@@ -1,11 +1,11 @@
-﻿<Window x:Class="TravelPal.MainWindow"
+﻿<Window x:Class="TravelPal.UserDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="MainWindow" FontFamily="Arial" FontSize="15" Height="450" Width="800" ResizeMode="NoResize">
+        Title="UserDetailsWindow" FontFamily="Arial" FontSize="15" Height="450" Width="800" ResizeMode="NoResize">
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -42,6 +42,16 @@
             VerticalAlignment="Center"
             />
         <Label
+            Content="User Details"
+            FontSize="20"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            />
+        <Label
             Content="Username"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -50,7 +60,7 @@
             HorizontalAlignment="Center"
             />
         <Label
-            Content="Password"
+            Content="Country"
             Grid.Column="2"
             Grid.ColumnSpan="2"
             Grid.Row="5"
@@ -58,10 +68,26 @@
             HorizontalAlignment="Center"
             />
         <Label
+            Content="Password"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Grid.Row="6"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center"
+            />
+        <Label
+            Content="Confirm Password"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Grid.Row="7"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Center"
+            />
+        <Label
             x:Name="lblShowPassword"
             Content="Show password"
             FontSize="10"
-            Grid.Row="5"
+            Grid.Row="7"
             Grid.Column="6"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
@@ -69,25 +95,23 @@
             Margin="1"
             />
         <Label
-            x:Name="lblRegister"
-            Content="Not a user yet? Register here!"
-            FontSize="10"
-            Grid.Row="6"
-            Grid.Column="4"
-            Grid.ColumnSpan="2"
+            Content="User:"
+            Grid.Column="0"
+            Grid.Row="0"
+            VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
+            Margin="30, 0, 5, 0"
+            FontSize="12"
             />
-        <Button
-            x:Name="btnSignIn"
-            Content="Sign In"
-            Grid.Column="4"
+        <Label
+            x:Name="lblUsername"
+            Content="*USERNAME*"
+            Grid.Column="1"
             Grid.ColumnSpan="2"
-            Grid.Row="7"
-            Grid.RowSpan="2"
-            BorderThickness="2"
-            Height="30"
-            Width="100"
+            Grid.Row="0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="12"
             />
         <TextBox
             x:Name="tbxUsername"
@@ -96,11 +120,13 @@
             Grid.Column="4"
             Grid.ColumnSpan="2"
             VerticalContentAlignment="Center"
-            Margin="5, 35, 5, 10"
+            Margin="5, 0, 5, 10"
+            Height="35" 
+            VerticalAlignment="Bottom"
             />
         <TextBox
             x:Name="tbxPasswordBox"
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="4"
             Grid.ColumnSpan="2"
             Margin="5, 8, 5, 0"
@@ -109,21 +135,77 @@
             />
         <PasswordBox
             x:Name="pabxPasswordBox"
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.Column="4"
             Grid.ColumnSpan="2"
             VerticalContentAlignment="Center"
             Margin="5, 8, 5, 0"
             PasswordChar="*"
             />
+        <TextBox
+            x:Name="tbxPasswordBox2"
+            Grid.Row="7"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Margin="5, 8, 5, 0"
+            VerticalContentAlignment="Center"
+            Visibility="Collapsed"
+            />
+        <PasswordBox
+            x:Name="pabxPasswordBox2"
+            Grid.Row="7"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            VerticalContentAlignment="Center"
+            Margin="5, 8, 5, 0"
+            PasswordChar="*"
+            />
+        <ComboBox
+            x:Name="cbCountries"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Grid.Row="5"
+            Margin="5"
+            />
+        <Button
+            x:Name="btnReturn"
+            Content="Return"
+            Grid.Row="9"
+            Grid.Column="9"
+            Height="25"
+            Width="70"
+            HorizontalContentAlignment="Center"
+            HorizontalAlignment="Center"
+            BorderThickness="2"
+            />
+        <Button
+            x:Name="btnEdit"
+            Content="Edit Details"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Grid.Row="8"
+            Grid.RowSpan="2"
+            BorderThickness="2"
+            Height="30"
+            Width="100"
+            />
+        <Button
+            x:Name="btnSave"
+            Content="Save"
+            Grid.Column="5"
+            Grid.ColumnSpan="2"
+            Grid.Row="8"
+            Grid.RowSpan="2"
+            BorderThickness="2"
+            Height="30"
+            Width="100"
+            />
         <CheckBox
             x:Name="chbxShowPassword"
-            Grid.Row="4"
-            Grid.RowSpan="2"
+            Grid.Row="7"
             Grid.Column="6"
-            Grid.ColumnSpan="2"
             VerticalAlignment="Bottom"
-            Margin="20, 20, 10, 5"
+            Margin="15, 10, 5, 5"
             />
     </Grid>
 </Window>

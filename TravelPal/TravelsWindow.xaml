@@ -51,6 +51,25 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             />
+        <Label
+            Content="User:"
+            Grid.Column="0"
+            Grid.Row="0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="30, 0, 5, 0"
+            FontSize="12"
+            />
+        <Label
+            x:Name="lblUsername"
+            Content="*USERNAME*"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.Row="0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="12"
+            />
         <Button
             x:Name="btnReturn"
             Content="Sign Out"
@@ -148,25 +167,6 @@
             HorizontalAlignment="Left"
             Margin="10, 5, 5, 5"
             BorderThickness="2"
-            FontSize="12"
-            />
-        <Label
-            Content="User:"
-            Grid.Column="0"
-            Grid.Row="0"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="30, 0, 5, 0"
-            FontSize="12"
-            />
-        <Label
-            x:Name="lblUsername"
-            Content="*USERNAME*"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            Grid.Row="0"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Left"
             FontSize="12"
             />
         <ListViewItem

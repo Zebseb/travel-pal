@@ -31,5 +31,24 @@ namespace TravelPal
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();
         }
+
+        private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
+        {
+            tbxPasswordBox.Text = pabxPasswordBox.Password;
+            pabxPasswordBox.Visibility = Visibility.Collapsed;
+            tbxPasswordBox.Visibility = Visibility.Visible;
+        }
+
+        private void chbxShowPassword_Unchecked(object sender, RoutedEventArgs e)
+        {
+            pabxPasswordBox.Password = tbxPasswordBox.Text;
+            tbxPasswordBox.Visibility = Visibility.Collapsed;
+            pabxPasswordBox.Visibility = Visibility.Visible;
+        }
+
+        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

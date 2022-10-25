@@ -165,6 +165,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
+            Click="btnReturn_Click"
             />
         <Button
             x:Name="btnRegister"
@@ -176,6 +177,7 @@
             BorderThickness="2"
             Height="30"
             Width="100"
+            Click="btnRegister_Click"
             />
         <CheckBox
             x:Name="chbxShowPassword"

@@ -22,6 +22,7 @@ namespace TravelPal
         public TravelDetailsWindow()
         {
             InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
     }
 }

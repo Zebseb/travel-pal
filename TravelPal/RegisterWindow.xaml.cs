@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelPal.Enums;
+using TravelPal.Managers;
 
 namespace TravelPal
 {
@@ -20,10 +21,14 @@ namespace TravelPal
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        public RegisterWindow()
+        private UserManager userManager;
+
+        public RegisterWindow(UserManager userManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            this.userManager = userManager;
 
             foreach (Countries country in Enum.GetValues(typeof(Countries)))
             {
@@ -49,6 +54,31 @@ namespace TravelPal
             tbxPasswordBox2.Visibility = Visibility.Collapsed;
             pabxPasswordBox.Visibility = Visibility.Visible;
             pabxPasswordBox2.Visibility = Visibility.Visible;
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new();
+            mainWindow.Show();
+            Close();
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            string username = tbxUsername.Text;
+            string password = "";
+
+            if (pabxPasswordBox.Password.ToString() == pabxPasswordBox2.Password.ToString())
+            {
+                password = pabxPasswordBox.Password.ToString();
+            }
+
+            else
+            {
+                MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
+            }
+
+            userManager.AddUser(username, password); //TO-DO Spara användarens land som en enum/sträng
         }
     }
 }

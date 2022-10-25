@@ -4,7 +4,9 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TravelPal.Enums;
 using TravelPal.Interfaces;
+using TravelPal.Models;
 
 namespace TravelPal.Managers
 {
@@ -15,11 +17,22 @@ namespace TravelPal.Managers
 
         public UserManager()
         {
-            
+            Admin newAdmin = new("admin", "password");
+            users.Add(newAdmin);
+            User newUser = new("Gandalf", "password", Countries.Sweden);
+            users.Add(newUser);
+
         }
 
-        public void AddUser()
+        public List <IUser> GetUsers()
         {
+            return users;
+        }
+
+        public void AddUser(string username, string password)
+        {
+            //User newUser = new(username, password, Countries location);
+            //users.Add(newUser);
 
         }
 

@@ -30,25 +30,37 @@ namespace TravelPal.Managers
             return users;
         }
 
-        public void AddUser(string username, string password, Countries country)
+        public bool AddUser(string username, string password, Countries country)
         {
-            User registeredUser = new(username, password, country);
-            users.Add(registeredUser);
+            bool isAvailableUsername = ValidateUsername(username);
+
+            if (isAvailableUsername)
+            {
+                User registeredUser = new(username, password, country);
+                users.Add(registeredUser);
+                return true;
+            }
+
+            return false;
         }
 
-        public void RemoveUser()
+        public bool UpdateUsername()
         {
-
+            ValidateUsername(username);
+            return true;
         }
 
-        public void UpdateUsername()
+        private bool ValidateUsername(string username)
         {
-            ValidateUsername();
-        }
+            foreach (IUser user in users)
+            {
+                if (user.Username == username)
+                {
+                    return false;
+                }
+            }
 
-        private void ValidateUsername()
-        {
-            
+            return true;
         }
 
         public bool SignInUser(string username, string password)

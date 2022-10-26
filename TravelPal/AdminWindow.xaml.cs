@@ -22,16 +22,38 @@ namespace TravelPal
     /// </summary>
     public partial class AdminWindow : Window
     {
+        private UserManager userManager;
+        private List<IUser> users;
         private Admin admin;
         public AdminWindow(UserManager userManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.userManager = userManager;
+            users = userManager.GetUsers();
+            admin = userManager.signedInUser as Admin;
+
+            lblUsername.Content = admin.Username;
+
+            foreach (IUser user in users)
+            {
+                if (user is User)
+                {
+                    cbUsers.Items.Add(user.Username);
+                }
+            }
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new(userManager);
+            mainWindow.Show();
             Close();    
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

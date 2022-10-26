@@ -56,7 +56,7 @@ namespace TravelPal
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new();
+            MainWindow mainWindow = new(userManager);
             mainWindow.Show();
             Close();
         }
@@ -79,10 +79,20 @@ namespace TravelPal
                 MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
             }
 
-            userManager.AddUser(username, password, countryEnum); //TO-DO Spara användarens land som en enum/sträng
-            MainWindow mainWindow = new(userManager);
-            mainWindow.Show();
-            Close();
+            bool isAvailableUsername = userManager.AddUser(username, password, countryEnum);
+
+            if (!isAvailableUsername)
+            {
+                MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
+            }
+
+            else
+            {
+                MainWindow mainWindow = new(userManager);
+                mainWindow.Show();
+                Close();
+            }
+
         }
     }
 }

@@ -22,11 +22,22 @@ namespace TravelPal
     public partial class AddTravelWindow : Window
     {
         private User user;
+        private UserManager userManager;
+
         public AddTravelWindow(UserManager userManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.userManager = userManager;
+            this.user = userManager.signedInUser as User;
+            lblUsername.Content = user.Username;
+        }
 
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            TravelsWindow travelsWindow = new(userManager);
+            travelsWindow.Show();
+            Close();
         }
     }
 }

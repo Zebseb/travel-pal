@@ -57,7 +57,7 @@
             Grid.Row="0"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Margin="25, 0, 5, 0"
+            Margin="20, 0, 5, 0"
             FontSize="12"
             />
         <Label
@@ -100,6 +100,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
+            Click="btnRemove_Click"
             />
         <Button
             x:Name="btnReturn"

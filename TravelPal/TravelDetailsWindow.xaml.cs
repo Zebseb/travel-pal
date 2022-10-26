@@ -20,10 +20,19 @@ namespace TravelPal
     /// </summary>
     public partial class TravelDetailsWindow : Window
     {
+        private UserManager userManager;
         public TravelDetailsWindow(UserManager userManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.userManager = userManager;
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            TravelsWindow travelsWindow = new(userManager);
+            travelsWindow.Show();
+            Close();
         }
     }
 }

@@ -46,18 +46,21 @@ namespace TravelPal
         {
             UserDetailsWindow userDetailsWindow = new(userManager);
             userDetailsWindow.Show();
+            Close();
         }
 
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             AddTravelWindow addTravelWindow = new(userManager);
             addTravelWindow.Show();
+            Close();
         }
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
             TravelDetailsWindow travelDetailsWindow = new(userManager);
             travelDetailsWindow.Show();
+            Close();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)

@@ -68,6 +68,8 @@ namespace TravelPal
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
+            TravelsWindow travelsWindow = new(userManager);
+            travelsWindow.Show();
             Close();
         }
 
@@ -94,6 +96,20 @@ namespace TravelPal
                 user.Password = pabxPasswordBox.Password;
             }
 
+            tbxUsername.Text = user.Username;
+            cbCountries.SelectedItem = user.Location.ToString();
+
+            pabxPasswordBox.Clear();
+            pabxPasswordBox2.Clear();
+            tbxPasswordBox.Clear();
+            tbxPasswordBox2.Clear();
+
+            tbxUsername.IsEnabled = false;
+            pabxPasswordBox.IsEnabled = false;
+            pabxPasswordBox2.IsEnabled = false;
+            cbCountries.IsEnabled = false;
+            btnSave.IsEnabled = false;
+            chbxShowPassword.IsEnabled = false;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace TravelPal.Managers
 {
     public class UserManager
     {
-        public List<IUser> users = new();
+        private List<IUser> users = new();
         public IUser signedInUser;
 
         public UserManager()
@@ -21,7 +21,6 @@ namespace TravelPal.Managers
             users.Add(newAdmin);
             User newUser = new("Gandalf", "password", Countries.Sweden);
             users.Add(newUser);
-
         }
 
         public List <IUser> GetUsers()
@@ -29,11 +28,10 @@ namespace TravelPal.Managers
             return users;
         }
 
-        public void AddUser(string username, string password)
+        public void AddUser(string username, string password, Countries country)
         {
-            //User newUser = new(username, password, Countries location);
-            //users.Add(newUser);
-
+            User registeredUser = new(username, password, country);
+            users.Add(registeredUser);
         }
 
         public void RemoveUser()

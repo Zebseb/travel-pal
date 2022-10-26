@@ -24,20 +24,18 @@ namespace TravelPal
     public partial class MainWindow : Window
     {
         private UserManager userManager = new();
-        private List<IUser> users = new();
+        private List<IUser> users;
 
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            users = userManager.GetUsers();
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            RegisterWindow registerWindow = new RegisterWindow(userManager);
+            RegisterWindow registerWindow = new(userManager);
             registerWindow.Show();
-            Close();
         }
 
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
@@ -56,19 +54,21 @@ namespace TravelPal
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
+            users = userManager.GetUsers();
+
             bool userIsFound = false;
             string username = tbxUsername.Text;
-            string password = pabxPasswordBox.Password.ToString();
+            string password = pabxPasswordBox.Password;
 
             foreach (IUser user in users)
             {
                 if (username == user.Username && password == user.Password)
                 {
-                    userIsFound = true;
+                    userIsFound = true; 
 
                     if (user is User)
                     {
-                        TravelsWindow travelsWindow = new();
+                        TravelsWindow travelsWindow = new(userManager, user);
                         travelsWindow.Show();
                         tbxUsername.Clear();
                         pabxPasswordBox.Clear();
@@ -78,7 +78,7 @@ namespace TravelPal
 
                     else if (user is Admin)
                     {
-                        AdminWindow adminWindow = new();
+                        AdminWindow adminWindow = new(userManager, user);
                         adminWindow.Show();
                         tbxUsername.Clear();
                         pabxPasswordBox.Clear();
@@ -87,16 +87,10 @@ namespace TravelPal
                     }
                 }
 
-                if (username == user.Username && password != user.Password)
+                else if (username != user.Username && password == user.Password || username == user.Username && password != user.Password)
                 {
                     userIsFound = true;
-                    MessageBox.Show("Username or password is incorrect.", "Warning!", MessageBoxButton.OK);
-                }
-
-                else if (username != user.Username && password == user.Password)
-                {
-                    userIsFound = true;
-                    MessageBox.Show("Username or password is incorrect.", "Warning!", MessageBoxButton.OK);
+                    MessageBox.Show("Username or password is incorrect...", "Warning!", MessageBoxButton.OK);
                 }
             }
 

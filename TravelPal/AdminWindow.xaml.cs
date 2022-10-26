@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Interfaces;
+using TravelPal.Managers;
+using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -19,10 +22,17 @@ namespace TravelPal
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow()
+        private Admin admin;
+        public AdminWindow(UserManager userManager, IUser user)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            admin = user as Admin;
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();    
         }
     }
 }

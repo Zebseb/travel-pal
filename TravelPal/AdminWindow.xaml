@@ -111,6 +111,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
+            Click="btnReturn_Click"
             />
     </Grid>
 </Window>

@@ -81,6 +81,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
+            Click="btnReturn_Click"
             />
         <Button
             x:Name="btnAddTravel"
@@ -93,6 +94,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
+            Click="btnAddTravel_Click"
             />
         <Button
             x:Name="btnDetails"
@@ -106,6 +108,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
+            Click="btnDetails_Click"
             />
         <Button
             x:Name="btnRemove"
@@ -120,6 +123,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             BorderThickness="2"
+            Click="btnRemove_Click"
             />
         <Button
             x:Name="btnEditAccount"
@@ -136,6 +140,7 @@
             Margin="35, 0, 5, 5"
             BorderThickness="2"
             FontSize="12"
+            Click="btnEditAccount_Click"
             />
         <Button
             x:Name="btnHelp"
@@ -152,6 +157,7 @@
             Margin="10, 5, 5, 5"
             BorderThickness="2"
             FontSize="12"
+            Click="btnHelp_Click"
             />
         <Button
             x:Name="btnAboutUs"
@@ -168,6 +174,7 @@
             Margin="10, 5, 5, 5"
             BorderThickness="2"
             FontSize="12"
+            Click="btnAboutUs_Click"
             />
         <ListViewItem
             x:Name="lvTravels"
@@ -176,6 +183,7 @@
             Grid.Row="3"
             Grid.RowSpan="7"
             Margin="20, 30, 50, 30"
+            Background="MintCream"
             />
     </Grid>
 </Window>

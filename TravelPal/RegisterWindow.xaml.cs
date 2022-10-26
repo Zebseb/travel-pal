@@ -30,10 +30,8 @@ namespace TravelPal
 
             this.userManager = userManager;
 
-            foreach (Countries country in Enum.GetValues(typeof(Countries)))
-            {
-                cbCountries.Items.Add(country);
-            }
+            string[] countries = Enum.GetNames(typeof(Countries));
+            cbCountries.ItemsSource = countries;
         }
 
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
@@ -67,6 +65,9 @@ namespace TravelPal
         {
             string username = tbxUsername.Text;
             string password = "";
+            string country = cbCountries.SelectedItem as string;
+
+            Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
 
             if (pabxPasswordBox.Password.ToString() == pabxPasswordBox2.Password.ToString())
             {
@@ -78,7 +79,9 @@ namespace TravelPal
                 MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
             }
 
-            userManager.AddUser(username, password); //TO-DO Spara användarens land som en enum/sträng
+            userManager.AddUser(username, password, countryEnum); //TO-DO Spara användarens land som en enum/sträng
+
+            Close();
         }
     }
 }

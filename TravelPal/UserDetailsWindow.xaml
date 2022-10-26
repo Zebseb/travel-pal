@@ -92,7 +92,7 @@
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Margin="5, 10, 20, 5"
+            Margin="5, 10, 10, 5"
             />
         <Label
             Content="User:"
@@ -106,11 +106,12 @@
         <Label
             x:Name="lblUsername"
             Content="*USERNAME*"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
             Grid.Row="0"
             VerticalAlignment="Center"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
+            Margin="0, 0, 10, 0"
             FontSize="12"
             />
         <TextBox
@@ -182,6 +183,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
+            Click="btnReturn_Click"
             />
         <Button
             x:Name="btnEdit"
@@ -193,6 +195,7 @@
             BorderThickness="2"
             Height="30"
             Width="100"
+            Click="btnEdit_Click"
             />
         <Button
             x:Name="btnSave"
@@ -204,6 +207,7 @@
             BorderThickness="2"
             Height="30"
             Width="100"
+            Click="btnSave_Click"
             />
         <CheckBox
             x:Name="chbxShowPassword"

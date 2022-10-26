@@ -23,11 +23,10 @@ namespace TravelPal
     public partial class AdminWindow : Window
     {
         private Admin admin;
-        public AdminWindow(UserManager userManager, IUser user)
+        public AdminWindow(UserManager userManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            admin = user as Admin;
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)

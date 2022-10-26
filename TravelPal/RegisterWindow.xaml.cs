@@ -80,7 +80,8 @@ namespace TravelPal
             }
 
             userManager.AddUser(username, password, countryEnum); //TO-DO Spara användarens land som en enum/sträng
-
+            MainWindow mainWindow = new(userManager);
+            mainWindow.Show();
             Close();
         }
     }

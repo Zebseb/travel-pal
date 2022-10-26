@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IUser user;
         private UserManager userManager = new();
         private List<IUser> users;
 
@@ -32,10 +34,18 @@ namespace TravelPal
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
+        public MainWindow(UserManager userManager)
+        {
+            InitializeComponent();
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.userManager = userManager;
+        }
+
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new(userManager);
             registerWindow.Show();
+            Close();
         }
 
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
@@ -54,54 +64,49 @@ namespace TravelPal
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            users = userManager.GetUsers();
-
-            bool userIsFound = false;
             string username = tbxUsername.Text;
             string password = pabxPasswordBox.Password;
 
-            foreach (IUser user in users)
+            bool isUserFound = userManager.SignInUser(username, password);
+            user = userManager.signedInUser;
+
+            if (isUserFound)
             {
-                if (username == user.Username && password == user.Password)
+                if (user is User)
                 {
-                    userIsFound = true; 
-
-                    if (user is User)
-                    {
-                        TravelsWindow travelsWindow = new(userManager, user);
-                        travelsWindow.Show();
-                        tbxUsername.Clear();
-                        pabxPasswordBox.Clear();
-                        tbxPasswordBox.Clear();
-                        chbxShowPassword.IsChecked = false;
-                    }
-
-                    else if (user is Admin)
-                    {
-                        AdminWindow adminWindow = new(userManager, user);
-                        adminWindow.Show();
-                        tbxUsername.Clear();
-                        pabxPasswordBox.Clear();
-                        tbxPasswordBox.Clear();
-                        chbxShowPassword.IsChecked = false;
-                    }
+                    TravelsWindow travelsWindow = new(userManager);
+                    travelsWindow.Show();
+                    Close();
                 }
 
-                else if (username != user.Username && password == user.Password || username == user.Username && password != user.Password)
+                else if (user is Admin)
                 {
-                    userIsFound = true;
-                    MessageBox.Show("Username or password is incorrect...", "Warning!", MessageBoxButton.OK);
+                    AdminWindow adminWindow = new(userManager);
+                    adminWindow.Show();
+                    Close();
                 }
             }
 
-            if (!userIsFound)
-            {
-                MessageBox.Show("Please register before signing in...", "Warning!", MessageBoxButton.OK);
-                tbxUsername.Clear();
-                pabxPasswordBox.Clear();
-                tbxPasswordBox.Clear();
-                chbxShowPassword.IsChecked = false;
-            }
+            //bool usernameFound = false;
+
+            //if (!userIsFound)
+            //{
+            //    foreach (IUser user in users)
+            //    {
+            //        if (user.Username == username)
+            //        {
+            //            usernameFound = true;
+
+            //            MessageBox.Show("Username or password is incorrect...", "Warning!", MessageBoxButton.OK);
+            //        }
+            //    }
+            //}
+
+            //if (!userIsFound && !usernameFound)
+            //{
+            //    MessageBox.Show("Please register before signing in...", "Warning!", MessageBoxButton.OK);
+
+            //}
         }
     }
 }

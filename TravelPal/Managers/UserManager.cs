@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Converters;
 using TravelPal.Enums;
 using TravelPal.Interfaces;
 using TravelPal.Models;
@@ -49,9 +51,22 @@ namespace TravelPal.Managers
             
         }
 
-        public void SignInUser()
+        public bool SignInUser(string username, string password)
         {
+            bool isFoundUser = false;
 
+            foreach (IUser user in users)
+            {
+                if (username == user.Username && password == user.Password)
+                {
+                    isFoundUser = true;
+                    signedInUser = user;
+
+                    return isFoundUser;
+                }
+            }
+
+            return isFoundUser;
         }
     }
 }

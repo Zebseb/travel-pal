@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Enums;
+using TravelPal.Managers;
+using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -19,10 +22,28 @@ namespace TravelPal
     /// </summary>
     public partial class UserDetailsWindow : Window
     {
-        public UserDetailsWindow()
+        private UserManager userManager;
+        private User user;
+        public UserDetailsWindow(UserManager userManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            this.userManager = userManager;
+            this.user = userManager.signedInUser as User;
+
+            tbxUsername.Text = user.Username;
+            cbCountries.SelectedItem = user.Location.ToString();
+
+            tbxUsername.IsEnabled = false;
+            pabxPasswordBox.IsEnabled = false;
+            pabxPasswordBox2.IsEnabled = false;
+            cbCountries.IsEnabled = false;
+            btnSave.IsEnabled = false;
+            chbxShowPassword.IsEnabled = false;
+
+            string[] countries = Enum.GetNames(typeof(Countries));
+            cbCountries.ItemsSource = countries;
         }
 
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
@@ -43,6 +64,36 @@ namespace TravelPal
             tbxPasswordBox2.Visibility = Visibility.Collapsed;
             pabxPasswordBox.Visibility = Visibility.Visible;
             pabxPasswordBox2.Visibility = Visibility.Visible;
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            tbxUsername.IsEnabled = true;
+            pabxPasswordBox.IsEnabled = true;
+            pabxPasswordBox2.IsEnabled = true;
+            cbCountries.IsEnabled = true;
+            btnSave.IsEnabled = true;
+            chbxShowPassword.IsEnabled = true;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            user.Username = tbxUsername.Text;
+
+            string country = cbCountries.SelectedItem as string;
+            Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+            user.Location = countryEnum;
+
+            if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+            {
+                user.Password = pabxPasswordBox.Password;
+            }
+
         }
     }
 }

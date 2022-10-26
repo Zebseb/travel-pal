@@ -22,35 +22,41 @@ namespace TravelPal
     /// </summary>
     public partial class TravelsWindow : Window
     {
+        private UserManager userManager;
         private User user;
-        public TravelsWindow(UserManager userManager, IUser user)
+
+        public TravelsWindow(UserManager userManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.user = user as User;
+            this.user = userManager.signedInUser as User;
+            this.userManager = userManager;
+            lblUsername.Content = user.Username;
 
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new(userManager);
+            mainWindow.Show();
             Close();
         }
 
         private void btnEditAccount_Click(object sender, RoutedEventArgs e)
         {
-            UserDetailsWindow userDetailsWindow = new();
+            UserDetailsWindow userDetailsWindow = new(userManager);
             userDetailsWindow.Show();
         }
 
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
-            AddTravelWindow addTravelWindow = new();
+            AddTravelWindow addTravelWindow = new(userManager);
             addTravelWindow.Show();
         }
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
-            TravelDetailsWindow travelDetailsWindow = new();
+            TravelDetailsWindow travelDetailsWindow = new(userManager);
             travelDetailsWindow.Show();
         }
 
@@ -61,7 +67,7 @@ namespace TravelPal
 
         private void btnAboutUs_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Traveling agency making dreams come true since 1992!", "Abous Us", MessageBoxButton.OK);   
+            MessageBox.Show("Your go-to traveling agency, making dreams come true since 1992!", "About Us", MessageBoxButton.OK);   
         }
 
         private void btnHelp_Click(object sender, RoutedEventArgs e)

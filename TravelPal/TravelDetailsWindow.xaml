@@ -63,11 +63,12 @@
         <Label
             x:Name="lblUsername"
             Content="*USERNAME*"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
             Grid.Row="0"
             VerticalAlignment="Center"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
+            Margin="0, 0, 10, 0"
             FontSize="12"
             />
         <Label

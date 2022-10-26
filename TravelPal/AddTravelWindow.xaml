@@ -93,6 +93,7 @@
             VerticalAlignment="Center"
             />
         <Label
+            x:Name="lblTripType"
             Content="Trip type"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -100,6 +101,7 @@
             VerticalAlignment="Center"
             />
         <Label
+            x:Name="lblAllInclusive"
             Content="All Inclusive"
             FontSize="12"
             Grid.Column="7"
@@ -133,6 +135,7 @@
             Grid.Row="6"
             Margin="5"
             Height="25"
+            SelectionChanged="cbTravelType_SelectionChanged"
             />
         <ComboBox
             x:Name="cbTripType"
@@ -163,6 +166,21 @@
             HorizontalAlignment="Center"
             BorderThickness="2"
             Click="btnReturn_Click"
+            />
+        <Button
+            x:Name="btnAddTravel"
+            Content="Add Travel"
+            Grid.Row="8"
+            Grid.RowSpan="2"
+            Grid.Column="4"
+            Grid.ColumnSpan="3"
+            Height="30"
+            Width="110"
+            HorizontalContentAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="0, 40, 0, 0"
+            BorderThickness="2"
+            Click="btnAddTravel_Click"
             />
     </Grid>
 </Window>

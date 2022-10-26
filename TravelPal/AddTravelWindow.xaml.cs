@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Enums;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -30,7 +31,19 @@ namespace TravelPal
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
+
             lblUsername.Content = user.Username;
+            cbxAllInclusive.Visibility = Visibility.Collapsed;
+            lblAllInclusive.Visibility = Visibility.Collapsed;
+            cbTripType.Visibility = Visibility.Collapsed;
+            lblTripType.Visibility = Visibility.Collapsed;
+            
+            string[] countries = Enum.GetNames(typeof(Countries));
+            cbCountries.ItemsSource = countries;
+            string[] travelTypes = Enum.GetNames(typeof(TravelType));
+            cbTravelType.ItemsSource = travelTypes;
+            string[] tripTypes = Enum.GetNames(typeof(TripTypes));
+            cbTripType.ItemsSource = tripTypes;
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
@@ -38,6 +51,31 @@ namespace TravelPal
             TravelsWindow travelsWindow = new(userManager);
             travelsWindow.Show();
             Close();
+        }
+
+        private void cbTravelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbTravelType.SelectedIndex == 0)
+            {
+                cbTripType.Visibility = Visibility.Collapsed;
+                lblTripType.Visibility = Visibility.Collapsed;
+                cbxAllInclusive.Visibility = Visibility.Visible;
+                lblAllInclusive.Visibility = Visibility.Visible;
+            }
+
+            else if (cbTravelType.SelectedIndex == 1)
+            {
+                cbxAllInclusive.IsChecked = false;
+                cbxAllInclusive.Visibility = Visibility.Collapsed;
+                lblAllInclusive.Visibility = Visibility.Collapsed;
+                cbTripType.Visibility = Visibility.Visible;
+                lblTripType.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btnAddTravel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

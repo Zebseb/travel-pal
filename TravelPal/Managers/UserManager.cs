@@ -25,11 +25,13 @@ namespace TravelPal.Managers
             users.Add(newUser);
         }
 
+        //Returns all users (Users and Admins) in the users-list.
         public List <IUser> GetUsers()
         {
             return users;
         }
 
+        //Returns a true value if a user was added to the users-list or returns a false value if the username the username is taken.
         public bool AddUser(string username, string password, Countries country)
         {
             bool isAvailableUsername = ValidateUsername(username);
@@ -44,12 +46,22 @@ namespace TravelPal.Managers
             return false;
         }
 
-        public bool UpdateUsername()
+        //Updates the user's username if the username is available and returns a true value. Returns a false value if the username is already taken.
+        public bool UpdateUsername(User user, string username)
         {
-            ValidateUsername(username);
-            return true;
+            bool isAvailableUsername = ValidateUsername(username);
+
+            if (isAvailableUsername)
+            {
+                user.Username = username;
+
+                return true;
+            }
+
+            return false;
         }
 
+        //Checks if the wanted username is available or not.
         private bool ValidateUsername(string username)
         {
             foreach (IUser user in users)
@@ -63,22 +75,20 @@ namespace TravelPal.Managers
             return true;
         }
 
+        //Sets the signedInUser variable if the username and password matches with a users' in the users-list.
         public bool SignInUser(string username, string password)
         {
-            bool isFoundUser = false;
-
             foreach (IUser user in users)
             {
                 if (username == user.Username && password == user.Password)
                 {
-                    isFoundUser = true;
                     signedInUser = user;
 
-                    return isFoundUser;
+                    return true;
                 }
             }
 
-            return isFoundUser;
+            return false;
         }
     }
 }

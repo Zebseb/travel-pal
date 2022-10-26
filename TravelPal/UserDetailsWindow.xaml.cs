@@ -24,6 +24,7 @@ namespace TravelPal
     {
         private UserManager userManager;
         private User user;
+
         public UserDetailsWindow(UserManager userManager)
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace TravelPal
 
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
+            lblUsername.Content = user.Username;
 
             tbxUsername.Text = user.Username;
             cbCountries.SelectedItem = user.Location.ToString();
@@ -85,31 +87,41 @@ namespace TravelPal
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            user.Username = tbxUsername.Text;
+            string username = tbxUsername.Text;
 
-            string country = cbCountries.SelectedItem as string;
-            Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-            user.Location = countryEnum;
-
-            if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+            bool isUpdatedUser = userManager.UpdateUsername(user, username);
+            
+            if (isUpdatedUser)
             {
-                user.Password = pabxPasswordBox.Password;
+                string country = cbCountries.SelectedItem as string;
+                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                user.Location = countryEnum;
+
+                if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+                {
+                    user.Password = pabxPasswordBox.Password;
+                }
+
+                tbxUsername.Text = user.Username;
+                tbxUsername.IsEnabled = false;
+                cbCountries.SelectedItem = user.Location.ToString();
+                cbCountries.IsEnabled = false;
+                btnSave.IsEnabled = false;
+
+                MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
             }
 
-            tbxUsername.Text = user.Username;
-            cbCountries.SelectedItem = user.Location.ToString();
+            else
+            {
+                MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
+                cbCountries.SelectedItem = user.Location.ToString();
+            }
 
             pabxPasswordBox.Clear();
             pabxPasswordBox2.Clear();
             tbxPasswordBox.Clear();
             tbxPasswordBox2.Clear();
 
-            tbxUsername.IsEnabled = false;
-            pabxPasswordBox.IsEnabled = false;
-            pabxPasswordBox2.IsEnabled = false;
-            cbCountries.IsEnabled = false;
-            btnSave.IsEnabled = false;
-            chbxShowPassword.IsEnabled = false;
         }
     }
 }

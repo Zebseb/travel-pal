@@ -11,11 +11,13 @@ namespace TravelPal.Managers
     {
         List<Travel> travels = new();
 
+        //Adds a travel to the travels-list.
         public void AddTravel()
         {
 
         }
 
+        //Removes a travel from the travels-list.
         public void RemoveTravel()
         {
 

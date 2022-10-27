@@ -14,18 +14,21 @@ namespace TravelPal.Managers
         private List<Travel> travels = new();
         private List<IUser> users;
 
-        public TravelManager(UserManager userManager)
+        public TravelManager()
         {
-            Vacation newVacation = new(true, "Madagascar", 2, Enums.Countries.Sweden);
-            travels.Add(newVacation);
-            Trip newTrip = new(Enums.TripTypes.Leisure, "Sydney", 4, Enums.Countries.Denmark);
-            travels.Add(newTrip);
 
-            this.userManager = userManager;
-            this.users = userManager.GetUsers();
-            
-            
         }
+
+        //public TravelManager(UserManager userManager)
+        //{
+        //  Vacation newVacation = new(true, "Madagascar", 2, Enums.Countries.Sweden);
+        //  travels.Add(newVacation);
+        //  Trip newTrip = new(Enums.TripTypes.Leisure, "Sydney", 4, Enums.Countries.Denmark);
+        //  travels.Add(newTrip);
+
+        //  this.userManager = userManager;
+        //  this.users = userManager.GetUsers();
+        //}
 
         public List<Travel> GetTravels()
         {
@@ -33,9 +36,9 @@ namespace TravelPal.Managers
         }
 
         //Adds a travel to the travels-list.
-        public void AddTravel()
+        public void AddTravel(Travel newTravel)
         {
-
+            travels.Add(newTravel);
         }
 
         //Removes a travel from the travels-list.

@@ -189,6 +189,7 @@
             Grid.RowSpan="7"
             Margin="20, 30, 50, 30"
             Background="MintCream"
+            SelectionChanged="lvTravels_SelectionChanged"
             />
     </Grid>
 </Window>

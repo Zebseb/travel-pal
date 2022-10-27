@@ -36,13 +36,15 @@ namespace TravelPal
             this.userManager = userManager;
             this.travels = travelManager.GetTravels();
             lblUsername.Content = user.Username;
+            btnDetails.IsEnabled = false;
+            btnRemove.IsEnabled = false;
 
-            foreach (Travel travel in travels)
+            foreach (Travel travel in user.travels)
             {
-                    ListViewItem item = new();
-                    item.Content = travel.GetInfo();
-                    item.Tag = travel;
-                    lvTravels.Items.Add(item);
+                ListViewItem item = new();
+                item.Content = travel.GetInfo();
+                item.Tag = travel;
+                lvTravels.Items.Add(item);
             }
         }
 
@@ -69,7 +71,10 @@ namespace TravelPal
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
-            TravelDetailsWindow travelDetailsWindow = new(userManager);
+            ListViewItem selectedItem = lvTravels.SelectedItem as ListViewItem;
+            Travel selectedTravel = selectedItem.Tag as Travel;
+
+            TravelDetailsWindow travelDetailsWindow = new(userManager, selectedTravel);
             travelDetailsWindow.Show();
             Close();
         }
@@ -90,6 +95,12 @@ namespace TravelPal
                 "-Use the Details-button to show detailed info about a selected travel in the list.\n" +
                 "-Use the Remove-button to remove a selected travel from the list.\n" +
                 "-Use the Edit Account-button to edit profile settings (username, password etc.).", "Help", MessageBoxButton.OK);
+        }
+
+        private void lvTravels_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnDetails.IsEnabled = true;
+            btnRemove.IsEnabled = true;
         }
     }
 }

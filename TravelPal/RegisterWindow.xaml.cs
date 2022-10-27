@@ -92,7 +92,6 @@ namespace TravelPal
                 mainWindow.Show();
                 Close();
             }
-
         }
     }
 }

@@ -24,6 +24,7 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TravelManager travelManager = new();
         private IUser user;
         private UserManager userManager = new();
         private List<IUser> users;
@@ -81,7 +82,7 @@ namespace TravelPal
 
                 else if (user is Admin)
                 {
-                    AdminWindow adminWindow = new(userManager);
+                    AdminWindow adminWindow = new(userManager, travelManager);
                     adminWindow.Show();
                     Close();
                 }

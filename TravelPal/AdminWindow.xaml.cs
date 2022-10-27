@@ -22,13 +22,18 @@ namespace TravelPal
     /// </summary>
     public partial class AdminWindow : Window
     {
+        private TravelManager travelManager;
+        private List<Travel> travels;
         private UserManager userManager;
         private List<IUser> users;
         private Admin admin;
-        public AdminWindow(UserManager userManager)
+        public AdminWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.travelManager = travelManager;
+            this.travels = travelManager.GetTravels();
+
             this.userManager = userManager;
             users = userManager.GetUsers();
             admin = userManager.signedInUser as Admin;
@@ -41,6 +46,11 @@ namespace TravelPal
                 {
                     cbUsers.Items.Add(user.Username);
                 }
+            }
+
+            foreach (Travel travel in travels)
+            {
+
             }
         }
 

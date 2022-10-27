@@ -79,27 +79,37 @@
             VerticalAlignment="Center"
             />
         <Label
-            Content="Country"
+            Content="Departure"
             Grid.Column="2"
             Grid.ColumnSpan="2"
             Grid.Row="5"
             VerticalAlignment="Center"
             />
         <Label
-            Content="Travel type"
+            Content="Destination"
             Grid.Column="2"
             Grid.ColumnSpan="2"
             Grid.Row="6"
             VerticalAlignment="Center"
             />
         <Label
-            Content="Trip type"
+            x:Name="lblTravelType"
+            Content="Travel type"
             Grid.Column="2"
             Grid.ColumnSpan="2"
             Grid.Row="7"
             VerticalAlignment="Center"
             />
         <Label
+            x:Name="lblTripType"
+            Content="Trip type"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Grid.Row="8"
+            VerticalAlignment="Center"
+            />
+        <Label
+            x:Name="lblAllInclusive"
             Content="All Inclusive"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -115,7 +125,7 @@
             VerticalContentAlignment="Center"
             />
         <TextBox
-            x:Name="tbxNumCountry"
+            x:Name="tbxDeparture"
             Grid.Column="4"
             Grid.ColumnSpan="3"
             Grid.Row="5"
@@ -123,7 +133,7 @@
             VerticalContentAlignment="Center"
             />
         <TextBox
-            x:Name="tbxTravelType"
+            x:Name="tbxDestination"
             Grid.Column="4"
             Grid.ColumnSpan="3"
             Grid.Row="6"
@@ -131,10 +141,18 @@
             VerticalContentAlignment="Center"
             />
         <TextBox
-            x:Name="tbxTripType"
+            x:Name="tbxTravelType"
             Grid.Column="4"
             Grid.ColumnSpan="3"
             Grid.Row="7"
+            Margin="5"
+            VerticalContentAlignment="Center"
+            />
+        <TextBox
+            x:Name="tbxTripType"
+            Grid.Column="4"
+            Grid.ColumnSpan="3"
+            Grid.Row="8"
             Margin="5"
             VerticalContentAlignment="Center"
             />

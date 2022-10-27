@@ -18,7 +18,7 @@ namespace TravelPal.Models
 
         public override string GetInfo()
         {
-            return $"All Inclusive: {AllInclusive}";
+            return $"Destination: {Destination}\n";
         }
     }
 }

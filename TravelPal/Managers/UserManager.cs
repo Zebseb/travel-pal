@@ -14,6 +14,7 @@ namespace TravelPal.Managers
 {
     public class UserManager
     {
+        private TravelManager travelManager = new();
         private List<IUser> users = new();
         public IUser signedInUser;
 
@@ -21,10 +22,16 @@ namespace TravelPal.Managers
         {
             Admin newAdmin = new("admin", "password");
             users.Add(newAdmin);
-            User newUser = new("Gandalf", "password", Countries.Sweden);
-            users.Add(newUser);
 
-            
+            User newUser = new("Gandalf", "password", Countries.Sweden);
+            users.Add(newUser); 
+
+            Vacation newVacation = new(true, "Madagascar", 2, Enums.Countries.Sweden);
+            travelManager.AddTravel(newVacation);
+            newUser.travels.Add(newVacation);
+            Trip newTrip = new(Enums.TripTypes.Leisure, "Sydney", 4, Enums.Countries.Denmark);
+            travelManager.AddTravel(newTrip);
+            newUser.travels.Add(newTrip);
         }
 
         //Returns all users (Users and Admins) in the users-list.

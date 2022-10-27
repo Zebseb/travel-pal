@@ -11,6 +11,11 @@ namespace TravelPal.Models
     {
         public TripTypes Type { get; set; }
 
+        public Trip(TripTypes type, string destination, int travelers, Countries country) : base(destination, travelers, country)
+        {
+            this.Type = type;
+        }
+
         public override string GetInfo()
         {
             return $"Traveling for {Type}.";

@@ -23,6 +23,8 @@ namespace TravelPal.Managers
             users.Add(newAdmin);
             User newUser = new("Gandalf", "password", Countries.Sweden);
             users.Add(newUser);
+
+            
         }
 
         //Returns all users (Users and Admins) in the users-list.

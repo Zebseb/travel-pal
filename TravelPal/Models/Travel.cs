@@ -18,9 +18,16 @@ namespace TravelPal.Models
 
         }
 
+        public Travel(string destination, int travelers, Countries country)
+        {
+            this.Destination = destination;
+            this.Travelers = travelers;
+            this.Country = country;
+        }
+
         public virtual string GetInfo()
         {
-            return "";
+            return $"Destination: {Destination} | Departure: {Country.ToString()} | Num. of travelers: {Travelers}";
         }
     }
 }

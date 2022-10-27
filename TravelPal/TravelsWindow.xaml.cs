@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,8 @@ namespace TravelPal
     public partial class TravelsWindow : Window
     {
         private UserManager userManager;
+        private TravelManager travelManager = new();
+        private List<Travel> travels;
         private User user;
 
         public TravelsWindow(UserManager userManager)
@@ -31,8 +34,16 @@ namespace TravelPal
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.user = userManager.signedInUser as User;
             this.userManager = userManager;
+            this.travels = travelManager.GetTravels();
             lblUsername.Content = user.Username;
 
+            foreach (Travel travel in travels)
+            {
+                    ListViewItem item = new();
+                    item.Content = travel.GetInfo();
+                    item.Tag = travel;
+                    lvTravels.Items.Add(item);
+            }
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)

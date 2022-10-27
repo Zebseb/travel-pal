@@ -13,7 +13,7 @@ namespace TravelPal.Models
 
         public override string GetInfo()
         {
-            return "";
+            return $"Traveling for {Type}.";
         }
     }
 }

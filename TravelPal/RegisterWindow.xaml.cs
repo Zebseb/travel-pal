@@ -69,9 +69,9 @@ namespace TravelPal
 
             Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
 
-            if (pabxPasswordBox.Password.ToString() == pabxPasswordBox2.Password.ToString())
+            if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
             {
-                password = pabxPasswordBox.Password.ToString();
+                password = pabxPasswordBox.Password;
             }
 
             else

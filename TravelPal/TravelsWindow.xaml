@@ -181,7 +181,7 @@
             FontSize="12"
             Click="btnAboutUs_Click"
             />
-        <ListViewItem
+        <ListView
             x:Name="lvTravels"
             Grid.Column="2"
             Grid.ColumnSpan="7"

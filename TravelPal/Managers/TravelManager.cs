@@ -11,6 +11,17 @@ namespace TravelPal.Managers
     {
         List<Travel> travels = new();
 
+
+        public TravelManager()
+        {
+
+        }
+
+        public List<Travel> GetTravels()
+        {
+            return travels;
+        }
+
         //Adds a travel to the travels-list.
         public void AddTravel()
         {

@@ -24,27 +24,29 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UserManager userManager = new();
         private TravelManager travelManager = new();
         private IUser user;
-        private UserManager userManager = new();
         private List<IUser> users;
 
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
         }
 
-        public MainWindow(UserManager userManager)
+        public MainWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.userManager = userManager;
+            this.travelManager = travelManager;
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            RegisterWindow registerWindow = new(userManager);
+            RegisterWindow registerWindow = new(userManager, travelManager);
             registerWindow.Show();
             Close();
         }
@@ -75,7 +77,7 @@ namespace TravelPal
             {
                 if (user is User)
                 {
-                    TravelsWindow travelsWindow = new(userManager);
+                    TravelsWindow travelsWindow = new(userManager, travelManager);
                     travelsWindow.Show();
                     Close();
                 }

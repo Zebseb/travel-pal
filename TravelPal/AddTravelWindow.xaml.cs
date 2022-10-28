@@ -24,11 +24,13 @@ namespace TravelPal
     {
         private User user;
         private UserManager userManager;
+        private TravelManager travelManager;
 
-        public AddTravelWindow(UserManager userManager)
+        public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.travelManager = travelManager;
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
 
@@ -48,7 +50,7 @@ namespace TravelPal
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            TravelsWindow travelsWindow = new(userManager);
+            TravelsWindow travelsWindow = new(userManager, travelManager);
             travelsWindow.Show();
             Close();
         }
@@ -75,7 +77,40 @@ namespace TravelPal
 
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
+            int numOfTravelers = 0;
+            string country = "";
+            string destination = "";
+            string tripType = "";
+            bool isAllInclusive = false;
 
+            if (cbTravelType.SelectedIndex == 0)
+            {
+                numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
+                country = cbCountries.SelectedItem as string;
+                destination = tbxDestination.Text;
+                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                
+                if ((bool)cbxAllInclusive.IsChecked)
+                {
+                    isAllInclusive = true;
+                }
+
+                Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
+                user.travels.Add(newVacation);
+            }
+
+            else if (cbTravelType.SelectedIndex == 1)
+            {
+                numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
+                country = cbCountries.SelectedItem as string;
+                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                destination = tbxDestination.Text;
+                tripType = cbTripType.SelectedItem as string;
+                TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
+
+                Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
+                user.travels.Add(newTrip);
+            }
         }
     }
 }

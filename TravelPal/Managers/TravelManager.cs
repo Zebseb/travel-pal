@@ -42,9 +42,9 @@ namespace TravelPal.Managers
         }
 
         //Removes a travel from the travels-list.
-        public void RemoveTravel()
+        public void RemoveTravel(Travel travelToRemove)
         {
-
+            travels.Remove(travelToRemove);
         }
     }
 }

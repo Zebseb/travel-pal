@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +28,10 @@ namespace TravelPal
         private List<Travel> travels;
         private UserManager userManager;
         private List<IUser> users;
+        private List<User> userUsers = new();
         private Admin admin;
+        private User user = new();
+
         public AdminWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
@@ -44,19 +49,42 @@ namespace TravelPal
             {
                 if (user is User)
                 {
+                    this.user = user as User;
+                    userUsers.Add(this.user);
+                }
+            }
+
+            foreach (User user in userUsers)
+            {
+                foreach (Travel travel in user.travels)
+                {
+                    ListViewItem item = new();
+                    item.Content = travel.GetInfo();
+                    item.Tag = travel;
+                    lvUserTravels.Items.Add(item);
+                }
+            }
+
+            foreach (IUser user in users)
+            {
+                if (user is User)
+                {
                     cbUsers.Items.Add(user.Username);
                 }
             }
 
-            foreach (Travel travel in travels)
-            {
-
-            }
+            //foreach (Travel travel in travels)
+            //{
+            //    ListViewItem item = new();
+            //    item.Content = travel.GetInfo();
+            //    item.Tag = travel;
+            //    lvUserTravels.Items.Add(item);
+            //}
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new(userManager);
+            MainWindow mainWindow = new(userManager, travelManager);
             mainWindow.Show();
             Close();    
         }

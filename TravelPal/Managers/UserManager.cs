@@ -20,6 +20,7 @@ namespace TravelPal.Managers
 
         public UserManager()
         {
+            
             Admin newAdmin = new("admin", "password");
             users.Add(newAdmin);
 
@@ -29,6 +30,7 @@ namespace TravelPal.Managers
             Vacation newVacation = new(true, "Madagascar", 2, Enums.Countries.Sweden);
             travelManager.AddTravel(newVacation);
             newUser.travels.Add(newVacation);
+
             Trip newTrip = new(Enums.TripTypes.Leisure, "Sydney", 4, Enums.Countries.Denmark);
             travelManager.AddTravel(newTrip);
             newUser.travels.Add(newTrip);

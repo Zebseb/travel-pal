@@ -24,16 +24,17 @@ namespace TravelPal
     public partial class TravelsWindow : Window
     {
         private UserManager userManager;
-        private TravelManager travelManager = new();
+        private TravelManager travelManager;
         private List<Travel> travels;
         private User user;
 
-        public TravelsWindow(UserManager userManager)
+        public TravelsWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.user = userManager.signedInUser as User;
             this.userManager = userManager;
+            this.travelManager = travelManager;
             this.travels = travelManager.GetTravels();
             lblUsername.Content = user.Username;
             btnDetails.IsEnabled = false;
@@ -50,21 +51,21 @@ namespace TravelPal
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new(userManager);
+            MainWindow mainWindow = new(userManager, travelManager);
             mainWindow.Show();
             Close();
         }
 
         private void btnEditAccount_Click(object sender, RoutedEventArgs e)
         {
-            UserDetailsWindow userDetailsWindow = new(userManager);
+            UserDetailsWindow userDetailsWindow = new(userManager, travelManager);
             userDetailsWindow.Show();
             Close();
         }
 
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
-            AddTravelWindow addTravelWindow = new(userManager);
+            AddTravelWindow addTravelWindow = new(userManager, travelManager);
             addTravelWindow.Show();
             Close();
         }
@@ -74,14 +75,18 @@ namespace TravelPal
             ListViewItem selectedItem = lvTravels.SelectedItem as ListViewItem;
             Travel selectedTravel = selectedItem.Tag as Travel;
 
-            TravelDetailsWindow travelDetailsWindow = new(userManager, selectedTravel);
+            TravelDetailsWindow travelDetailsWindow = new(userManager, selectedTravel, travelManager);
             travelDetailsWindow.Show();
             Close();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            ListViewItem selectedItem = lvTravels.SelectedItem as ListViewItem;
+            Travel selectedTravel = selectedItem.Tag as Travel;
 
+            user.travels.Remove(selectedTravel);
+            travelManager.RemoveTravel(selectedTravel);
         }
 
         private void btnAboutUs_Click(object sender, RoutedEventArgs e)

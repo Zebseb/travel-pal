@@ -15,6 +15,11 @@ namespace TravelPal.Models
         public Countries Location { get; set; }
         public List<Travel> travels { get; set; } = new();
 
+        public User()
+        {
+
+        }
+
         public User(string username, string password, Countries location)
         {
             Username = username;

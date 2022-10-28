@@ -22,13 +22,15 @@ namespace TravelPal
     public partial class RegisterWindow : Window
     {
         private UserManager userManager;
+        private TravelManager travelManager;
 
-        public RegisterWindow(UserManager userManager)
+        public RegisterWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             this.userManager = userManager;
+            this.travelManager = travelManager;
 
             string[] countries = Enum.GetNames(typeof(Countries));
             cbCountries.ItemsSource = countries;
@@ -56,7 +58,7 @@ namespace TravelPal
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new(userManager);
+            MainWindow mainWindow = new(userManager, travelManager);
             mainWindow.Show();
             Close();
         }
@@ -88,7 +90,7 @@ namespace TravelPal
 
             else
             {
-                MainWindow mainWindow = new(userManager);
+                MainWindow mainWindow = new(userManager, travelManager);
                 mainWindow.Show();
                 Close();
             }

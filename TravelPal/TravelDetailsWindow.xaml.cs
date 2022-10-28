@@ -23,14 +23,16 @@ namespace TravelPal
     {
         private User user;
         private UserManager userManager;
+        private TravelManager travelManager;
         private Travel travel;
         private Vacation vacation;
         private Trip trip;
 
-        public TravelDetailsWindow(UserManager userManager, Travel selectedTravel)
+        public TravelDetailsWindow(UserManager userManager, Travel selectedTravel, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.travelManager = travelManager;
             this.travel = selectedTravel;
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
@@ -74,7 +76,7 @@ namespace TravelPal
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            TravelsWindow travelsWindow = new(userManager);
+            TravelsWindow travelsWindow = new(userManager, travelManager);
             travelsWindow.Show();
             Close();
         }

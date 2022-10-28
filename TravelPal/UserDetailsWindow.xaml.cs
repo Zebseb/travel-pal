@@ -22,14 +22,15 @@ namespace TravelPal
     /// </summary>
     public partial class UserDetailsWindow : Window
     {
+        private TravelManager travelManager;
         private UserManager userManager;
         private User user;
 
-        public UserDetailsWindow(UserManager userManager)
+        public UserDetailsWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
+            this.travelManager = travelManager;
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
             lblUsername.Content = user.Username;
@@ -70,7 +71,7 @@ namespace TravelPal
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
-            TravelsWindow travelsWindow = new(userManager);
+            TravelsWindow travelsWindow = new(userManager, travelManager);
             travelsWindow.Show();
             Close();
         }

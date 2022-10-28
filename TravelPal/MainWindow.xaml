@@ -91,6 +91,7 @@
             Height="30"
             Width="100"
             VerticalAlignment="Center"
+            IsDefault="True"
             Click="btnSignIn_Click"
             />
         <TextBox

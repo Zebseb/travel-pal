@@ -177,6 +177,7 @@
             BorderThickness="2"
             Height="30"
             Width="100"
+            IsDefault="True"
             Click="btnRegister_Click"
             />
         <CheckBox

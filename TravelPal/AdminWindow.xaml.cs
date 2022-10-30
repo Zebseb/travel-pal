@@ -59,7 +59,7 @@ namespace TravelPal
                 foreach (Travel travel in user.travels)
                 {
                     ListViewItem item = new();
-                    item.Content = travel.GetInfo();
+                    item.Content = $"Traveler: {user.Username} {travel.GetInfo()}";
                     item.Tag = travel;
                     lvUserTravels.Items.Add(item);
                 }

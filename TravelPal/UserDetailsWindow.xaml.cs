@@ -110,6 +110,10 @@ namespace TravelPal
                 btnSave.IsEnabled = false;
 
                 MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
+
+                TravelsWindow travelsWindow = new(userManager, travelManager);
+                travelsWindow.Show();
+                Close();
             }
 
             else
@@ -122,7 +126,6 @@ namespace TravelPal
             pabxPasswordBox2.Clear();
             tbxPasswordBox.Clear();
             tbxPasswordBox2.Clear();
-
         }
     }
 }

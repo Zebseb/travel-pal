@@ -67,7 +67,17 @@ namespace TravelPal
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             string username = tbxUsername.Text;
-            string password = pabxPasswordBox.Password;
+            string password = "";
+
+            if (!(bool)chbxShowPassword.IsChecked)
+            {
+                password = pabxPasswordBox.Password;
+            }
+
+            else if ((bool)chbxShowPassword.IsChecked)
+            {
+                password = tbxPasswordBox.Text;
+            }
 
             bool isUserFound = userManager.SignInUser(username, password);
             user = userManager.signedInUser;

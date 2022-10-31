@@ -31,6 +31,8 @@ namespace TravelPal
         private List<User> userUsers = new();
         private Admin admin;
         private User user = new();
+        private Travel travelToRemove;
+        private User userToGetTravelRemoved;
 
         public AdminWindow(UserManager userManager, TravelManager travelManager)
         {
@@ -91,7 +93,24 @@ namespace TravelPal
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            ListViewItem selectedItem = lvUserTravels.SelectedItem as ListViewItem;
+            Travel selectedTravel = selectedItem.Tag as Travel;
 
+            travelManager.RemoveTravel(selectedTravel);
+
+            foreach (User user in userUsers)
+            {
+                foreach (Travel travel in user.travels)
+                {
+                    if (selectedTravel == travel)
+                    {
+                        userToGetTravelRemoved = user;
+                        travelToRemove = travel;
+                    }
+                }
+            }
+
+            userToGetTravelRemoved.travels.Remove(travelToRemove);
         }
     }
 }

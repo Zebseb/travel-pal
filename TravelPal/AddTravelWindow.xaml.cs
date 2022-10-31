@@ -96,7 +96,10 @@ namespace TravelPal
                 }
 
                 Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
-                user.travels.Add(newVacation);
+                user.travels.Add(newVacation); //TODO -Lägg till resa i All travels också
+                travelManager.AddTravel(newVacation);
+
+                Close();
             }
 
             else if (cbTravelType.SelectedIndex == 1)
@@ -109,7 +112,10 @@ namespace TravelPal
                 TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
 
                 Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
-                user.travels.Add(newTrip);
+                user.travels.Add(newTrip); //TODO -Lägg till resa i All travels också
+                travelManager.AddTravel(newTrip);
+
+                Close();
             }
         }
     }

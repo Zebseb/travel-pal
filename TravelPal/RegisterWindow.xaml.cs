@@ -70,35 +70,65 @@ namespace TravelPal
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            string username = tbxUsername.Text;
-            string password = "";
-            string country = cbCountries.SelectedItem as string;
+            string username = "";
 
-            Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-
-            if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+            if (tbxUsername.Text.Length >= 3)
             {
-                password = pabxPasswordBox.Password;
+                username = tbxUsername.Text;
+
+                string password = "";
+                string country = cbCountries.SelectedItem as string;
+
+                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+
+                if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+                {
+                    if (pabxPasswordBox.Password.Length >= 5)
+                    {
+                        password = pabxPasswordBox.Password;
+
+                        bool isAvailableUsername = userManager.AddUser(username, password, countryEnum);
+
+                        if (!isAvailableUsername)
+                        {
+                            MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
+                            ClearPasswordBoxes();
+                        }
+
+                        else
+                        {
+                            MainWindow mainWindow = new(userManager, travelManager);
+                            mainWindow.Show();
+                            Close();
+                        }
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                        ClearPasswordBoxes();
+                    }
+                }
+
+                else
+                {
+                    MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
+                }
             }
 
             else
             {
-                MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
+                MessageBox.Show("You have to choose a username with at least 3 characters...", "Warning!", MessageBoxButton.OK);
+                ClearPasswordBoxes();
             }
+        }
 
-            bool isAvailableUsername = userManager.AddUser(username, password, countryEnum);
-
-            if (!isAvailableUsername)
-            {
-                MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
-            }
-
-            else
-            {
-                MainWindow mainWindow = new(userManager, travelManager);
-                mainWindow.Show();
-                Close();
-            }
+        private void ClearPasswordBoxes()
+        {
+            tbxPasswordBox.Clear();
+            tbxPasswordBox2.Clear();
+            pabxPasswordBox.Clear();
+            pabxPasswordBox2.Clear();
         }
     }
 }

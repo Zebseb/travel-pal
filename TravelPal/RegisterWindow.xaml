@@ -85,7 +85,7 @@
             />
         <Label
             x:Name="lblShowPassword"
-            Content="Show passwords"
+            Content="Show password"
             FontSize="10"
             Grid.Row="7"
             Grid.Column="6"

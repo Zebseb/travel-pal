@@ -27,19 +27,18 @@ namespace TravelPal
         private UserManager userManager = new();
         private TravelManager travelManager = new();
         private IUser user;
-        private List<IUser> users;
 
         public MainWindow()
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
         }
 
         public MainWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             this.userManager = userManager;
             this.travelManager = travelManager;
         }

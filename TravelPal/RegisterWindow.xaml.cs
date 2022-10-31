@@ -32,6 +32,11 @@ namespace TravelPal
             this.userManager = userManager;
             this.travelManager = travelManager;
 
+            PopulateCountryComboBox();
+        }
+
+        private void PopulateCountryComboBox()
+        {
             string[] countries = Enum.GetNames(typeof(Countries));
             cbCountries.ItemsSource = countries;
         }

@@ -30,23 +30,33 @@ namespace TravelPal
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             this.travelManager = travelManager;
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
-            lblUsername.Content = user.Username;
 
+            lblUsername.Content = user.Username;
             tbxUsername.Text = user.Username;
             cbCountries.SelectedItem = user.Location.ToString();
 
+            DisableTextBoxes();
+            PopulateCountryComboBox();
+        }
+
+        private void PopulateCountryComboBox()
+        {
+            string[] countries = Enum.GetNames(typeof(Countries));
+            cbCountries.ItemsSource = countries;
+        }
+
+        private void DisableTextBoxes()
+        {
             tbxUsername.IsEnabled = false;
             pabxPasswordBox.IsEnabled = false;
             pabxPasswordBox2.IsEnabled = false;
             cbCountries.IsEnabled = false;
             btnSave.IsEnabled = false;
             chbxShowPassword.IsEnabled = false;
-
-            string[] countries = Enum.GetNames(typeof(Countries));
-            cbCountries.ItemsSource = countries;
         }
 
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)

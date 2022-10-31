@@ -32,46 +32,64 @@ namespace TravelPal
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             this.travelManager = travelManager;
             this.travel = selectedTravel;
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
+
             lblUsername.Content = user.Username;
 
-            tbxNumOfTravelers.IsEnabled = false;
-            tbxDeparture.IsEnabled = false;
-            tbxDestination.IsEnabled = false;
-            tbxTravelType.IsEnabled = false;
-            tbxAllInclusive.IsEnabled = false;
-            tbxTripType.IsEnabled = false;
+            DisableTextBoxes();
+            CollapseTextBoxesAndLabels();
+            SetTextboxesToTravelDetails();
+            SetTextBoxInfo();
+        }
 
-            lblTripType.Visibility = Visibility.Collapsed;
-            tbxTripType.Visibility = Visibility.Collapsed;
-            lblAllInclusive.Visibility = Visibility.Collapsed;
-            tbxAllInclusive.Visibility = Visibility.Collapsed;
-            
-            tbxNumOfTravelers.Text = selectedTravel.Travelers.ToString();
-            tbxDeparture.Text = selectedTravel.Country.ToString();
-            tbxDestination.Text = selectedTravel.Destination;
-
-            if (selectedTravel is Vacation)
+        private void SetTextBoxInfo()
+        {
+            if (travel is Vacation)
             {
-                vacation = selectedTravel as Vacation;
+                vacation = travel as Vacation;
                 lblAllInclusive.Visibility = Visibility.Visible;
                 tbxAllInclusive.Visibility = Visibility.Visible;
                 tbxAllInclusive.Text = vacation.AllInclusive.ToString();
                 tbxTravelType.Text = "Vacation";
             }
 
-            else if (selectedTravel is Trip)
+            else if (travel is Trip)
             {
-                trip = selectedTravel as Trip;
+                trip = travel as Trip;
                 lblTripType.Visibility = Visibility.Visible;
                 tbxTripType.Visibility = Visibility.Visible;
                 tbxTripType.Text = trip.Type.ToString();
                 tbxTravelType.Text = "Trip";
             }
+        }
 
+        private void SetTextboxesToTravelDetails()
+        {
+            tbxNumOfTravelers.Text = travel.Travelers.ToString();
+            tbxDeparture.Text = travel.Country.ToString();
+            tbxDestination.Text = travel.Destination;
+        }
+
+        private void CollapseTextBoxesAndLabels()
+        {
+            lblTripType.Visibility = Visibility.Collapsed;
+            tbxTripType.Visibility = Visibility.Collapsed;
+            lblAllInclusive.Visibility = Visibility.Collapsed;
+            tbxAllInclusive.Visibility = Visibility.Collapsed;
+        }
+
+        private void DisableTextBoxes()
+        {
+            tbxNumOfTravelers.IsEnabled = false;
+            tbxDeparture.IsEnabled = false;
+            tbxDestination.IsEnabled = false;
+            tbxTravelType.IsEnabled = false;
+            tbxAllInclusive.IsEnabled = false;
+            tbxTripType.IsEnabled = false;
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)

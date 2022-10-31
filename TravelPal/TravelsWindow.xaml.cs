@@ -25,20 +25,26 @@ namespace TravelPal
     {
         private UserManager userManager;
         private TravelManager travelManager;
-        private List<Travel> travels;
         private User user;
 
         public TravelsWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             this.user = userManager.signedInUser as User;
             this.userManager = userManager;
             this.travelManager = travelManager;
-            this.travels = travelManager.GetTravels();
+
             lblUsername.Content = user.Username;
-            btnDetails.IsEnabled = false;
-            btnRemove.IsEnabled = false;
+
+            DisableDetailsAndRemoveButtons();
+            PopulateUserListView();
+        }
+
+        private void PopulateUserListView()
+        {
+            lvTravels.Items.Clear();
 
             foreach (Travel travel in user.travels)
             {
@@ -47,6 +53,12 @@ namespace TravelPal
                 item.Tag = travel;
                 lvTravels.Items.Add(item);
             }
+        }
+
+        private void DisableDetailsAndRemoveButtons()
+        {
+            btnDetails.IsEnabled = false;
+            btnRemove.IsEnabled = false;
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
@@ -87,6 +99,7 @@ namespace TravelPal
 
             user.travels.Remove(selectedTravel);
             travelManager.RemoveTravel(selectedTravel);
+            PopulateUserListView();
         }
 
         private void btnAboutUs_Click(object sender, RoutedEventArgs e)

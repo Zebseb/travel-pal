@@ -25,7 +25,6 @@ namespace TravelPal
     public partial class AdminWindow : Window
     {
         private TravelManager travelManager;
-        private List<Travel> travels;
         private UserManager userManager;
         private List<IUser> users;
         private List<User> userUsers = new();
@@ -38,23 +37,34 @@ namespace TravelPal
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.travelManager = travelManager;
-            this.travels = travelManager.GetTravels();
 
+            this.travelManager = travelManager;
             this.userManager = userManager;
+
             users = userManager.GetUsers();
             admin = userManager.signedInUser as Admin;
 
             lblUsername.Content = admin.Username;
 
+            CreateListWithUserUsers();
+            PopulateTravelsListView();
+            PopulateUserComboBox();
+        }
+
+        private void PopulateUserComboBox()
+        {
             foreach (IUser user in users)
             {
                 if (user is User)
                 {
-                    this.user = user as User;
-                    userUsers.Add(this.user);
+                    cbUsers.Items.Add(user.Username);
                 }
             }
+        }
+
+        private void PopulateTravelsListView()
+        {
+            lvUserTravels.Items.Clear();
 
             foreach (User user in userUsers)
             {
@@ -66,22 +76,18 @@ namespace TravelPal
                     lvUserTravels.Items.Add(item);
                 }
             }
+        }
 
+        private void CreateListWithUserUsers()
+        {
             foreach (IUser user in users)
             {
                 if (user is User)
                 {
-                    cbUsers.Items.Add(user.Username);
+                    this.user = user as User;
+                    userUsers.Add(this.user);
                 }
             }
-
-            //foreach (Travel travel in travels)
-            //{
-            //    ListViewItem item = new();
-            //    item.Content = travel.GetInfo();
-            //    item.Tag = travel;
-            //    lvUserTravels.Items.Add(item);
-            //}
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
@@ -111,6 +117,7 @@ namespace TravelPal
             }
 
             userToGetTravelRemoved.travels.Remove(travelToRemove);
+            PopulateTravelsListView();
         }
     }
 }

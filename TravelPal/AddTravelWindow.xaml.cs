@@ -30,22 +30,33 @@ namespace TravelPal
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
             this.travelManager = travelManager;
             this.userManager = userManager;
             this.user = userManager.signedInUser as User;
 
             lblUsername.Content = user.Username;
-            cbxAllInclusive.Visibility = Visibility.Collapsed;
-            lblAllInclusive.Visibility = Visibility.Collapsed;
-            cbTripType.Visibility = Visibility.Collapsed;
-            lblTripType.Visibility = Visibility.Collapsed;
-            
+
+            CollapseTextBoxesAndLabels();
+            PopulateComboBoxes();
+        }
+
+        private void PopulateComboBoxes()
+        {
             string[] countries = Enum.GetNames(typeof(Countries));
             cbCountries.ItemsSource = countries;
             string[] travelTypes = Enum.GetNames(typeof(TravelType));
             cbTravelType.ItemsSource = travelTypes;
             string[] tripTypes = Enum.GetNames(typeof(TripTypes));
             cbTripType.ItemsSource = tripTypes;
+        }
+
+        private void CollapseTextBoxesAndLabels()
+        {
+            cbxAllInclusive.Visibility = Visibility.Collapsed;
+            lblAllInclusive.Visibility = Visibility.Collapsed;
+            cbTripType.Visibility = Visibility.Collapsed;
+            lblTripType.Visibility = Visibility.Collapsed;
         }
 
         private void btnReturn_Click(object sender, RoutedEventArgs e)
@@ -88,6 +99,7 @@ namespace TravelPal
                 numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
                 country = cbCountries.SelectedItem as string;
                 destination = tbxDestination.Text;
+
                 Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                 
                 if ((bool)cbxAllInclusive.IsChecked)
@@ -96,9 +108,11 @@ namespace TravelPal
                 }
 
                 Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
-                user.travels.Add(newVacation); //TODO -Lägg till resa i All travels också
+                user.travels.Add(newVacation);
                 travelManager.AddTravel(newVacation);
 
+                TravelsWindow travelsWindow = new(userManager, travelManager);
+                travelsWindow.Show();
                 Close();
             }
 
@@ -106,15 +120,18 @@ namespace TravelPal
             {
                 numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
                 country = cbCountries.SelectedItem as string;
-                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                 destination = tbxDestination.Text;
                 tripType = cbTripType.SelectedItem as string;
+
+                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                 TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
 
                 Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
-                user.travels.Add(newTrip); //TODO -Lägg till resa i All travels också
+                user.travels.Add(newTrip);
                 travelManager.AddTravel(newTrip);
 
+                TravelsWindow travelsWindow = new(userManager, travelManager);
+                travelsWindow.Show();
                 Close();
             }
         }

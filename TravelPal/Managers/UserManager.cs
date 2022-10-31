@@ -20,7 +20,6 @@ namespace TravelPal.Managers
 
         public UserManager()
         {
-            
             Admin newAdmin = new("admin", "password");
             users.Add(newAdmin);
 

@@ -87,6 +87,7 @@
             Height="25"
             VerticalAlignment="Top"
             Margin="10, 20, 10, 0"
+            SelectionChanged="cbUsers_SelectionChanged"
             />
         <Button
             x:Name="btnRemove"

@@ -32,6 +32,7 @@ namespace TravelPal
         private User user = new();
         private Travel travelToRemove;
         private User userToGetTravelRemoved;
+        private User selectedUser = new();
 
         public AdminWindow(UserManager userManager, TravelManager travelManager)
         {
@@ -53,6 +54,8 @@ namespace TravelPal
 
         private void PopulateUserComboBox()
         {
+            cbUsers.Items.Add("-All Travels-");
+
             foreach (IUser user in users)
             {
                 if (user is User)
@@ -60,6 +63,8 @@ namespace TravelPal
                     cbUsers.Items.Add(user.Username);
                 }
             }
+
+            cbUsers.SelectedIndex = 0;
         }
 
         private void PopulateTravelsListView()
@@ -118,6 +123,35 @@ namespace TravelPal
 
             userToGetTravelRemoved.travels.Remove(travelToRemove);
             PopulateTravelsListView();
+        }
+
+        private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lvUserTravels.Items.Clear();
+
+            if (cbUsers.SelectedIndex != 0)
+            {
+                foreach (User user in userUsers)
+                {
+                    if ((string)cbUsers.SelectedItem == user.Username)
+                    {
+                        selectedUser = user;
+                    }
+                }
+
+                foreach (Travel travel in selectedUser.travels)
+                {
+                    ListViewItem item = new();
+                    item.Content = $"Traveler: {selectedUser.Username} {travel.GetInfo()}";
+                    item.Tag = travel;
+                    lvUserTravels.Items.Add(item);
+                }
+            }
+
+            else
+            {
+                PopulateTravelsListView();
+            }
         }
     }
 }

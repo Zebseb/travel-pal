@@ -51,6 +51,7 @@ namespace TravelPal
 
         private void DisableTextBoxes()
         {
+            pabxCurrentPasswordBox.IsEnabled = false;
             tbxUsername.IsEnabled = false;
             pabxPasswordBox.IsEnabled = false;
             pabxPasswordBox2.IsEnabled = false;
@@ -88,6 +89,7 @@ namespace TravelPal
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            pabxCurrentPasswordBox.IsEnabled = true;
             tbxUsername.IsEnabled = true;
             pabxPasswordBox.IsEnabled = true;
             pabxPasswordBox2.IsEnabled = true;
@@ -100,38 +102,54 @@ namespace TravelPal
         {
             string username = tbxUsername.Text;
 
-            bool isUpdatedUser = userManager.UpdateUsername(user, username);
-            
-            if (isUpdatedUser)
+            if (pabxCurrentPasswordBox.Password == user.Password)
             {
-                string country = cbCountries.SelectedItem as string;
-                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-                user.Location = countryEnum;
+                bool isUpdatedUser = userManager.UpdateUsername(user, username);
 
-                if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+                if (isUpdatedUser)
                 {
-                    user.Password = pabxPasswordBox.Password;
+                    string country = cbCountries.SelectedItem as string;
+                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                    user.Location = countryEnum;
+
+                    if (pabxPasswordBox.Password == pabxPasswordBox2.Password && !string.IsNullOrEmpty(pabxPasswordBox.Password) && string.IsNullOrEmpty(pabxPasswordBox2.Password))
+                    {
+                        user.Password = pabxPasswordBox.Password;
+                    }
+
+                    else if (tbxPasswordBox.Text == tbxPasswordBox2.Text && !string.IsNullOrEmpty(tbxPasswordBox.Text) && !string.IsNullOrEmpty(tbxPasswordBox2.Text))
+                    {
+                        user.Password = tbxPasswordBox.Text;
+                    }
+
+                    tbxUsername.Text = user.Username;
+                    tbxUsername.IsEnabled = false;
+                    cbCountries.SelectedItem = user.Location.ToString();
+                    cbCountries.IsEnabled = false;
+                    btnSave.IsEnabled = false;
+
+                    MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
+
+                    TravelsWindow travelsWindow = new(userManager, travelManager);
+                    travelsWindow.Show();
+                    Close();
                 }
 
-                tbxUsername.Text = user.Username;
-                tbxUsername.IsEnabled = false;
-                cbCountries.SelectedItem = user.Location.ToString();
-                cbCountries.IsEnabled = false;
-                btnSave.IsEnabled = false;
-
-                MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
-
-                TravelsWindow travelsWindow = new(userManager, travelManager);
-                travelsWindow.Show();
-                Close();
+                else if (!isUpdatedUser)
+                {
+                    {
+                        MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
+                        cbCountries.SelectedItem = user.Location.ToString();
+                    }
+                }
             }
 
             else
             {
-                MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
-                cbCountries.SelectedItem = user.Location.ToString();
+                MessageBox.Show("Please enter your current password correctly to update user details...", "Warning!", MessageBoxButton.OK);
             }
 
+            pabxCurrentPasswordBox.Clear();
             pabxPasswordBox.Clear();
             pabxPasswordBox2.Clear();
             tbxPasswordBox.Clear();

@@ -118,7 +118,32 @@ namespace TravelPal
 
             else if (cbTravelType.SelectedIndex == 1)
             {
-                numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
+                try
+                {
+                    numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
+
+                    if(numOfTravelers <= 0)
+                    {
+                        MessageBox.Show("0 travelers can't go anywhere...", "Warning!", MessageBoxButton.OK);
+
+                        return;
+                    }
+                }
+
+                catch(OverflowException ex)
+                {
+                    MessageBox.Show("The flight can't take that many passengers...", "Warning", MessageBoxButton.OK);
+
+                    return;
+                }
+
+                catch(FormatException ex)
+                {
+                    MessageBox.Show("Please input a number for the amount of travelers...", "Warning!", MessageBoxButton.OK);
+
+                    return;
+                }
+
                 country = cbCountries.SelectedItem as string;
                 destination = tbxDestination.Text;
                 tripType = cbTripType.SelectedItem as string;

@@ -72,55 +72,93 @@ namespace TravelPal
         {
             string username = "";
 
-            if (tbxUsername.Text.Trim().Length >= 3)
+            if (CheckInputs())
             {
-                username = tbxUsername.Text;
-
-                string password = "";
-                string country = cbCountries.SelectedItem as string;
-
-                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-
-                if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+                if (tbxUsername.Text.Trim().Length >= 3)
                 {
-                    if (pabxPasswordBox.Password.Trim().Length >= 5)
+                    username = tbxUsername.Text;
+
+                    string password = "";
+                    string country = cbCountries.SelectedItem as string;
+
+                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+
+                    if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
                     {
-                        password = pabxPasswordBox.Password;
-
-                        bool isAvailableUsername = userManager.AddUser(username, password, countryEnum);
-
-                        if (!isAvailableUsername)
+                        if (pabxPasswordBox.Password.Trim().Length >= 5)
                         {
-                            MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
-                            ClearPasswordBoxes();
+                            password = pabxPasswordBox.Password;
+
+                            bool isAvailableUsername = userManager.AddUser(username, password, countryEnum);
+
+                            if (!isAvailableUsername)
+                            {
+                                MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
+                                ClearPasswordBoxes();
+                            }
+
+                            else
+                            {
+                                MainWindow mainWindow = new(userManager, travelManager);
+                                mainWindow.Show();
+                                Close();
+                            }
                         }
 
                         else
                         {
-                            MainWindow mainWindow = new(userManager, travelManager);
-                            mainWindow.Show();
-                            Close();
+                            MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                            ClearPasswordBoxes();
                         }
                     }
 
                     else
                     {
-                        MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
-                        ClearPasswordBoxes();
+                        MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
                     }
                 }
 
                 else
                 {
-                    MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
+                    MessageBox.Show("You have to choose a username with at least 3 characters...", "Warning!", MessageBoxButton.OK);
+                    ClearPasswordBoxes();
                 }
             }
 
             else
             {
-                MessageBox.Show("You have to choose a username with at least 3 characters...", "Warning!", MessageBoxButton.OK);
-                ClearPasswordBoxes();
+                MessageBox.Show("In order to register you need to give us the required info...", "Warning!", MessageBoxButton.OK);
             }
+
+        }
+
+        private bool CheckInputs()
+        {
+            string username = tbxUsername.Text;
+            string country = cbCountries.SelectedItem as string;
+            string password = "";
+
+            if (!(bool)chbxShowPassword.IsChecked)
+            {
+                password = pabxPasswordBox.Password;
+            }
+
+            else if ((bool)(chbxShowPassword.IsChecked))
+            {
+                password = tbxPasswordBox.Text;
+            }
+
+            string[] fields = new[] { username, country, password };
+
+            foreach (string field in fields)
+            {
+                if (string.IsNullOrEmpty(field))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void ClearPasswordBoxes()

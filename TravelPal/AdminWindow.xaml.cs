@@ -46,6 +46,7 @@ namespace TravelPal
             admin = userManager.signedInUser as Admin;
 
             lblUsername.Content = admin.Username;
+            btnRemove.IsEnabled = false;
 
             CreateListWithUserUsers();
             PopulateTravelsListView();
@@ -80,6 +81,19 @@ namespace TravelPal
                     item.Tag = travel;
                     lvUserTravels.Items.Add(item);
                 }
+            }
+        }
+
+        private void PopulateSelectedUserTravelsListView()
+        {
+            lvUserTravels.Items.Clear();
+
+            foreach (Travel travel in selectedUser.travels)
+            {
+                ListViewItem item = new();
+                item.Content = $"Traveler: {selectedUser.Username} {travel.GetInfo()}";
+                item.Tag = travel;
+                lvUserTravels.Items.Add(item);
             }
         }
 
@@ -122,7 +136,18 @@ namespace TravelPal
             }
 
             userToGetTravelRemoved.travels.Remove(travelToRemove);
-            PopulateTravelsListView();
+
+            if (cbUsers.SelectedIndex == 0)
+            {
+                PopulateTravelsListView();
+            }
+
+            else
+            {
+                PopulateSelectedUserTravelsListView();
+            }
+
+            btnRemove.IsEnabled = false;
         }
 
         private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -152,6 +177,11 @@ namespace TravelPal
             {
                 PopulateTravelsListView();
             }
+        }
+
+        private void lvUserTravels_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                btnRemove.IsEnabled = true;
         }
     }
 }

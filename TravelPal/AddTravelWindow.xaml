@@ -198,5 +198,15 @@
             BorderThickness="2"
             Click="btnAddTravel_Click"
             />
+        <Calendar
+            x:Name="clndrBox"
+            Grid.Column="7"
+            Grid.ColumnSpan="3"
+            Grid.Row="2"
+            Grid.RowSpan="5"
+            Width="200"
+            VerticalAlignment="Center"
+            SelectionMode="SingleRange"
+            />
     </Grid>
 </Window>

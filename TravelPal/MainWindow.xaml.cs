@@ -99,26 +99,18 @@ namespace TravelPal
                 }
             }
 
-            //bool usernameFound = false;
+            if (!isUserFound)
+            {
+                MessageBox.Show("Username or password is incorrect... Please register if you are not a member yet!", "Warning!", MessageBoxButton.OK);
+                ClearTextBoxes();
+            }
+        }
 
-            //if (!userIsFound)
-            //{
-            //    foreach (IUser user in users)
-            //    {
-            //        if (user.Username == username)
-            //        {
-            //            usernameFound = true;
-
-            //            MessageBox.Show("Username or password is incorrect...", "Warning!", MessageBoxButton.OK);
-            //        }
-            //    }
-            //}
-
-            //if (!userIsFound && !usernameFound)
-            //{
-            //    MessageBox.Show("Please register before signing in...", "Warning!", MessageBoxButton.OK);
-
-            //}
+        private void ClearTextBoxes()
+        {
+            tbxUsername.Clear();
+            tbxPasswordBox.Clear();
+            pabxPasswordBox.Clear();
         }
     }
 }

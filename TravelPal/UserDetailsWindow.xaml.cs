@@ -100,7 +100,17 @@ namespace TravelPal
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string username = tbxUsername.Text;
+            string username = "";
+
+            if (tbxUsername.Text.Trim().Length >= 3)
+            {
+                username = tbxUsername.Text;
+            }
+
+            else
+            {
+                MessageBox.Show("You have to choose a username with at least 3 characters...", "Warning!", MessageBoxButton.OK);
+            }
 
             if (pabxCurrentPasswordBox.Password == user.Password)
             {
@@ -112,27 +122,48 @@ namespace TravelPal
                     Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                     user.Location = countryEnum;
 
-                    if (pabxPasswordBox.Password == pabxPasswordBox2.Password && !string.IsNullOrEmpty(pabxPasswordBox.Password) && string.IsNullOrEmpty(pabxPasswordBox2.Password))
+                    if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
                     {
-                        user.Password = pabxPasswordBox.Password;
+                        if (pabxPasswordBox.Password.Trim().Length >= 5)
+                        {
+                            user.Password = pabxPasswordBox.Password;
+
+                            MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
+
+                            TravelsWindow travelsWindow = new(userManager, travelManager);
+                            travelsWindow.Show();
+                            Close();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                        }
                     }
 
-                    else if (tbxPasswordBox.Text == tbxPasswordBox2.Text && !string.IsNullOrEmpty(tbxPasswordBox.Text) && !string.IsNullOrEmpty(tbxPasswordBox2.Text))
+                    else if (tbxPasswordBox.Text == tbxPasswordBox2.Text)
                     {
-                        user.Password = tbxPasswordBox.Text;
+                        if (tbxPasswordBox.Text.Trim().Length >= 5)
+                        {
+                            user.Password = tbxPasswordBox.Text;
+
+                            MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
+
+                            TravelsWindow travelsWindow = new(userManager, travelManager);
+                            travelsWindow.Show();
+                            Close();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                        }
                     }
 
-                    tbxUsername.Text = user.Username;
-                    tbxUsername.IsEnabled = false;
-                    cbCountries.SelectedItem = user.Location.ToString();
-                    cbCountries.IsEnabled = false;
-                    btnSave.IsEnabled = false;
-
-                    MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
-
-                    TravelsWindow travelsWindow = new(userManager, travelManager);
-                    travelsWindow.Show();
-                    Close();
+                    else
+                    {
+                        MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
+                    }
                 }
 
                 else if (!isUpdatedUser)
@@ -149,6 +180,11 @@ namespace TravelPal
                 MessageBox.Show("Please enter your current password correctly to update user details...", "Warning!", MessageBoxButton.OK);
             }
 
+            ClearTextBoxes();
+        }
+
+        private void ClearTextBoxes()
+        {
             pabxCurrentPasswordBox.Clear();
             pabxPasswordBox.Clear();
             pabxPasswordBox2.Clear();

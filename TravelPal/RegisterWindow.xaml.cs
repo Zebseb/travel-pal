@@ -72,7 +72,7 @@ namespace TravelPal
         {
             string username = "";
 
-            if (tbxUsername.Text.Length >= 3)
+            if (tbxUsername.Text.Trim().Length >= 3)
             {
                 username = tbxUsername.Text;
 
@@ -83,7 +83,7 @@ namespace TravelPal
 
                 if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
                 {
-                    if (pabxPasswordBox.Password.Length >= 5)
+                    if (pabxPasswordBox.Password.Trim().Length >= 5)
                     {
                         password = pabxPasswordBox.Password;
 

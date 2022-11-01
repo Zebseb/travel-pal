@@ -35,12 +35,14 @@ namespace TravelPal
             PopulateCountryComboBox();
         }
 
+        //Populates the combobox with countries from the Countries-enum
         private void PopulateCountryComboBox()
         {
             string[] countries = Enum.GetNames(typeof(Countries));
             cbCountries.ItemsSource = countries;
         }
 
+        //Collapses password-boxes and displays password-textboxes if the checkbox for "Show Password" is checked
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
         {
             tbxPasswordBox.Text = pabxPasswordBox.Password;
@@ -51,6 +53,7 @@ namespace TravelPal
             tbxPasswordBox2.Visibility = Visibility.Visible;
         }
 
+        //Collapses textboxes and displays password-boxes if the checkbox for "Show Password" is unchecked
         private void chbxShowPassword_Unchecked(object sender, RoutedEventArgs e)
         {
             pabxPasswordBox.Password = tbxPasswordBox.Text;
@@ -61,6 +64,7 @@ namespace TravelPal
             pabxPasswordBox2.Visibility = Visibility.Visible;
         }
 
+        //Sends the user back to the MainWindow and closes the RegisterWindow when clicking the Return-button
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(userManager, travelManager);
@@ -68,6 +72,7 @@ namespace TravelPal
             Close();
         }
 
+        //Registers a new user if all inputs are OK and displays warnings if input is missing or incorrect
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             string username = "";
@@ -132,6 +137,7 @@ namespace TravelPal
 
         }
 
+        //Checks that the user has entered input in all fields and returns a bool
         private bool CheckInputs()
         {
             string username = tbxUsername.Text;
@@ -161,6 +167,7 @@ namespace TravelPal
             return true;
         }
 
+        //Clears all password-boxes
         private void ClearPasswordBoxes()
         {
             tbxPasswordBox.Clear();

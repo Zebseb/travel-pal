@@ -41,6 +41,7 @@ namespace TravelPal
             PopulateComboBoxes();
         }
 
+        //Populates all comboboxes in the window
         private void PopulateComboBoxes()
         {
             string[] countries = Enum.GetNames(typeof(Countries));
@@ -51,6 +52,7 @@ namespace TravelPal
             cbTripType.ItemsSource = tripTypes;
         }
 
+        //Collapses UI
         private void CollapseTextBoxesAndLabels()
         {
             cbxAllInclusive.Visibility = Visibility.Collapsed;
@@ -59,6 +61,7 @@ namespace TravelPal
             lblTripType.Visibility = Visibility.Collapsed;
         }
 
+        //Sends the user back to the TravelsWindow and closes the AddTravelWindow when clicking the Return-button
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(userManager, travelManager);
@@ -66,6 +69,7 @@ namespace TravelPal
             Close();
         }
 
+        //Shows/collapses UI depending on what TravelType is selected
         private void cbTravelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbTravelType.SelectedIndex == 0)
@@ -86,6 +90,7 @@ namespace TravelPal
             }
         }
 
+        //Adds a travel if all input is correct and will show warnings if input is missing or incorrect
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             int numOfTravelers = 0;
@@ -152,6 +157,7 @@ namespace TravelPal
             }
         }
 
+        //Tries to parse user input and returns an int. Shows warnings if the input doesn't parse correctly.
         private int ParseNumOfTravelers()
         {
             int numOfTravelers = 0;
@@ -179,6 +185,7 @@ namespace TravelPal
                 return numOfTravelers;
         }
 
+        //Checks that the user has entered input in all fields and returns a bool
         private bool CheckInputs()
         {
             bool isEmptyFieldsVacation = false;

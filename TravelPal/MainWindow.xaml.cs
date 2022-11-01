@@ -43,6 +43,7 @@ namespace TravelPal
             this.travelManager = travelManager;
         }
 
+        //Sends the user to the RegisterWindow and closes the MainWindow when clicking the hyperlink
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new(userManager, travelManager);
@@ -50,13 +51,14 @@ namespace TravelPal
             Close();
         }
 
+        //Collapses the password-box and displays the password-textbox if the checkbox for "Show Password" is checked
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
         {
             tbxPasswordBox.Text = pabxPasswordBox.Password;
             pabxPasswordBox.Visibility = Visibility.Collapsed;
             tbxPasswordBox.Visibility = Visibility.Visible;
         }
-
+        //Collapses the password-textbox and displays the password-box if the checkbox for "Show Password" is unchecked
         private void chbxShowPassword_Unchecked(object sender, RoutedEventArgs e)
         {
             pabxPasswordBox.Password = tbxPasswordBox.Text;
@@ -64,6 +66,7 @@ namespace TravelPal
             pabxPasswordBox.Visibility = Visibility.Visible;
         }
 
+        //Checks if the user is registered and signs in. Shows a warning if the username or password is incorrect
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             string username = tbxUsername.Text;
@@ -106,8 +109,10 @@ namespace TravelPal
             }
         }
 
+        //Clears all inputboxes
         private void ClearTextBoxes()
         {
+            chbxShowPassword.IsChecked = false;
             tbxUsername.Clear();
             tbxPasswordBox.Clear();
             pabxPasswordBox.Clear();

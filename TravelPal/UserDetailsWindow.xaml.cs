@@ -43,12 +43,14 @@ namespace TravelPal
             PopulateCountryComboBox();
         }
 
+        //Populates combobox with all countries from Countries-enum
         private void PopulateCountryComboBox()
         {
             string[] countries = Enum.GetNames(typeof(Countries));
             cbCountries.ItemsSource = countries;
         }
 
+        //Disables all boxes in the window
         private void DisableTextBoxes()
         {
             pabxCurrentPasswordBox.IsEnabled = false;
@@ -60,6 +62,7 @@ namespace TravelPal
             chbxShowPassword.IsEnabled = false;
         }
 
+        //Collapses password-boxes and displays password-textboxes if the checkbox for "Show Password" is checked
         private void chbxShowPassword_Checked(object sender, RoutedEventArgs e)
         {
             tbxPasswordBox.Text = pabxPasswordBox.Password;
@@ -69,7 +72,8 @@ namespace TravelPal
             tbxPasswordBox.Visibility = Visibility.Visible;
             tbxPasswordBox2.Visibility = Visibility.Visible;
         }
-
+        
+        //Collapses password-textboxes and displays password-boxes if the checkbox for "Show Password" is unchecked
         private void chbxShowPassword_Unchecked(object sender, RoutedEventArgs e)
         {
             pabxPasswordBox.Password = tbxPasswordBox.Text;
@@ -80,6 +84,7 @@ namespace TravelPal
             pabxPasswordBox2.Visibility = Visibility.Visible;
         }
 
+        //Sends the user back to the TravelWindow and closes the UserDetailsWindow when clicking the Return-button and closes the UserDetailsWindow
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(userManager, travelManager);
@@ -87,6 +92,7 @@ namespace TravelPal
             Close();
         }
 
+        //Enables all boxes if the user clicks the Edit-button
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             pabxCurrentPasswordBox.IsEnabled = true;
@@ -98,6 +104,7 @@ namespace TravelPal
             chbxShowPassword.IsEnabled = true;
         }
 
+        //Saves updated account information if the user enters correct input and shows warnings if input is missing or incorrect
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string username = "";
@@ -183,6 +190,7 @@ namespace TravelPal
             ClearTextBoxes();
         }
 
+        //Resets and clears the password-boxes
         private void ClearTextBoxes()
         {
             pabxCurrentPasswordBox.Clear();

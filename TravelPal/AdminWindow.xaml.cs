@@ -48,11 +48,12 @@ namespace TravelPal
             lblUsername.Content = admin.Username;
             btnRemove.IsEnabled = false;
 
-            CreateListWithUserUsers();
+            PopulateUserUsersList();
             PopulateTravelsListView();
             PopulateUserComboBox();
         }
 
+        //Populates the users-combobox
         private void PopulateUserComboBox()
         {
             cbUsers.Items.Add("-All Travels-");
@@ -68,6 +69,7 @@ namespace TravelPal
             cbUsers.SelectedIndex = 0;
         }
 
+        //Populates the listview with all users' travels
         private void PopulateTravelsListView()
         {
             lvUserTravels.Items.Clear();
@@ -84,6 +86,7 @@ namespace TravelPal
             }
         }
 
+        //Populates the listview with the selected user's travels
         private void PopulateSelectedUserTravelsListView()
         {
             lvUserTravels.Items.Clear();
@@ -97,7 +100,8 @@ namespace TravelPal
             }
         }
 
-        private void CreateListWithUserUsers()
+        //Populates the userUsers-list with all Users
+        private void PopulateUserUsersList()
         {
             foreach (IUser user in users)
             {
@@ -109,6 +113,7 @@ namespace TravelPal
             }
         }
 
+        //Sends the user back to the MainWindow and closes the AdminWindow when clicking the Return-button
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(userManager, travelManager);
@@ -116,6 +121,7 @@ namespace TravelPal
             Close();    
         }
 
+        //Removes the selected travel in the listview from the TravelManager's travels-list and from the user's travels-list
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem selectedItem = lvUserTravels.SelectedItem as ListViewItem;
@@ -150,6 +156,7 @@ namespace TravelPal
             btnRemove.IsEnabled = false;
         }
 
+        //Displays travels in listview depending on what item is selected in the combobox
         private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lvUserTravels.Items.Clear();
@@ -179,6 +186,7 @@ namespace TravelPal
             }
         }
 
+        //Enables the Remove-Button when an item in the listview is selected
         private void lvUserTravels_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 btnRemove.IsEnabled = true;

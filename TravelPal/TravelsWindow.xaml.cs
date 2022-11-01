@@ -42,6 +42,7 @@ namespace TravelPal
             PopulateUserListView();
         }
 
+        //Clears and populates the travel-listview with the user's travels
         private void PopulateUserListView()
         {
             lvTravels.Items.Clear();
@@ -55,12 +56,14 @@ namespace TravelPal
             }
         }
 
+        //Disables the Detaisl- and Remove-buttons
         private void DisableDetailsAndRemoveButtons()
         {
             btnDetails.IsEnabled = false;
             btnRemove.IsEnabled = false;
         }
 
+        //Sends the user back to the MainWindow when clicking the Return-button and closes the TravelsWindow
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(userManager, travelManager);
@@ -68,6 +71,7 @@ namespace TravelPal
             Close();
         }
 
+        //Sends the user to the UserDetailsWindow and closes the TravelsWindow when clicking the EditAccount-button
         private void btnEditAccount_Click(object sender, RoutedEventArgs e)
         {
             UserDetailsWindow userDetailsWindow = new(userManager, travelManager);
@@ -75,6 +79,7 @@ namespace TravelPal
             Close();
         }
 
+        //Sends the user to the AddTravelWindow and closes the TravelWindow when clicking the AddTravel-button
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             AddTravelWindow addTravelWindow = new(userManager, travelManager);
@@ -82,6 +87,7 @@ namespace TravelPal
             Close();
         }
 
+        //Sends the user and the clicked object to the TravelDetailsWindow and closes the TravelsWindow when clicking the Details-button
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem selectedItem = lvTravels.SelectedItem as ListViewItem;
@@ -92,6 +98,7 @@ namespace TravelPal
             Close();
         }
 
+        //Removes the selected listview-travel from the user's travelslist and the TravelManagers' travel-list
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem selectedItem = lvTravels.SelectedItem as ListViewItem;
@@ -102,11 +109,13 @@ namespace TravelPal
             PopulateUserListView();
         }
 
+        //Displays a messagebox with info about the TravelPal agency
         private void btnAboutUs_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Your go-to traveling agency, making dreams come true since 1992!", "About Us", MessageBoxButton.OK);   
         }
 
+        //Displays a messagebox with info about how to use the application
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("-Use the Add-button for adding new travels.\n" +
@@ -115,6 +124,7 @@ namespace TravelPal
                 "-Use the Edit Account-button to edit profile settings (username, password etc.).", "Help", MessageBoxButton.OK);
         }
 
+        //Enables Details- and Remove-buttons when an item in the listview is selected
         private void lvTravels_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnDetails.IsEnabled = true;

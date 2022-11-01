@@ -46,6 +46,7 @@ namespace TravelPal
             SetTextBoxInfo();
         }
 
+        //Sets and displays UI depending on what kind of Travel the selectedTravel is
         private void SetTextBoxInfo()
         {
             if (travel is Vacation)
@@ -67,6 +68,7 @@ namespace TravelPal
             }
         }
 
+        //Sets textboxes to the variables all Travels's have
         private void SetTextboxesToTravelDetails()
         {
             tbxNumOfTravelers.Text = travel.Travelers.ToString();
@@ -74,6 +76,7 @@ namespace TravelPal
             tbxDestination.Text = travel.Destination;
         }
 
+        //Collapses UI (before getting information about what kind of Travel the selectedTravel is)
         private void CollapseTextBoxesAndLabels()
         {
             lblTripType.Visibility = Visibility.Collapsed;
@@ -82,6 +85,7 @@ namespace TravelPal
             tbxAllInclusive.Visibility = Visibility.Collapsed;
         }
 
+        //Disables all textboxes
         private void DisableTextBoxes()
         {
             tbxNumOfTravelers.IsEnabled = false;
@@ -92,6 +96,7 @@ namespace TravelPal
             tbxTripType.IsEnabled = false;
         }
 
+        //Sends the user back to the TravelsWindow and closes TravelDetailsWindow when clicking the Return-button
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(userManager, travelManager);

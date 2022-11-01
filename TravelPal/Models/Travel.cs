@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelPal.Enums;
+using TravelPal.Interfaces;
 
 namespace TravelPal.Models
 {
@@ -12,6 +13,10 @@ namespace TravelPal.Models
         public string Destination { get; set; }
         public int Travelers { get; set; }
         public Countries Country { get; set; }
+        public List<IPackingListItem> PackingList { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public int TravelDays { get; set; }
 
         public Travel()
         {
@@ -23,6 +28,11 @@ namespace TravelPal.Models
             this.Destination = destination;
             this.Travelers = travelers;
             this.Country = country;
+        }
+
+        private int CalculateTravelDays()
+        {
+            return 0;
         }
 
         public virtual string GetInfo()

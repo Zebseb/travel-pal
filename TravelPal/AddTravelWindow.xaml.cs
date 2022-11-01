@@ -96,69 +96,79 @@ namespace TravelPal
 
             if (cbTravelType.SelectedIndex == 0)
             {
-                numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
-                country = cbCountries.SelectedItem as string;
-                destination = tbxDestination.Text;
-
-                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                numOfTravelers = ParseNumOfTravelers();
                 
-                if ((bool)cbxAllInclusive.IsChecked)
+                if (numOfTravelers > 0)
                 {
-                    isAllInclusive = true;
+                    country = cbCountries.SelectedItem as string;
+                    destination = tbxDestination.Text;
+
+                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+
+                    if ((bool)cbxAllInclusive.IsChecked)
+                    {
+                        isAllInclusive = true;
+                    }
+
+                    Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
+                    user.travels.Add(newVacation);
+                    travelManager.AddTravel(newVacation);
+
+                    TravelsWindow travelsWindow = new(userManager, travelManager);
+                    travelsWindow.Show();
+                    Close();
                 }
-
-                Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
-                user.travels.Add(newVacation);
-                travelManager.AddTravel(newVacation);
-
-                TravelsWindow travelsWindow = new(userManager, travelManager);
-                travelsWindow.Show();
-                Close();
             }
 
             else if (cbTravelType.SelectedIndex == 1)
             {
-                try
+                numOfTravelers = ParseNumOfTravelers();
+
+                if (numOfTravelers > 0)
                 {
-                    numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
+                    country = cbCountries.SelectedItem as string;
+                    destination = tbxDestination.Text;
+                    tripType = cbTripType.SelectedItem as string;
 
-                    if(numOfTravelers <= 0)
-                    {
-                        MessageBox.Show("0 travelers can't go anywhere...", "Warning!", MessageBoxButton.OK);
+                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                    TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
 
-                        return;
-                    }
+                    Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
+                    user.travels.Add(newTrip);
+                    travelManager.AddTravel(newTrip);
+
+                    TravelsWindow travelsWindow = new(userManager, travelManager);
+                    travelsWindow.Show();
+                    Close();
                 }
-
-                catch(OverflowException ex)
-                {
-                    MessageBox.Show("The flight can't take that many passengers...", "Warning", MessageBoxButton.OK);
-
-                    return;
-                }
-
-                catch(FormatException ex)
-                {
-                    MessageBox.Show("Please input a number for the amount of travelers...", "Warning!", MessageBoxButton.OK);
-
-                    return;
-                }
-
-                country = cbCountries.SelectedItem as string;
-                destination = tbxDestination.Text;
-                tripType = cbTripType.SelectedItem as string;
-
-                Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-                TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
-
-                Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
-                user.travels.Add(newTrip);
-                travelManager.AddTravel(newTrip);
-
-                TravelsWindow travelsWindow = new(userManager, travelManager);
-                travelsWindow.Show();
-                Close();
             }
+        }
+
+        private int ParseNumOfTravelers()
+        {
+            int numOfTravelers = 0;
+
+            try
+            {
+                numOfTravelers = int.Parse(tbxNumOfTravelers.Text);
+
+                if (numOfTravelers <= 0)
+                {
+                    MessageBox.Show("0 travelers can't go anywhere...", "Warning!", MessageBoxButton.OK);
+                }
+            }
+
+            catch (OverflowException ex)
+            {
+                MessageBox.Show("The flight can't take that many passengers...", "Warning", MessageBoxButton.OK);
+            }
+
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Please input a number for the amount of travelers...", "Warning!", MessageBoxButton.OK);
+            }
+
+                return numOfTravelers;
         }
     }
 }

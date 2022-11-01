@@ -94,53 +94,61 @@ namespace TravelPal
             string tripType = "";
             bool isAllInclusive = false;
 
-            if (cbTravelType.SelectedIndex == 0)
+            if (CheckInputs())
             {
-                numOfTravelers = ParseNumOfTravelers();
-                
-                if (numOfTravelers > 0)
+                if (cbTravelType.SelectedIndex == 0)
                 {
-                    country = cbCountries.SelectedItem as string;
-                    destination = tbxDestination.Text;
-
-                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-
-                    if ((bool)cbxAllInclusive.IsChecked)
+                    numOfTravelers = ParseNumOfTravelers();
+                
+                    if (numOfTravelers > 0)
                     {
-                        isAllInclusive = true;
+                        country = cbCountries.SelectedItem as string;
+                        destination = tbxDestination.Text;
+
+                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+
+                        if ((bool)cbxAllInclusive.IsChecked)
+                        {
+                            isAllInclusive = true;
+                        }
+
+                        Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
+                        user.travels.Add(newVacation);
+                        travelManager.AddTravel(newVacation);
+
+                        TravelsWindow travelsWindow = new(userManager, travelManager);
+                        travelsWindow.Show();
+                        Close();
                     }
+                }
 
-                    Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
-                    user.travels.Add(newVacation);
-                    travelManager.AddTravel(newVacation);
+                else if (cbTravelType.SelectedIndex == 1)
+                {
+                    numOfTravelers = ParseNumOfTravelers();
 
-                    TravelsWindow travelsWindow = new(userManager, travelManager);
-                    travelsWindow.Show();
-                    Close();
+                    if (numOfTravelers > 0)
+                    {
+                        country = cbCountries.SelectedItem as string;
+                        destination = tbxDestination.Text;
+                        tripType = cbTripType.SelectedItem as string;
+
+                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                        TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
+
+                        Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
+                        user.travels.Add(newTrip);
+                        travelManager.AddTravel(newTrip);
+
+                        TravelsWindow travelsWindow = new(userManager, travelManager);
+                        travelsWindow.Show();
+                        Close();
+                    }
                 }
             }
 
-            else if (cbTravelType.SelectedIndex == 1)
+            else
             {
-                numOfTravelers = ParseNumOfTravelers();
-
-                if (numOfTravelers > 0)
-                {
-                    country = cbCountries.SelectedItem as string;
-                    destination = tbxDestination.Text;
-                    tripType = cbTripType.SelectedItem as string;
-
-                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-                    TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
-
-                    Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
-                    user.travels.Add(newTrip);
-                    travelManager.AddTravel(newTrip);
-
-                    TravelsWindow travelsWindow = new(userManager, travelManager);
-                    travelsWindow.Show();
-                    Close();
-                }
+                MessageBox.Show("In order to add a travel you need to give us the required info...", "Warning!", MessageBoxButton.OK);
             }
         }
 
@@ -169,6 +177,47 @@ namespace TravelPal
             }
 
                 return numOfTravelers;
+        }
+
+        private bool CheckInputs()
+        {
+            bool isEmptyFieldsVacation = false;
+            bool isEmptyFieldsTrip = false;
+
+            string numOfTravelers = tbxNumOfTravelers.Text;
+            string country = cbCountries.SelectedItem as string;
+            string destination = tbxDestination.Text;
+            string travelType = cbTravelType.SelectedItem as string;
+            string tripType = cbTripType.SelectedItem as string;
+
+            string[] vacationFields = new[] { numOfTravelers, country, destination, travelType };
+            string[] tripFields = new[] { numOfTravelers, country, destination, travelType, tripType };
+
+            foreach (string field in vacationFields)
+            {
+                if (string.IsNullOrEmpty(field))
+                {
+                    isEmptyFieldsVacation = true;
+                }
+            }
+
+            if (cbTravelType.SelectedIndex == 1)
+            {
+                foreach (string field in tripFields)
+                {
+                    if (string.IsNullOrEmpty(field))
+                    {
+                        isEmptyFieldsTrip = true;
+                    }
+                }
+            }
+
+            if (isEmptyFieldsVacation || isEmptyFieldsTrip)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

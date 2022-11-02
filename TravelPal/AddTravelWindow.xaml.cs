@@ -27,6 +27,7 @@ namespace TravelPal
         private User user;
         private UserManager userManager;
         private TravelManager travelManager;
+        private List<IPackingListItem> packingList = new();
 
         public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
@@ -57,10 +58,13 @@ namespace TravelPal
         //Collapses UI
         private void CollapseTextBoxesAndLabels()
         {
+            lvPackingList.IsEnabled = false;
             cbxAllInclusive.Visibility = Visibility.Collapsed;
             lblAllInclusive.Visibility = Visibility.Collapsed;
             cbTripType.Visibility = Visibility.Collapsed;
             lblTripType.Visibility = Visibility.Collapsed;
+            chbxRequired.Visibility = Visibility.Collapsed;
+            lblRequired.Visibility = Visibility.Collapsed;
         }
 
         //Sends the user back to the TravelsWindow and closes the AddTravelWindow when clicking the Return-button
@@ -120,6 +124,7 @@ namespace TravelPal
                         }
 
                         Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, DateTime.Now, DateTime.Now); //TO-DO Tillfällig lösning med DateTime
+                        newVacation.PackingList = this.packingList;
                         user.travels.Add(newVacation);
                         travelManager.AddTravel(newVacation);
 
@@ -143,6 +148,7 @@ namespace TravelPal
                         TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
 
                         Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, DateTime.Now, DateTime.Now); //TO-DO Tillfällig lösning med DateTime
+                        newTrip.PackingList = this.packingList;
                         user.travels.Add(newTrip);
                         travelManager.AddTravel(newTrip);
 
@@ -231,7 +237,68 @@ namespace TravelPal
 
         private void btnAdditem_Click(object sender, RoutedEventArgs e)
         {
+            int itemQuantity;
+            bool isRequiredItem = false;
+            string itemName = tbxAddItem.Text;
 
+            if (tbxQuantity.Text.Trim().Length > 0 && !(bool)chbxDocument.IsChecked)
+            {
+                itemQuantity = int.Parse(tbxQuantity.Text);
+
+                OtherItem newOtherItem = new(itemName, itemQuantity);
+                packingList.Add(newOtherItem);
+
+                ListViewItem item = new();
+                item.Content = newOtherItem.ToString();
+                item.Tag = newOtherItem;
+
+                lvPackingList.Items.Add(item);
+                tbxAddItem.Clear();
+                tbxQuantity.Clear();
+            }
+
+            else if ((bool)chbxDocument.IsChecked)
+            {
+                if ((bool)chbxRequired.IsChecked)
+                {
+                    isRequiredItem = true;
+                }
+
+                TravelDocument newTravelDocument = new(itemName, isRequiredItem);
+                packingList.Add(newTravelDocument);
+
+                ListViewItem item = new();
+                item.Content = newTravelDocument.ToString();
+                item.Tag = newTravelDocument;
+
+                lvPackingList.Items.Add(item);
+                tbxAddItem.Clear();
+                chbxDocument.IsChecked = false;
+                chbxRequired.IsChecked = false;
+                lblRequired.Visibility = Visibility.Collapsed;
+                chbxRequired.Visibility = Visibility.Collapsed;
+            }
+
+            else
+            {
+                MessageBox.Show("Please enter a quantity of your item or check the Document checkbox to add a new item...\n", "Warning!", MessageBoxButton.OK);
+            }
+        }
+
+        private void chbxDocument_Checked(object sender, RoutedEventArgs e)
+        {
+            lblQuantity.Visibility = Visibility.Collapsed;
+            tbxQuantity.Visibility = Visibility.Collapsed;
+            lblRequired.Visibility = Visibility.Visible;
+            chbxRequired.Visibility = Visibility.Visible;
+        }
+
+        private void chbxDocument_Unchecked(object sender, RoutedEventArgs e)
+        {
+            lblQuantity.Visibility = Visibility.Visible;
+            tbxQuantity.Visibility = Visibility.Visible;
+            lblRequired.Visibility = Visibility.Collapsed;
+            chbxRequired.Visibility = Visibility.Collapsed;
         }
     }
 }

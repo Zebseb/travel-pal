@@ -20,7 +20,12 @@ namespace TravelPal.Models
 
         public override string ToString()
         {
-            return $"Document: {Name} | Required: {Required}";
+            if (Required)
+            {
+                return $"{Name} | Required";
+            }
+
+            return $"{Name} | Not required";
         }
     }
 }

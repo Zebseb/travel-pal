@@ -231,7 +231,7 @@
             Grid.Row="4"
             Grid.RowSpan="5"
             Margin="10, 40, 10, 10"
-            FontSize="10"
+            FontSize="12"
             />
         <Label
             x:Name="lblPackingList"

@@ -20,7 +20,7 @@ namespace TravelPal.Models
 
         public override string ToString()
         {
-            return $"Item: {Name} | Quantity: {Quantity}";
+            return $"{Name} | Quantity: {Quantity}";
         }
     }
 }

@@ -28,6 +28,7 @@ namespace TravelPal
         private UserManager userManager;
         private TravelManager travelManager;
         private List<IPackingListItem> packingList = new();
+        private TravelDocument passportDocument;
 
         public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
@@ -336,8 +337,13 @@ namespace TravelPal
             {
                 if (!isPassportAdded)
                 {
-                    TravelDocument newTravelDocument = new("Passport", false);
-                    packingList.Add(newTravelDocument);
+                    passportDocument = new("Passport", false);
+                    packingList.Add(passportDocument);
+                }
+
+                else
+                {
+                    passportDocument.Required = false;
                 }
 
                 lvPackingList.Items.Clear();
@@ -355,8 +361,13 @@ namespace TravelPal
             {
                 if (!isPassportAdded)
                 {
-                    TravelDocument newTravelDocument = new("Passport", true);
-                    packingList.Add(newTravelDocument);
+                    passportDocument = new("Passport", true);
+                    packingList.Add(passportDocument);
+                }
+
+                else
+                {
+                    passportDocument.Required = true;
                 }
 
                 lvPackingList.Items.Clear();
@@ -374,8 +385,13 @@ namespace TravelPal
             {
                 if (!isPassportAdded)
                 {
-                    TravelDocument newTravelDocument = new("Passport", true);
-                    packingList.Add(newTravelDocument);
+                    passportDocument = new("Passport", true);
+                    packingList.Add(passportDocument);
+                }
+
+                else
+                {
+                    passportDocument.Required = true;
                 }
 
                 lvPackingList.Items.Clear();

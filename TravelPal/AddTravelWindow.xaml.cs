@@ -117,7 +117,7 @@ namespace TravelPal
                             isAllInclusive = true;
                         }
 
-                        Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum);
+                        Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, DateTime.Now, DateTime.Now); //TO-DO Tillfällig lösning med DateTime
                         user.travels.Add(newVacation);
                         travelManager.AddTravel(newVacation);
 
@@ -140,7 +140,7 @@ namespace TravelPal
                         Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                         TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
 
-                        Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum);
+                        Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, DateTime.Now, DateTime.Now); //TO-DO Tillfällig lösning med DateTime
                         user.travels.Add(newTrip);
                         travelManager.AddTravel(newTrip);
 

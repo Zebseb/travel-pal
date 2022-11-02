@@ -26,11 +26,11 @@ namespace TravelPal.Managers
             User newUser = new("Gandalf", "password", Countries.Sweden);
             users.Add(newUser); 
 
-            Vacation newVacation = new(true, "Madagascar", 2, Enums.Countries.Sweden);
+            Vacation newVacation = new(true, "Madagascar", 2, Enums.Countries.Sweden, new DateTime(2023, 06, 20), new DateTime(2023, 06, 27));
             travelManager.AddTravel(newVacation);
             newUser.travels.Add(newVacation);
 
-            Trip newTrip = new(Enums.TripTypes.Leisure, "Sydney", 4, Enums.Countries.Denmark);
+            Trip newTrip = new(Enums.TripTypes.Leisure, "Sydney", 4, Enums.Countries.Denmark, new DateTime(2023, 05, 23), new DateTime(2023, 05, 28));
             travelManager.AddTravel(newTrip);
             newUser.travels.Add(newTrip);
         }

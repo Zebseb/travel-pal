@@ -23,16 +23,32 @@ namespace TravelPal.Models
 
         }
 
-        public Travel(string destination, int travelers, Countries country)
+        public Travel(string destination, int travelers, Countries country, DateTime startDate, DateTime endDate)
         {
             this.Destination = destination;
             this.Travelers = travelers;
             this.Country = country;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+            CalculateTravelDays();
         }
 
-        private int CalculateTravelDays()
+        private void CalculateTravelDays()
         {
-            return 0;
+            int travelDays;
+            System.TimeSpan diff = EndDate.Subtract(StartDate);
+            travelDays = int.Parse(diff.Days.ToString());
+            this.TravelDays = travelDays;
+        }
+
+        public string GetFormattedStartDate()
+        {
+            return $"{StartDate.Year}-{StartDate.Month}-{StartDate.Day}";
+        }
+
+        public string GetFormattedEndDate()
+        {
+            return $"{EndDate.Year}-{EndDate.Month}-{EndDate.Day}";
         }
 
         public virtual string GetInfo()

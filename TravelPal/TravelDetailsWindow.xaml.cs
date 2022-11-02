@@ -74,6 +74,9 @@ namespace TravelPal
             tbxNumOfTravelers.Text = travel.Travelers.ToString();
             tbxDeparture.Text = travel.Country.ToString();
             tbxDestination.Text = travel.Destination;
+            tbxStartDate.Text = travel.GetFormattedStartDate();
+            tbxEndDate.Text = travel.GetFormattedEndDate();
+            tbxDays.Text = travel.TravelDays.ToString();
         }
 
         //Collapses UI (before getting information about what kind of Travel the selectedTravel is)
@@ -94,6 +97,9 @@ namespace TravelPal
             tbxTravelType.IsEnabled = false;
             tbxAllInclusive.IsEnabled = false;
             tbxTripType.IsEnabled = false;
+            tbxStartDate.IsEnabled = false;
+            tbxEndDate.IsEnabled = false;
+            tbxDays.IsEnabled = false;
         }
 
         //Sends the user back to the TravelsWindow and closes TravelDetailsWindow when clicking the Return-button

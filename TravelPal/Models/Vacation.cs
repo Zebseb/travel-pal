@@ -11,14 +11,14 @@ namespace TravelPal.Models
     {
         public bool AllInclusive { get; set; }
 
-        public Vacation(bool allInclusive, string destination, int travelers, Countries country) : base(destination, travelers, country)
+        public Vacation(bool allInclusive, string destination, int travelers, Countries country, DateTime startDate, DateTime endDate) : base(destination, travelers, country, startDate, endDate)
         {
             this.AllInclusive = allInclusive;
         }
 
         public override string GetInfo()
         {
-            return $"Destination: {Destination}\n";
+            return $"Destination: {Destination} | Travel days: {TravelDays}\n";  
         }
     }
 }

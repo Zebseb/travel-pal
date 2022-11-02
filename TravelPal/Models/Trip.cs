@@ -11,14 +11,14 @@ namespace TravelPal.Models
     {
         public TripTypes Type { get; set; }
 
-        public Trip(TripTypes type, string destination, int travelers, Countries country) : base(destination, travelers, country)
+        public Trip(TripTypes type, string destination, int travelers, Countries country, DateTime startDate, DateTime endDate) : base(destination, travelers, country, startDate, endDate)
         {
             this.Type = type;
         }
 
         public override string GetInfo()
         {
-            return $"Destination: {Destination}\n";
+            return $"Destination: {Destination} | Travel days: {TravelDays}\n";
         }
     }
 }

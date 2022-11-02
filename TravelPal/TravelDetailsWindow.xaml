@@ -116,6 +116,30 @@
             Grid.Row="8"
             VerticalAlignment="Center"
             />
+        <Label
+            x:Name="lblStartDate"
+            Content="Start date"
+            Grid.Column="7"
+            Grid.ColumnSpan="1"
+            Grid.Row="4"
+            VerticalAlignment="Center"
+            />
+        <Label
+            x:Name="lblEndDate"
+            Content="End date"
+            Grid.Column="7"
+            Grid.ColumnSpan="2"
+            Grid.Row="5"
+            VerticalAlignment="Center"
+            />
+        <Label
+            x:Name="lblTravelDays"
+            Content="Days"
+            Grid.Column="7"
+            Grid.ColumnSpan="1"
+            Grid.Row="6"
+            VerticalAlignment="Center"
+            />
         <TextBox
             x:Name="tbxNumOfTravelers"
             Grid.Column="4"
@@ -161,6 +185,30 @@
             Grid.Column="4"
             Grid.ColumnSpan="3"
             Grid.Row="8"
+            Margin="5"
+            VerticalContentAlignment="Center"
+            />
+        <TextBox
+            x:Name="tbxStartDate"
+            Grid.Column="8"
+            Grid.ColumnSpan="2"
+            Grid.Row="4"
+            Margin="5"
+            VerticalContentAlignment="Center"
+            />
+        <TextBox
+            x:Name="tbxEndDate"
+            Grid.Column="8"
+            Grid.ColumnSpan="2"
+            Grid.Row="5"
+            Margin="5"
+            VerticalContentAlignment="Center"
+            />
+        <TextBox
+            x:Name="tbxDays"
+            Grid.Column="8"
+            Grid.ColumnSpan="2"
+            Grid.Row="6"
             Margin="5"
             VerticalContentAlignment="Center"
             />

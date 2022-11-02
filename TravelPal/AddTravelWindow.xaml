@@ -178,6 +178,7 @@
             Grid.Row="5"
             Margin="5"
             Height="25"
+            SelectionChanged="cbCountries_SelectionChanged"
             />
         <TextBox
             x:Name="tbxDestination"

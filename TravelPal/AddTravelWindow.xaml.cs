@@ -300,5 +300,94 @@ namespace TravelPal
             lblRequired.Visibility = Visibility.Collapsed;
             chbxRequired.Visibility = Visibility.Collapsed;
         }
+
+        private void cbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            bool isEuropeanUser = false;
+            bool isEuropeanCountry = false;
+            bool isPassportAdded = false;
+            string country = cbCountries.SelectedItem as string;
+
+            foreach (EuropeanCountries europeanCountry in Enum.GetValues(typeof(EuropeanCountries)))
+            {
+                if (user.Location.ToString() == europeanCountry.ToString())
+                {
+                    isEuropeanUser = true;
+                }
+            }
+
+            foreach (EuropeanCountries europeanCountry in Enum.GetValues(typeof(EuropeanCountries)))
+            {
+                if (country == europeanCountry.ToString())
+                {
+                    isEuropeanCountry = true;
+                }
+            }
+
+            foreach (IPackingListItem packingListItem in packingList)
+            {
+                if (packingListItem.Name == "Passport")
+                {
+                    isPassportAdded = true;
+                }
+            }
+
+            if (isEuropeanCountry && isEuropeanUser)
+            {
+                if (!isPassportAdded)
+                {
+                    TravelDocument newTravelDocument = new("Passport", false);
+                    packingList.Add(newTravelDocument);
+                }
+
+                lvPackingList.Items.Clear();
+
+                foreach (IPackingListItem packingListItem in packingList)
+                {
+                    ListViewItem item = new();
+                    item.Content = packingListItem.ToString();
+                    item.Tag = packingListItem;
+                    lvPackingList.Items.Add(item);
+                }
+            }
+
+            else if (!isEuropeanCountry && isEuropeanUser)
+            {
+                if (!isPassportAdded)
+                {
+                    TravelDocument newTravelDocument = new("Passport", true);
+                    packingList.Add(newTravelDocument);
+                }
+
+                lvPackingList.Items.Clear();
+
+                foreach (IPackingListItem packingListItem in packingList)
+                {
+                    ListViewItem item = new();
+                    item.Content = packingListItem.ToString();
+                    item.Tag = packingListItem;
+                    lvPackingList.Items.Add(item);
+                }
+            }
+
+            else if (!isEuropeanUser)
+            {
+                if (!isPassportAdded)
+                {
+                    TravelDocument newTravelDocument = new("Passport", true);
+                    packingList.Add(newTravelDocument);
+                }
+
+                lvPackingList.Items.Clear();
+
+                foreach (IPackingListItem packingListItem in packingList)
+                {
+                    ListViewItem item = new();
+                    item.Content = packingListItem.ToString();
+                    item.Tag = packingListItem;
+                    lvPackingList.Items.Add(item);
+                }
+            }
+        }
     }
 }

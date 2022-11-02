@@ -259,7 +259,7 @@
             HorizontalContentAlignment="Center"
             HorizontalAlignment="Center"
             BorderThickness="2"
-            Click="btnReturn_Click"
+            Click="btnAdditem_Click"
             />
         <Button
             x:Name="btnAddTravel"

@@ -18,7 +18,7 @@ namespace TravelPal.Models
             Quantity = quantity;
         }
 
-        public string GetInfo()
+        public override string ToString()
         {
             return $"Item: {Name} | Quantity: {Quantity}";
         }

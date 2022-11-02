@@ -18,7 +18,7 @@ namespace TravelPal.Models
             Required = required;
         }
 
-        public string GetInfo()
+        public override string ToString()
         {
             return $"Document: {Name} | Required: {Required}";
         }

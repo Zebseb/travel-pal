@@ -10,9 +10,9 @@ namespace TravelPal.Interfaces
     {
         public string Name { get; set; }
 
-        public string GetInfo()
+        public virtual string ToString()
         {
-            return "";
+            return $"{Name}";
         }
     }
 }

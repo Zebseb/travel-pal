@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPal.Interfaces;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -40,10 +41,23 @@ namespace TravelPal
 
             lblUsername.Content = user.Username;
 
+            PopulatePackingListListView();
             DisableTextBoxes();
             CollapseTextBoxesAndLabels();
             SetTextboxesToTravelDetails();
             SetTextBoxInfo();
+        }
+
+        private void PopulatePackingListListView()
+        {
+            foreach (IPackingListItem packingListItem in travel.PackingList)
+            {
+                ListViewItem item = new();
+                item.Content = packingListItem.ToString();
+                item.Tag = packingListItem;
+                lvPackingList.Items.Add(packingListItem);
+                lvPackingList.IsEnabled = false;
+            }
         }
 
         //Sets and displays UI depending on what kind of Travel the selectedTravel is

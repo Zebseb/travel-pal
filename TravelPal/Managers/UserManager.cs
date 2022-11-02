@@ -27,12 +27,16 @@ namespace TravelPal.Managers
             users.Add(newUser); 
 
             Vacation newVacation = new(true, "Madagascar", 2, Enums.Countries.Sweden, new DateTime(2023, 06, 20), new DateTime(2023, 06, 27));
+            TravelDocument newTravelDocument = new("Boarding Pass", true);
             travelManager.AddTravel(newVacation);
             newUser.travels.Add(newVacation);
+            newVacation.PackingList.Add(newTravelDocument);
 
             Trip newTrip = new(Enums.TripTypes.Leisure, "Sydney", 4, Enums.Countries.Denmark, new DateTime(2023, 05, 23), new DateTime(2023, 05, 28));
+            OtherItem newOtherItem = new("Sunglasses", 1);
             travelManager.AddTravel(newTrip);
             newUser.travels.Add(newTrip);
+            newTrip.PackingList.Add(newOtherItem);
         }
 
         //Returns all users (Users and Admins) in the users-list.

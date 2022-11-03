@@ -29,6 +29,8 @@ namespace TravelPal
         private TravelManager travelManager;
         private List<IPackingListItem> packingList = new();
         private TravelDocument passportDocument;
+        DateTime startDate = new();
+        DateTime endDate = new();
 
         public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
@@ -41,8 +43,15 @@ namespace TravelPal
 
             lblUsername.Content = user.Username;
 
+            SetPastCalendarDatesToUnselectable();
             CollapseTextBoxesAndLabels();
             PopulateComboBoxes();
+        }
+
+        private void SetPastCalendarDatesToUnselectable()
+        {
+            dtpStartDate.BlackoutDates.AddDatesInPast();
+            dtpEndDate.BlackoutDates.AddDatesInPast();
         }
 
         //Populates all comboboxes in the window
@@ -124,7 +133,7 @@ namespace TravelPal
                             isAllInclusive = true;
                         }
 
-                        Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, DateTime.Now, DateTime.Now); //TO-DO Tillfällig lösning med DateTime
+                        Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
                         newVacation.PackingList = this.packingList;
                         user.travels.Add(newVacation);
                         travelManager.AddTravel(newVacation);
@@ -148,7 +157,7 @@ namespace TravelPal
                         Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                         TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
 
-                        Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, DateTime.Now, DateTime.Now); //TO-DO Tillfällig lösning med DateTime
+                        Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
                         newTrip.PackingList = this.packingList;
                         user.travels.Add(newTrip);
                         travelManager.AddTravel(newTrip);
@@ -200,14 +209,16 @@ namespace TravelPal
             bool isEmptyFieldsVacation = false;
             bool isEmptyFieldsTrip = false;
 
+            string startDate = dtpStartDate.SelectedDate.ToString();
+            string endDate = dtpEndDate.SelectedDate.ToString();
             string numOfTravelers = tbxNumOfTravelers.Text;
             string country = cbCountries.SelectedItem as string;
             string destination = tbxDestination.Text;
             string travelType = cbTravelType.SelectedItem as string;
             string tripType = cbTripType.SelectedItem as string;
 
-            string[] vacationFields = new[] { numOfTravelers, country, destination, travelType };
-            string[] tripFields = new[] { numOfTravelers, country, destination, travelType, tripType };
+            string[] vacationFields = new[] { numOfTravelers, country, destination, travelType, startDate, endDate };
+            string[] tripFields = new[] { numOfTravelers, country, destination, travelType, tripType, startDate, endDate };
 
             foreach (string field in vacationFields)
             {
@@ -454,6 +465,20 @@ namespace TravelPal
                     lvPackingList.Items.Add(item);
                 }
             }
+        }
+
+        private void dtpStartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+            startDate = (DateTime)picker.SelectedDate;
+
+        }
+
+        private void dtpEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+            endDate = (DateTime)picker.SelectedDate;
+
         }
     }
 }

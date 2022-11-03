@@ -277,7 +277,7 @@
             BorderThickness="2"
             Click="btnAddTravel_Click"
             />
-        <Calendar
+        <!--<Calendar
             x:Name="clndrBox"
             Grid.Column="4"
             Grid.ColumnSpan="3"
@@ -287,6 +287,44 @@
             Height="180"
             VerticalAlignment="Top"
             SelectionMode="SingleRange"
+            SelectedDatesChanged="clndrBox_SelectedDatesChanged"
+            />-->
+        <DatePicker
+            x:Name="dtpStartDate"
+            Grid.Column="4"
+            Grid.ColumnSpan="3"
+            Grid.Row="4"
+            Grid.RowSpan="2"
+            Width="200"
+            Height="30"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            SelectedDateChanged="dtpStartDate_SelectedDateChanged"
+            
+            />
+        <DatePicker
+            x:Name="dtpEndDate"
+            Grid.Column="4"
+            Grid.ColumnSpan="3"
+            Grid.Row="6"
+            Grid.RowSpan="2"
+            Width="200"
+            Height="30"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            SelectedDateChanged="dtpEndDate_SelectedDateChanged"
+            />
+        <Label
+            x:Name="lblStartDate"
+            Content="Start date"
+            Grid.Column="5"
+            Grid.Row="4"
+            />
+        <Label
+            x:Name="lblEndDate"
+            Content="End date"
+            Grid.Column="5"
+            Grid.Row="6"
             />
         <ListView
             x:Name="lvPackingList"

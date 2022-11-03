@@ -241,21 +241,25 @@ namespace TravelPal
             int itemQuantity;
             bool isRequiredItem = false;
             string itemName = tbxAddItem.Text;
+            string quantity = tbxQuantity.Text;
 
-            if (tbxQuantity.Text.Trim().Length > 0 && !(bool)chbxDocument.IsChecked)
+            if (tbxQuantity.Text.Trim().Length > 0 && !(bool)chbxDocument.IsChecked && tbxAddItem.Text.Trim().Length > 0)
             {
-                itemQuantity = int.Parse(tbxQuantity.Text);
+                itemQuantity = GetParsedQuantity(quantity);
+                
+                if (itemQuantity > 0 && tbxAddItem.Text.Trim().Length > 0)
+                {
+                    OtherItem newOtherItem = new(itemName, itemQuantity);
+                    packingList.Add(newOtherItem);
 
-                OtherItem newOtherItem = new(itemName, itemQuantity);
-                packingList.Add(newOtherItem);
+                    ListViewItem item = new();
+                    item.Content = newOtherItem.ToString();
+                    item.Tag = newOtherItem;
 
-                ListViewItem item = new();
-                item.Content = newOtherItem.ToString();
-                item.Tag = newOtherItem;
-
-                lvPackingList.Items.Add(item);
-                tbxAddItem.Clear();
-                tbxQuantity.Clear();
+                    lvPackingList.Items.Add(item);
+                    tbxAddItem.Clear();
+                    tbxQuantity.Clear();
+                }
             }
 
             else if ((bool)chbxDocument.IsChecked)
@@ -265,25 +269,71 @@ namespace TravelPal
                     isRequiredItem = true;
                 }
 
-                TravelDocument newTravelDocument = new(itemName, isRequiredItem);
-                packingList.Add(newTravelDocument);
+                if (tbxAddItem.Text.Trim().Length > 0)
+                {
+                    TravelDocument newTravelDocument = new(itemName, isRequiredItem);
+                    packingList.Add(newTravelDocument);
 
-                ListViewItem item = new();
-                item.Content = newTravelDocument.ToString();
-                item.Tag = newTravelDocument;
+                    ListViewItem item = new();
+                    item.Content = newTravelDocument.ToString();
+                    item.Tag = newTravelDocument;
 
-                lvPackingList.Items.Add(item);
-                tbxAddItem.Clear();
-                chbxDocument.IsChecked = false;
-                chbxRequired.IsChecked = false;
-                lblRequired.Visibility = Visibility.Collapsed;
-                chbxRequired.Visibility = Visibility.Collapsed;
+                    lvPackingList.Items.Add(item);
+                    tbxAddItem.Clear();
+                    chbxDocument.IsChecked = false;
+                    chbxRequired.IsChecked = false;
+                    lblRequired.Visibility = Visibility.Collapsed;
+                    chbxRequired.Visibility = Visibility.Collapsed;
+                }
+
+                else
+                {
+                    MessageBox.Show("Please enter what kind of item you would like to add...", "Warning!", MessageBoxButton.OK);
+                }
+            }
+
+            else if (tbxQuantity.Text.Trim().Length > 0 && tbxAddItem.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Please enter what kind of item you would like to add...", "Warning!", MessageBoxButton.OK);
             }
 
             else
             {
                 MessageBox.Show("Please enter a quantity of your item or check the Document checkbox to add a new item...\n", "Warning!", MessageBoxButton.OK);
             }
+        }
+
+        private int GetParsedQuantity(string quantity)
+        {
+            int itemQuantity = 0;
+            
+            try
+            {
+                itemQuantity = int.Parse(quantity);
+
+                if (itemQuantity <= 0)
+                {
+                    MessageBox.Show("You can't add an item with a 0 or a negative quantity...", "Warning!", MessageBoxButton.OK);
+                    tbxQuantity.Clear();
+                    tbxAddItem.Clear();
+                }
+            }
+
+            catch (OverflowException ex)
+            {
+                MessageBox.Show("That number is too large...", "Warning", MessageBoxButton.OK);
+                tbxQuantity.Clear();
+                tbxAddItem.Clear();
+            }
+
+            catch (FormatException ex)
+            {
+                MessageBox.Show("This input box takes numbers only...", "Warning!", MessageBoxButton.OK);
+                tbxQuantity.Clear();
+                tbxAddItem.Clear();
+            }
+
+            return itemQuantity;
         }
 
         private void chbxDocument_Checked(object sender, RoutedEventArgs e)

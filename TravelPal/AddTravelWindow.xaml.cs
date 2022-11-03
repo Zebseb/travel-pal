@@ -43,12 +43,13 @@ namespace TravelPal
 
             lblUsername.Content = user.Username;
 
-            SetPastCalendarDatesToUnselectable();
+            SetUnselectableCalendarDates();
             CollapseTextBoxesAndLabels();
             PopulateComboBoxes();
         }
 
-        private void SetPastCalendarDatesToUnselectable()
+        //Makes the dates before the current day unselectable
+        private void SetUnselectableCalendarDates()
         {
             dtpStartDate.BlackoutDates.AddDatesInPast();
             dtpEndDate.BlackoutDates.AddDatesInPast();
@@ -141,7 +142,7 @@ namespace TravelPal
 
                         if (!isEndDateEarlierThanStartDate)
                         {
-                            Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
+                            Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, startDate, endDate);
                             newVacation.PackingList = this.packingList;
                             user.travels.Add(newVacation);
                             travelManager.AddTravel(newVacation);
@@ -178,7 +179,7 @@ namespace TravelPal
 
                         if (!isEndDateEarlierThanStartDate)
                         {
-                            Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
+                            Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, startDate, endDate);
                             newTrip.PackingList = this.packingList;
                             user.travels.Add(newTrip);
                             travelManager.AddTravel(newTrip);
@@ -274,6 +275,7 @@ namespace TravelPal
             return true;
         }
 
+        //Adds a new packinglist-item to the user and to the listview
         private void btnAdditem_Click(object sender, RoutedEventArgs e)
         {
             int itemQuantity;
@@ -341,6 +343,7 @@ namespace TravelPal
             }
         }
 
+        //Checks if the user input is a valid quantity number
         private int GetParsedQuantity(string quantity)
         {
             int itemQuantity = 0;
@@ -374,6 +377,7 @@ namespace TravelPal
             return itemQuantity;
         }
 
+        //Updates UI when Document-checkbox is checked
         private void chbxDocument_Checked(object sender, RoutedEventArgs e)
         {
             lblQuantity.Visibility = Visibility.Collapsed;
@@ -382,6 +386,7 @@ namespace TravelPal
             chbxRequired.Visibility = Visibility.Visible;
         }
 
+        //Updates UI when Document-checkbox is unchecked
         private void chbxDocument_Unchecked(object sender, RoutedEventArgs e)
         {
             lblQuantity.Visibility = Visibility.Visible;
@@ -390,6 +395,7 @@ namespace TravelPal
             chbxRequired.Visibility = Visibility.Collapsed;
         }
 
+        //Adds a passport to the packinglist when a country is selected and will set status to required/not required 
         private void cbCountries_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             bool isEuropeanUser = false;
@@ -494,6 +500,7 @@ namespace TravelPal
             }
         }
 
+        //Saves the selected start date
         private void dtpStartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             var picker = sender as DatePicker;
@@ -501,6 +508,7 @@ namespace TravelPal
 
         }
 
+        //Saves the selected end date
         private void dtpEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             var picker = sender as DatePicker;

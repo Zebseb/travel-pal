@@ -12,12 +12,14 @@ namespace TravelPal.Models
         public string Name { get; set; }
         public bool Required { get; set; }
 
+        //Constructor taking required parameters to create a new TravelDocument
         public TravelDocument(string name, bool required)
         {
             Name = name;
             Required = required;
         }
 
+        //Returns a string containing the item's name and required-status
         public override string ToString()
         {
             if (Required)

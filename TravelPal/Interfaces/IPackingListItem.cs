@@ -10,6 +10,7 @@ namespace TravelPal.Interfaces
     {
         public string Name { get; set; }
 
+        //Returns a string containing the item's name
         public virtual string ToString()
         {
             return $"{Name}";

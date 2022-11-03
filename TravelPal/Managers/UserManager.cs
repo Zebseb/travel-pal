@@ -18,6 +18,7 @@ namespace TravelPal.Managers
         private List<IUser> users = new();
         public IUser signedInUser;
 
+        //Constructor creating the fiex IUsers and creating travels and items to add to them
         public UserManager()
         {
             Admin newAdmin = new("admin", "password");

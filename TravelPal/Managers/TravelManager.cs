@@ -12,11 +12,13 @@ namespace TravelPal.Managers
     {
         private List<Travel> travels = new();
 
+        //Constructor with no parameters to create a new TravelManager
         public TravelManager()
         {
 
         }
 
+        //Returns the list of all users' travels
         public List<Travel> GetTravels()
         {
             return travels;

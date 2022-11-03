@@ -11,11 +11,13 @@ namespace TravelPal.Models
     {
         public bool AllInclusive { get; set; }
 
+        //Constructor taking required parameters to create a new Vacation
         public Vacation(bool allInclusive, string destination, int travelers, Countries country, DateTime startDate, DateTime endDate) : base(destination, travelers, country, startDate, endDate)
         {
             this.AllInclusive = allInclusive;
         }
 
+        //Returns a string contatining the Vacation's destination and number of traveling days
         public override string GetInfo()
         {
             return $"Destination: {Destination} | Travel days: {TravelDays}\n";  

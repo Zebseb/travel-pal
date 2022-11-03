@@ -13,6 +13,7 @@ namespace TravelPal.Models
         public string Username { get; set; }
         public string Password { get; set; }
 
+        //Constructor taking required parameters to create a new Admin
         public Admin(string username, string password)
         {
             Username = username;

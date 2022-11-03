@@ -12,12 +12,14 @@ namespace TravelPal.Models
         public string Name { get; set; }
         public int Quantity { get; set; }
 
+        //Constructor taking required parameters to create a new OtherItem
         public OtherItem(string name, int quantity)
         {
             Name = name;
             Quantity = quantity;
         }
 
+        //Returns a string containing the name and quantity of the item
         public override string ToString()
         {
             return $"{Name} | Quantity: {Quantity}";

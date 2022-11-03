@@ -15,11 +15,13 @@ namespace TravelPal.Models
         public Countries Location { get; set; }
         public List<Travel> travels { get; set; } = new();
 
+        //Constructor with no parameters to create a new User
         public User()
         {
 
         }
 
+        //Constructor taking required parameters to create a new User
         public User(string username, string password, Countries location)
         {
             Username = username;

@@ -48,6 +48,7 @@ namespace TravelPal
             SetTextBoxInfo();
         }
 
+        //Populates the listview with the user's packinglist-items
         private void PopulatePackingListListView()
         {
             foreach (IPackingListItem packingListItem in travel.PackingList)

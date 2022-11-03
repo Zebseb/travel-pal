@@ -5,33 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="AddTravelWindow" FontFamily="Arial" FontSize="15"  Height="450" Width="800" ResizeMode="NoResize">
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Label
+        Title="AddTravelWindow" FontFamily="Arial" FontSize="15"  Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" Background="Transparent" AllowsTransparency="True">
+    <Border CornerRadius="15">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
+        </Border.Background>
+        <Border CornerRadius="20"
+            BorderThickness="10"
+            Opacity="50"
+            >
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
+                    <GradientStop Color="LemonChiffon" Offset="0.75"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label
             Content="TravelPal"
             Grid.Column="3"
             Grid.ColumnSpan="4"
@@ -41,7 +55,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="Add Travel"
             FontSize="20"
             Grid.Column="4"
@@ -51,7 +65,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="User:"
             Grid.Column="0"
             Grid.Row="0"
@@ -60,7 +74,7 @@
             Margin="30, 0, 5, 0"
             FontSize="12"
             />
-        <Label
+                <Label
             x:Name="lblUsername"
             Content="*USERNAME*"
             Grid.Column="0"
@@ -71,35 +85,35 @@
             Margin="0, 0, 10, 0"
             FontSize="12"
             />
-        <Label
+                <Label
             Content="Number of travelers"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Grid.Row="4"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="Country"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Grid.Row="5"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="Destination"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Grid.Row="6"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="Travel type"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Grid.Row="7"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             x:Name="lblTripType"
             Content="Trip type"
             Grid.Column="0"
@@ -107,7 +121,7 @@
             Grid.Row="8"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             x:Name="lblAllInclusive"
             Content="All Inclusive"
             FontSize="12"
@@ -118,7 +132,7 @@
             VerticalAlignment="Center"
             Margin="20, 2, 0, 0"
             />
-        <Label
+                <Label
             x:Name="lblPackingList"
             Content="Packing list"
             Grid.Column="7"
@@ -127,7 +141,7 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
             />
-        <Label
+                <Label
             x:Name="lblDocument"
             Content="Document"
             Grid.Column="9"
@@ -139,7 +153,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             />
-        <Label
+                <Label
             x:Name="lblRequired"
             Content="Required"
             Grid.Column="9"
@@ -151,7 +165,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             />
-        <Label
+                <Label
             x:Name="lblQuantity"
             Content="Quantity"
             Grid.Column="7"
@@ -162,7 +176,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             />
-        <TextBox
+                <TextBox
             x:Name="tbxNumOfTravelers"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -171,7 +185,7 @@
             Height="25"
             VerticalContentAlignment="Center"
             />
-        <ComboBox
+                <ComboBox
             x:Name="cbCountries"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -180,7 +194,7 @@
             Height="25"
             SelectionChanged="cbCountries_SelectionChanged"
             />
-        <TextBox
+                <TextBox
             x:Name="tbxDestination"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -189,7 +203,7 @@
             Height="25"
             VerticalContentAlignment="Center"
             />
-        <TextBox
+                <TextBox
             x:Name="tbxAddItem"
             Grid.Column="8"
             Grid.ColumnSpan="2"
@@ -198,7 +212,7 @@
             Height="25"
             VerticalContentAlignment="Center" VerticalAlignment="Top"
             />
-        <TextBox
+                <TextBox
             x:Name="tbxQuantity"
             Grid.Column="7"
             Grid.ColumnSpan="2"
@@ -210,7 +224,7 @@
             VerticalContentAlignment="Center"
             HorizontalAlignment="Center"
             />
-        <ComboBox
+                <ComboBox
             x:Name="cbTravelType"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -219,7 +233,7 @@
             Height="25"
             SelectionChanged="cbTravelType_SelectionChanged"
             />
-        <ComboBox
+                <ComboBox
             x:Name="cbTripType"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -227,7 +241,7 @@
             Margin="5"
             Height="25"
             />
-        <CheckBox
+                <CheckBox
             x:Name="cbxAllInclusive"
             Grid.Column="0"
             Grid.Row="8"
@@ -237,7 +251,7 @@
             Height="20"
             Width="20"
             />
-        <Button
+                <Button
             x:Name="btnReturn"
             Content="Return"
             Grid.Row="9"
@@ -250,7 +264,7 @@
             BorderThickness="2"
             Click="btnReturn_Click"
             />
-        <Button
+                <Button
             x:Name="btnAdditem"
             Content="Add item"
             Grid.Row="7"
@@ -262,7 +276,7 @@
             BorderThickness="2"
             Click="btnAdditem_Click"
             />
-        <Button
+                <Button
             x:Name="btnAddTravel"
             Content="Add Travel"
             Grid.Row="8"
@@ -277,7 +291,7 @@
             BorderThickness="2"
             Click="btnAddTravel_Click"
             />
-        <DatePicker
+                <DatePicker
             x:Name="dtpStartDate"
             Grid.Column="4"
             Grid.ColumnSpan="3"
@@ -289,7 +303,7 @@
             HorizontalContentAlignment="Center"
             SelectedDateChanged="dtpStartDate_SelectedDateChanged" 
             />
-        <DatePicker
+                <DatePicker
             x:Name="dtpEndDate"
             Grid.Column="4"
             Grid.ColumnSpan="3"
@@ -301,19 +315,19 @@
             HorizontalContentAlignment="Center"
             SelectedDateChanged="dtpEndDate_SelectedDateChanged"
             />
-        <Label
+                <Label
             x:Name="lblStartDate"
             Content="Start date"
             Grid.Column="5"
             Grid.Row="4"
             />
-        <Label
+                <Label
             x:Name="lblEndDate"
             Content="End date"
             Grid.Column="5"
             Grid.Row="6"
             />
-        <ListView
+                <ListView
             x:Name="lvPackingList"
             Grid.Column="7"
             Grid.ColumnSpan="4"
@@ -322,7 +336,7 @@
             Margin="5, 10, 10, 10"
             FontSize="12"
             />
-        <CheckBox
+                <CheckBox
             x:Name="chbxDocument"
             Grid.Column="8"
             Grid.ColumnSpan="2"
@@ -331,7 +345,7 @@
             Checked="chbxDocument_Checked"
             Unchecked="chbxDocument_Unchecked"
             />
-        <CheckBox
+                <CheckBox
             x:Name="chbxRequired"
             Grid.Column="8"
             Grid.ColumnSpan="2"
@@ -339,5 +353,38 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
             />
-    </Grid>
+                <Button
+                    x:Name="btnMinimize"
+                    Background="Transparent"
+                    Foreground="PeachPuff"
+                    Content="-"
+                    FontSize="35"
+                    BorderThickness="0"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="1"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Top"
+                    Cursor="Hand"
+                    Click="btnMinimize_Click"
+                    
+                    >
+                </Button>
+                <Button
+                    x:Name="btnClose"
+                    Background="Transparent"
+                    Foreground="PeachPuff"
+                    Content="X"
+                    FontSize="15"
+                    BorderThickness="0"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="1"
+                    Margin="0, 10, 0, 0"
+                    HorizontalAlignment="Right"
+                    Cursor="Hand"
+                    Click="btnClose_Click"
+                    >
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

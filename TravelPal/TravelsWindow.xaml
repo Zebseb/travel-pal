@@ -5,33 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="TravelsWindow" FontFamily="Arial" FontSize="15" Height="450" Width="800" ResizeMode="NoResize">
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Label
+        Title="TravelsWindow" FontFamily="Arial" FontSize="15" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" Background="Transparent" AllowsTransparency="True">
+    <Border CornerRadius="15">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
+        </Border.Background>
+        <Border CornerRadius="20"
+            BorderThickness="10"
+            Opacity="50"
+            >
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
+                    <GradientStop Color="LemonChiffon" Offset="0.75"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label
             Content="TravelPal"
             Grid.Column="3"
             Grid.ColumnSpan="4"
@@ -41,7 +55,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="Travels"
             FontSize="20"
             Grid.Column="4"
@@ -51,7 +65,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="User:"
             Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -61,7 +75,7 @@
             Margin="40, 0, 5, 0"
             FontSize="12"
             />
-        <Label
+                <Label
             x:Name="lblUsername"
             Content=""
             Grid.Column="1"
@@ -72,7 +86,7 @@
             HorizontalContentAlignment="Left"
             FontSize="12"
             />
-        <Button
+                <Button
             x:Name="btnReturn"
             Content="Sign Out"
             Grid.Row="9"
@@ -85,7 +99,7 @@
             BorderThickness="2"
             Click="btnReturn_Click"
             />
-        <Button
+                <Button
             x:Name="btnAddTravel"
             Content="Add Travel"
             Grid.Row="4"
@@ -99,7 +113,7 @@
             BorderThickness="2"
             Click="btnAddTravel_Click"
             />
-        <Button
+                <Button
             x:Name="btnDetails"
             Content="Travel Details"
             Grid.Row="5"
@@ -114,7 +128,7 @@
             BorderThickness="2"
             Click="btnDetails_Click"
             />
-        <Button
+                <Button
             x:Name="btnRemove"
             Content="Remove Travel"
             Grid.Row="7"
@@ -130,7 +144,7 @@
             BorderThickness="2"
             Click="btnRemove_Click"
             />
-        <Button
+                <Button
             x:Name="btnEditAccount"
             Content="Edit Account"
             Grid.Row="1"
@@ -147,7 +161,7 @@
             FontSize="12"
             Click="btnEditAccount_Click"
             />
-        <Button
+                <Button
             x:Name="btnHelp"
             Content="Help"
             Grid.Row="0"
@@ -164,7 +178,7 @@
             FontSize="12"
             Click="btnHelp_Click"
             />
-        <Button
+                <Button
             x:Name="btnAboutUs"
             Content="About Us"
             Grid.Row="0"
@@ -181,7 +195,7 @@
             FontSize="12"
             Click="btnAboutUs_Click"
             />
-        <ListView
+                <ListView
             x:Name="lvTravels"
             Grid.Column="2"
             Grid.ColumnSpan="7"
@@ -191,5 +205,38 @@
             Background="MintCream"
             SelectionChanged="lvTravels_SelectionChanged"
             />
-    </Grid>
+                <Button
+                    x:Name="btnMinimize"
+                    Background="Transparent"
+                    Foreground="PeachPuff"
+                    Content="-"
+                    FontSize="35"
+                    BorderThickness="0"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="1"
+                    HorizontalAlignment="Center"
+                    VerticalContentAlignment="Top"
+                    Cursor="Hand"
+                    Click="btnMinimize_Click"
+                    
+                    >
+                </Button>
+                <Button
+                    x:Name="btnClose"
+                    Background="Transparent"
+                    Foreground="PeachPuff"
+                    Content="X"
+                    FontSize="15"
+                    BorderThickness="0"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="1"
+                    Margin="0, 10, 0, 0"
+                    HorizontalAlignment="Right"
+                    Cursor="Hand"
+                    Click="btnClose_Click"
+                    >
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

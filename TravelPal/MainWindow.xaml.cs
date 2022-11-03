@@ -118,6 +118,7 @@ namespace TravelPal
             pabxPasswordBox.Clear();
         }
 
+        //Enables click and drag for the window's position
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -126,11 +127,13 @@ namespace TravelPal
             }
         }
 
+        //Minimizes the window when clicking "-"
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
+        //Closes the program when clicking "X"
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

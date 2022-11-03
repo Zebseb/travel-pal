@@ -109,76 +109,90 @@ namespace TravelPal
         {
             string username = "";
 
-            if (tbxUsername.Text.Trim().Length >= 3)
-            {
-                username = tbxUsername.Text;
-            }
-
-            else
-            {
-                MessageBox.Show("You have to choose a username with at least 3 characters...", "Warning!", MessageBoxButton.OK);
-            }
-
             if (pabxCurrentPasswordBox.Password == user.Password)
             {
-                bool isUpdatedUser = userManager.UpdateUsername(user, username);
-
-                if (isUpdatedUser)
+                if (tbxUsername.Text.Trim().Length >= 3)
                 {
-                    string country = cbCountries.SelectedItem as string;
-                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-                    user.Location = countryEnum;
+                    username = tbxUsername.Text;
+                    bool isAvailableUsename = userManager.UpdateUsername(user, username);
 
-                    if (pabxPasswordBox.Password == pabxPasswordBox2.Password)
+                    if (isAvailableUsename)
                     {
-                        if (pabxPasswordBox.Password.Trim().Length >= 5)
+                        user.Username = username;
+
+                        string country = cbCountries.SelectedItem as string;
+                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                        user.Location = countryEnum;
+
+                        if (pabxPasswordBox.Password.Trim().Length > 0 && pabxPasswordBox2.Password.Trim().Length > 0)
                         {
-                            user.Password = pabxPasswordBox.Password;
+                            if (pabxPasswordBox.Password.Trim().Length >= 5 && pabxPasswordBox.Password == pabxPasswordBox2.Password)
+                            {
+                                user.Password = pabxPasswordBox.Password;
 
-                            MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
+                                MessageBox.Show("Username and password was updated!", "Info", MessageBoxButton.OK);
 
+                                TravelsWindow travelsWindow = new(userManager, travelManager);
+                                travelsWindow.Show();
+                                Close();
+                            }
+
+                            else if (pabxPasswordBox.Password.Trim().Length < 5)
+                            {
+                                MessageBox.Show("Username was updated, but you have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                            }
+
+                            else if (pabxPasswordBox.Password != pabxPasswordBox2.Password)
+                            {
+                                MessageBox.Show("Username was updated, but your passwords have to match in order to update your current one...", "Warning!", MessageBoxButton.OK);
+                            }
+                        }
+
+                        else if (tbxPasswordBox.Text.Trim().Length > 0 && tbxPasswordBox2.Text.Trim().Length > 0)
+                        {
+                            if (tbxPasswordBox.Text.Trim().Length >= 5 && tbxPasswordBox.Text == tbxPasswordBox2.Text)
+                            {
+                                user.Password = tbxPasswordBox.Text;
+
+                                MessageBox.Show("Username and password was updated!", "Info", MessageBoxButton.OK);
+
+                                TravelsWindow travelsWindow = new(userManager, travelManager);
+                                travelsWindow.Show();
+                                Close();
+                            }
+
+                            else if(tbxPasswordBox.Text.Trim().Length < 5)
+                            {
+                                MessageBox.Show("Username was updated, but you have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                            }
+
+                            else if (tbxPasswordBox.Text != tbxPasswordBox2.Text)
+                            {
+                                MessageBox.Show("Username was updated, but your passwords have to match in order to update your current one...", "Warning!", MessageBoxButton.OK);
+                            }
+                        }
+
+                        if (isAvailableUsename)
+                        {
+                            MessageBox.Show("Your username was updated!", "Warning!", MessageBoxButton.OK);
                             TravelsWindow travelsWindow = new(userManager, travelManager);
                             travelsWindow.Show();
                             Close();
                         }
-
-                        else
-                        {
-                            MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
-                        }
                     }
 
-                    else if (tbxPasswordBox.Text == tbxPasswordBox2.Text)
+                    else if (!isAvailableUsename)
                     {
-                        if (tbxPasswordBox.Text.Trim().Length >= 5)
                         {
-                            user.Password = tbxPasswordBox.Text;
-
-                            MessageBox.Show("Account details was updated!", "Info", MessageBoxButton.OK);
-
-                            TravelsWindow travelsWindow = new(userManager, travelManager);
-                            travelsWindow.Show();
-                            Close();
+                            MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
+                            cbCountries.SelectedItem = user.Location.ToString();
                         }
-
-                        else
-                        {
-                            MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
-                        }
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
                     }
                 }
 
-                else if (!isUpdatedUser)
+                else
                 {
-                    {
-                        MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
-                        cbCountries.SelectedItem = user.Location.ToString();
-                    }
+                    MessageBox.Show("You have to choose a username with at least 3 characters...", "Warning!", MessageBoxButton.OK);
                 }
             }
 
@@ -200,22 +214,25 @@ namespace TravelPal
             tbxPasswordBox2.Clear();
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
+        //Enables click and drag for the window's position
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
+        }
+
+        //Minimizes the window when pressing "-"
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        //Closes the program when clicking "X"
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

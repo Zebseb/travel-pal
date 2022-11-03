@@ -20,7 +20,7 @@ namespace TravelPal.Models
         //Returns a string contatining the Trip's destination and number of traveling days
         public override string GetInfo()
         {
-            return $"Destination: {Destination} | Travel days: {TravelDays}\n";
+            return $"Destination: {Destination} | Travel days: {TravelDays}";
         }
     }
 }

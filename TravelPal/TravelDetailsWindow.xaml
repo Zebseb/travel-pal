@@ -79,7 +79,7 @@
             VerticalAlignment="Center"
             />
         <Label
-            Content="Departure"
+            Content="Country"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Grid.Row="5"

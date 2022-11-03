@@ -7,4 +7,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\Background_gradient1.jpg" />
+    <None Remove="Images\Background_leaves.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Background_gradient1.jpg" />
+    <Resource Include="Images\Background_leaves.jpg" />
+  </ItemGroup>
+
 </Project>

@@ -5,33 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="MainWindow" FontFamily="Arial" FontSize="15" Height="450" Width="800" ResizeMode="NoResize">
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Label
+        Title="MainWindow" FontFamily="Arial" FontSize="15" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" Background="Transparent" AllowsTransparency="True">
+    <Border CornerRadius="15">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
+        </Border.Background>
+    <Border CornerRadius="20"
+            BorderThickness="10"
+            Opacity="50"
+            >
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
+                <GradientStop Color="LemonChiffon" Offset="0.75"/>
+            </LinearGradientBrush>
+        </Border.Background>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label
             Content="TravelPal"
             Grid.Column="3"
             Grid.ColumnSpan="4"
@@ -41,7 +55,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="Username"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -49,7 +63,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             />
-        <Label
+                <Label
             Content="Password"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -57,7 +71,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             />
-        <Label
+                <Label
             x:Name="lblShowPassword"
             Content="Show password"
             FontSize="10"
@@ -69,18 +83,7 @@
             Margin="5, 15, 35, 5"
             Height="30"
             />
-        <!--<Label
-            x:Name="lblRegister"
-            Content="Not a user yet? Register here!"
-            FontSize="10"
-            Grid.Row="6"
-            Grid.Column="4"
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            MouseLeftButtonDown="lblRegister_MouseLeftButtonDown"
-            />-->
-        <Button
+                <Button
             x:Name="btnSignIn"
             Content="Sign In"
             Grid.Column="4"
@@ -94,7 +97,7 @@
             IsDefault="True"
             Click="btnSignIn_Click"
             />
-        <TextBox
+                <TextBox
             x:Name="tbxUsername"
             Grid.Row="4"
             Grid.RowSpan="1"
@@ -104,7 +107,7 @@
             VerticalContentAlignment="Center"
             Margin="5"
             />
-        <TextBox
+                <TextBox
             x:Name="tbxPasswordBox"
             Grid.Row="5"
             Grid.Column="4"
@@ -114,7 +117,7 @@
             VerticalContentAlignment="Center"
             Visibility="Collapsed"
             />
-        <PasswordBox
+                <PasswordBox
             x:Name="pabxPasswordBox"
             Grid.Row="5"
             Grid.Column="4"
@@ -124,7 +127,7 @@
             Margin="5"
             PasswordChar="*"
             />
-        <CheckBox
+                <CheckBox
             x:Name="chbxShowPassword"
             Grid.Row="5"
             Grid.RowSpan="1"
@@ -138,7 +141,7 @@
             Checked="chbxShowPassword_Checked"
             Unchecked="chbxShowPassword_Unchecked"
             />
-        <TextBlock
+                <TextBlock
             FontSize="10"
             Grid.Row="6"
             Grid.Column="4"
@@ -150,6 +153,8 @@
                 Foreground="MediumSlateBlue"
                 Click="Hyperlink_Click" 
                 NavigateUri="Reviews.xaml">Not a user yet? Register here!</Hyperlink>
-        </TextBlock>
-    </Grid>
+                </TextBlock>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

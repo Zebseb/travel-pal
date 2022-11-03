@@ -117,5 +117,13 @@ namespace TravelPal
             tbxPasswordBox.Clear();
             pabxPasswordBox.Clear();
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
     }
 }

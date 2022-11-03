@@ -8,17 +8,16 @@
         Title="TravelDetailsWindow" FontFamily="Lelawadee" FontSize="15" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" Background="Transparent" AllowsTransparency="True">
     <Border CornerRadius="15">
         <Border.Background>
-            <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
+                <GradientStop Color="LemonChiffon" Offset="0.75"/>
+            </LinearGradientBrush>
         </Border.Background>
         <Border CornerRadius="20"
             BorderThickness="10"
-            Opacity="50"
-            >
+            Opacity="50">
             <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
-                    <GradientStop Color="LemonChiffon" Offset="0.75"/>
-                </LinearGradientBrush>
+                <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
             </Border.Background>
             <Grid Margin="20">
         <Grid.ColumnDefinitions>
@@ -135,7 +134,7 @@
             Content="Start date"
             Grid.Column="4"
             Grid.ColumnSpan="1"
-            Grid.Row="4"
+            Grid.Row="5"
             VerticalAlignment="Center"
             />
         <Label
@@ -143,7 +142,7 @@
             Content="End date"
             Grid.Column="4"
             Grid.ColumnSpan="2"
-            Grid.Row="5"
+            Grid.Row="6"
             VerticalAlignment="Center"
             />
         <Label
@@ -151,7 +150,7 @@
             Content="Days"
             Grid.Column="4"
             Grid.ColumnSpan="1"
-            Grid.Row="6"
+            Grid.Row="7"
             VerticalAlignment="Center"
             />
         <TextBox
@@ -161,6 +160,7 @@
             Grid.Row="4"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxDeparture"
@@ -169,6 +169,7 @@
             Grid.Row="5"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxDestination"
@@ -177,6 +178,7 @@
             Grid.Row="6"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxTravelType"
@@ -185,6 +187,7 @@
             Grid.Row="7"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxTripType"
@@ -193,6 +196,7 @@
             Grid.Row="8"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxAllInclusive"
@@ -201,30 +205,34 @@
             Grid.Row="8"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxStartDate"
             Grid.Column="5"
             Grid.ColumnSpan="2"
-            Grid.Row="4"
+            Grid.Row="5"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxEndDate"
             Grid.Column="5"
             Grid.ColumnSpan="2"
-            Grid.Row="5"
+            Grid.Row="6"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <TextBox
             x:Name="tbxDays"
             Grid.Column="5"
             Grid.ColumnSpan="2"
-            Grid.Row="6"
+            Grid.Row="7"
             Margin="5"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
         <Button
             x:Name="btnReturn"
@@ -245,17 +253,19 @@
             Grid.ColumnSpan="4"
             Grid.Row="4"
             Grid.RowSpan="5"
-            Margin="10, 40, 10, 10"
+            Margin="10, 10, 10, 10"
             FontSize="12"
+            Background="MintCream"
             />
         <Label
             x:Name="lblPackingList"
             Content="Packing list"
             Grid.Column="7"
             Grid.ColumnSpan="3"
-            Grid.Row="4"
-            VerticalAlignment="Center"
+            Grid.Row="3"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
+            Foreground="MintCream"
             />
         <Button
                     x:Name="btnMinimize"

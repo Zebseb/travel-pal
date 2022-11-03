@@ -8,18 +8,17 @@
         Title="MainWindow" FontFamily="Lelawadee" FontSize="15" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" Background="Transparent" AllowsTransparency="True">
     <Border CornerRadius="15">
         <Border.Background>
-            <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
-        </Border.Background>
-    <Border CornerRadius="20"
-            BorderThickness="10"
-            Opacity="50"
-            >
-        <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
                 <GradientStop Color="LemonChiffon" Offset="0.75"/>
             </LinearGradientBrush>
         </Border.Background>
+    <Border CornerRadius="20"
+            BorderThickness="10"
+            Opacity="50">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
+            </Border.Background>
             <Grid Margin="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -106,6 +105,7 @@
             Height="25"
             VerticalContentAlignment="Center"
             Margin="5"
+            Background="MintCream"
             />
                 <TextBox
             x:Name="tbxPasswordBox"
@@ -116,6 +116,7 @@
             Height="25"
             VerticalContentAlignment="Center"
             Visibility="Collapsed"
+            Background="MintCream"
             />
                 <PasswordBox
             x:Name="pabxPasswordBox"
@@ -126,6 +127,7 @@
             VerticalContentAlignment="Center"
             Margin="5"
             PasswordChar="*"
+            Background="MintCream"
             />
                 <CheckBox
             x:Name="chbxShowPassword"

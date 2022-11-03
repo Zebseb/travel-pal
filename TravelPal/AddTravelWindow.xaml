@@ -8,17 +8,16 @@
         Title="AddTravelWindow" FontSize="15"  Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None" MouseDown="Window_MouseDown" Background="Transparent" AllowsTransparency="True" FontFamily="Leelawadee">
     <Border CornerRadius="15">
         <Border.Background>
-            <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
+                <GradientStop Color="LemonChiffon" Offset="0.75"/>
+            </LinearGradientBrush>
         </Border.Background>
         <Border CornerRadius="20"
             BorderThickness="10"
-            Opacity="50"
-            >
+            Opacity="50">
             <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#FF8BCBFF" Offset="0.0"/>
-                    <GradientStop Color="LemonChiffon" Offset="0.75"/>
-                </LinearGradientBrush>
+                <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>
             </Border.Background>
             <Grid Margin="20">
                 <Grid.ColumnDefinitions>
@@ -184,6 +183,7 @@
             Margin="5"
             Height="25"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
                 <ComboBox
             x:Name="cbCountries"
@@ -193,6 +193,7 @@
             Margin="5"
             Height="25"
             SelectionChanged="cbCountries_SelectionChanged"
+            Background="MintCream"        
             />
                 <TextBox
             x:Name="tbxDestination"
@@ -202,6 +203,7 @@
             Margin="5"
             Height="25"
             VerticalContentAlignment="Center"
+            Background="MintCream"
             />
                 <TextBox
             x:Name="tbxAddItem"
@@ -210,7 +212,9 @@
             Grid.Row="7"
             Margin="5, 5, 10, 0"
             Height="25"
-            VerticalContentAlignment="Center" VerticalAlignment="Top"
+            VerticalContentAlignment="Center" 
+            VerticalAlignment="Top"
+            Background="MintCream"
             />
                 <TextBox
             x:Name="tbxQuantity"
@@ -223,6 +227,7 @@
             Margin="20, 0, 0, 0"
             VerticalContentAlignment="Center"
             HorizontalAlignment="Center"
+            Background="MintCream"
             />
                 <ComboBox
             x:Name="cbTravelType"
@@ -232,6 +237,7 @@
             Margin="5"
             Height="25"
             SelectionChanged="cbTravelType_SelectionChanged"
+            Background="MintCream"
             />
                 <ComboBox
             x:Name="cbTripType"
@@ -240,6 +246,7 @@
             Grid.Row="8"
             Margin="5"
             Height="25"
+            Background="MintCream"
             />
                 <CheckBox
             x:Name="cbxAllInclusive"
@@ -301,7 +308,8 @@
             Height="30"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
-            SelectedDateChanged="dtpStartDate_SelectedDateChanged" 
+            SelectedDateChanged="dtpStartDate_SelectedDateChanged"
+            Background="MintCream"
             />
                 <DatePicker
             x:Name="dtpEndDate"
@@ -314,6 +322,7 @@
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             SelectedDateChanged="dtpEndDate_SelectedDateChanged"
+            Background="MintCream"
             />
                 <Label
             x:Name="lblStartDate"
@@ -335,6 +344,7 @@
             Grid.RowSpan="3"
             Margin="5, 10, 10, 10"
             FontSize="12"
+            Background="MintCream"
             />
                 <CheckBox
             x:Name="chbxDocument"
@@ -344,6 +354,7 @@
             HorizontalAlignment="Center"
             Checked="chbxDocument_Checked"
             Unchecked="chbxDocument_Unchecked"
+            Background="MintCream"
             />
                 <CheckBox
             x:Name="chbxRequired"
@@ -352,6 +363,7 @@
             Grid.Row="8"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
+            Background="MintCream"
             />
                 <Button
                     x:Name="btnMinimize"

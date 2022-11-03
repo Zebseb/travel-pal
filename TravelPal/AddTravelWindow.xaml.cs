@@ -114,6 +114,7 @@ namespace TravelPal
             string destination = "";
             string tripType = "";
             bool isAllInclusive = false;
+            bool isEndDateEarlierThanStartDate = false;
 
             if (CheckInputs())
             {
@@ -133,14 +134,27 @@ namespace TravelPal
                             isAllInclusive = true;
                         }
 
-                        Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
-                        newVacation.PackingList = this.packingList;
-                        user.travels.Add(newVacation);
-                        travelManager.AddTravel(newVacation);
+                        if (endDate < startDate)
+                        {
+                            isEndDateEarlierThanStartDate = true;
+                        }
 
-                        TravelsWindow travelsWindow = new(userManager, travelManager);
-                        travelsWindow.Show();
-                        Close();
+                        if (!isEndDateEarlierThanStartDate)
+                        {
+                            Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
+                            newVacation.PackingList = this.packingList;
+                            user.travels.Add(newVacation);
+                            travelManager.AddTravel(newVacation);
+
+                            TravelsWindow travelsWindow = new(userManager, travelManager);
+                            travelsWindow.Show();
+                            Close();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("You can't select an end date that occurs before the start date...", "Warning!", MessageBoxButton.OK);
+                        }
                     }
                 }
 
@@ -157,14 +171,27 @@ namespace TravelPal
                         Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                         TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
 
-                        Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
-                        newTrip.PackingList = this.packingList;
-                        user.travels.Add(newTrip);
-                        travelManager.AddTravel(newTrip);
+                        if (endDate < startDate)
+                        {
+                            isEndDateEarlierThanStartDate = true;
+                        }
 
-                        TravelsWindow travelsWindow = new(userManager, travelManager);
-                        travelsWindow.Show();
-                        Close();
+                        if (!isEndDateEarlierThanStartDate)
+                        {
+                            Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, startDate, endDate); //TO-DO Tillfällig lösning med DateTime
+                            newTrip.PackingList = this.packingList;
+                            user.travels.Add(newTrip);
+                            travelManager.AddTravel(newTrip);
+
+                            TravelsWindow travelsWindow = new(userManager, travelManager);
+                            travelsWindow.Show();
+                            Close();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("End date occurs before the start date, please select a new end date...", "Warning!", MessageBoxButton.OK);
+                        }
                     }
                 }
             }

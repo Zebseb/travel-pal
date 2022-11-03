@@ -113,7 +113,7 @@
             FontSize="12"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Grid.Row="9"
+            Grid.Row="8"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Margin="20, 2, 0, 0"
@@ -230,7 +230,7 @@
         <CheckBox
             x:Name="cbxAllInclusive"
             Grid.Column="0"
-            Grid.Row="9"
+            Grid.Row="8"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
             Margin="5, 5, 0, 0"
@@ -277,18 +277,6 @@
             BorderThickness="2"
             Click="btnAddTravel_Click"
             />
-        <!--<Calendar
-            x:Name="clndrBox"
-            Grid.Column="4"
-            Grid.ColumnSpan="3"
-            Grid.Row="4"
-            Grid.RowSpan="5"
-            Width="200"
-            Height="180"
-            VerticalAlignment="Top"
-            SelectionMode="SingleRange"
-            SelectedDatesChanged="clndrBox_SelectedDatesChanged"
-            />-->
         <DatePicker
             x:Name="dtpStartDate"
             Grid.Column="4"
@@ -299,8 +287,7 @@
             Height="30"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
-            SelectedDateChanged="dtpStartDate_SelectedDateChanged"
-            
+            SelectedDateChanged="dtpStartDate_SelectedDateChanged" 
             />
         <DatePicker
             x:Name="dtpEndDate"

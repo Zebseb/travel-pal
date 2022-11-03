@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="UserDetailsWindow" FontFamily="Arial" FontSize="15" Height="450" Width="800" ResizeMode="NoResize"  WindowStyle="None" MouseDown="Window_MouseDown"  Background="Transparent" AllowsTransparency="True">
+        Title="UserDetailsWindow" FontFamily="Lelawadee" FontSize="15" Height="450" Width="800" ResizeMode="NoResize"  WindowStyle="None" MouseDown="Window_MouseDown"  Background="Transparent" AllowsTransparency="True">
     <Border CornerRadius="15">
         <Border.Background>
             <ImageBrush ImageSource="/Images/Background_gradient1.jpg"/>

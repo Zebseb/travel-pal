@@ -84,28 +84,40 @@ namespace TravelPal
             pabxPasswordBox2.Visibility = Visibility.Visible;
         }
 
-        //Sends the user back to the TravelWindow and closes the UserDetailsWindow when clicking the Return-button and closes the UserDetailsWindow
-        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        //Resets and clears the password-boxes
+        private void ClearTextBoxes()
         {
-            TravelsWindow travelsWindow = new(userManager, travelManager);
-            travelsWindow.Show();
-            Close();
+            pabxCurrentPasswordBox.Clear();
+            pabxPasswordBox.Clear();
+            pabxPasswordBox2.Clear();
+            tbxPasswordBox.Clear();
+            tbxPasswordBox2.Clear();
         }
 
-        //Enables all boxes if the user clicks the Edit-button
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        //Enables click and drag for the window's position
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            pabxCurrentPasswordBox.IsEnabled = true;
-            tbxUsername.IsEnabled = true;
-            pabxPasswordBox.IsEnabled = true;
-            pabxPasswordBox2.IsEnabled = true;
-            cbCountries.IsEnabled = true;
-            btnSave.IsEnabled = true;
-            chbxShowPassword.IsEnabled = true;
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
+
+        //Minimizes the window when pressing "-"
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        //Closes the program when clicking "X"
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
 
         //Saves updated account information if the user enters correct input and shows warnings if input is missing or incorrect
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void btnSaveDetails_Click(object sender, RoutedEventArgs e)
         {
             string username = "";
 
@@ -161,7 +173,7 @@ namespace TravelPal
                                 Close();
                             }
 
-                            else if(tbxPasswordBox.Text.Trim().Length < 5)
+                            else if (tbxPasswordBox.Text.Trim().Length < 5)
                             {
                                 MessageBox.Show("Username was updated, but you have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
                             }
@@ -204,35 +216,25 @@ namespace TravelPal
             ClearTextBoxes();
         }
 
-        //Resets and clears the password-boxes
-        private void ClearTextBoxes()
+
+        //Enables all boxes if the user clicks the Edit-button
+        private void btnEditDetails_Click(object sender, RoutedEventArgs e)
         {
-            pabxCurrentPasswordBox.Clear();
-            pabxPasswordBox.Clear();
-            pabxPasswordBox2.Clear();
-            tbxPasswordBox.Clear();
-            tbxPasswordBox2.Clear();
+            pabxCurrentPasswordBox.IsEnabled = true;
+            tbxUsername.IsEnabled = true;
+            pabxPasswordBox.IsEnabled = true;
+            pabxPasswordBox2.IsEnabled = true;
+            cbCountries.IsEnabled = true;
+            btnSave.IsEnabled = true;
+            chbxShowPassword.IsEnabled = true;
         }
 
-        //Enables click and drag for the window's position
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        //Sends the user back to the TravelWindow and closes the UserDetailsWindow when clicking the Return-button and closes the UserDetailsWindow
+        private void btnReturn_Click_1(object sender, RoutedEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
-
-        //Minimizes the window when pressing "-"
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        //Closes the program when clicking "X"
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
+            TravelsWindow travelsWindow = new(userManager, travelManager);
+            travelsWindow.Show();
+            Close();
         }
     }
 }

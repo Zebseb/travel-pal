@@ -67,10 +67,11 @@
                 <Label
             Content="User:"
             Grid.Column="0"
+            Grid.ColumnSpan="2"
             Grid.Row="0"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="30, 0, 5, 0"
+            HorizontalAlignment="Left"
+            Margin="10, 0, 5, 0"
             FontSize="12"
             />
                 <Label
@@ -80,8 +81,8 @@
             Grid.ColumnSpan="3"
             Grid.Row="0"
             VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="0, 0, 10, 0"
+            HorizontalAlignment="Left"
+            Margin="40, 0, 0, 0"
             FontSize="12"
             />
                 <Label
@@ -210,7 +211,7 @@
             Grid.Column="8"
             Grid.ColumnSpan="2"
             Grid.Row="7"
-            Margin="5, 5, 10, 0"
+            Margin="5, 7, 10, 0"
             Height="25"
             VerticalContentAlignment="Center" 
             VerticalAlignment="Top"
@@ -257,46 +258,6 @@
             Margin="5, 5, 0, 0"
             Height="20"
             Width="20"
-            />
-                <Button
-            x:Name="btnReturn"
-            Content="Return"
-            Grid.Row="9"
-            Grid.Column="9"
-            Height="25"
-            Width="70"
-            VerticalAlignment="Bottom"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Center"
-            BorderThickness="2"
-            Click="btnReturn_Click"
-            />
-                <Button
-            x:Name="btnAdditem"
-            Content="Add item"
-            Grid.Row="7"
-            Grid.Column="7"
-            Height="25"
-            Width="70"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Center"
-            BorderThickness="2"
-            Click="btnAdditem_Click"
-            />
-                <Button
-            x:Name="btnAddTravel"
-            Content="Add Travel"
-            Grid.Row="8"
-            Grid.RowSpan="2"
-            Grid.Column="4"
-            Grid.ColumnSpan="2"
-            Height="30"
-            Width="85"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="0, 40, 5, 0"
-            BorderThickness="2"
-            Click="btnAddTravel_Click"
             />
                 <DatePicker
             x:Name="dtpStartDate"
@@ -395,6 +356,109 @@
                     Cursor="Hand"
                     Click="btnClose_Click"
                     >
+                </Button>
+                <Button
+                    x:Name="btnAddTravel"
+                    Content="Add Travel"
+                    Cursor="Hand"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="9"
+                    Grid.RowSpan="1"
+                    Click="btnAddTravel_Click_1"
+                    IsDefault="True"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnAddItem"
+                    Content="Add Item"
+                    Cursor="Hand"
+                    Grid.Column="6"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="7"
+                    Grid.RowSpan="1"
+                    Click="btnAddItem_Click_1"
+                    FontSize="12"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="70"
+                                    Height="24"
+                                    CornerRadius="12"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnReturn"
+                    Content="Return"
+                    Cursor="Hand"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="9"
+                    Click="btnReturn_Click_1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="60"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </Grid>
         </Border>

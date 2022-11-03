@@ -82,20 +82,6 @@
             Margin="5, 15, 35, 5"
             Height="30"
             />
-                <Button
-            x:Name="btnSignIn"
-            Content="Sign In"
-            Grid.Column="4"
-            Grid.ColumnSpan="2"
-            Grid.Row="7"
-            Grid.RowSpan="1"
-            BorderThickness="2"
-            Height="30"
-            Width="100"
-            VerticalAlignment="Center"
-            IsDefault="True"
-            Click="btnSignIn_Click"
-            />
                 <TextBox
             x:Name="tbxUsername"
             Grid.Row="4"
@@ -152,7 +138,7 @@
             VerticalAlignment="Center"
             >
             <Hyperlink
-                Foreground="MediumSlateBlue"
+                Foreground="MintCream"
                 Click="Hyperlink_Click" 
                 NavigateUri="Reviews.xaml">Not a user yet? Register here!</Hyperlink>
                 </TextBlock>
@@ -169,7 +155,6 @@
                     VerticalContentAlignment="Top"
                     Cursor="Hand"
                     Click="btnMinimize_Click"
-                    
                     >
                 </Button>
                 <Button
@@ -186,6 +171,39 @@
                     Cursor="Hand"
                     Click="btnClose_Click"
                     >
+                </Button>
+                <Button
+                    x:Name="btnLogin"
+                    Content="Sign In"
+                    Cursor="Hand"
+                    Grid.Column="4"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="7"
+                    Click="btnLogin_Click"
+                    IsDefault="True"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="100"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </Grid>
         </Border>

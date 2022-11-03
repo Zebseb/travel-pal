@@ -78,14 +78,6 @@ namespace TravelPal
             lblRequired.Visibility = Visibility.Collapsed;
         }
 
-        //Sends the user back to the TravelsWindow and closes the AddTravelWindow when clicking the Return-button
-        private void btnReturn_Click(object sender, RoutedEventArgs e)
-        {
-            TravelsWindow travelsWindow = new(userManager, travelManager);
-            travelsWindow.Show();
-            Close();
-        }
-
         //Shows/collapses UI depending on what TravelType is selected
         private void cbTravelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -104,102 +96,6 @@ namespace TravelPal
                 lblAllInclusive.Visibility = Visibility.Collapsed;
                 cbTripType.Visibility = Visibility.Visible;
                 lblTripType.Visibility = Visibility.Visible;
-            }
-        }
-
-        //Adds a travel if all input is correct and will show warnings if input is missing or incorrect
-        private void btnAddTravel_Click(object sender, RoutedEventArgs e)
-        {
-            int numOfTravelers = 0;
-            string country = "";
-            string destination = "";
-            string tripType = "";
-            bool isAllInclusive = false;
-            bool isEndDateEarlierThanStartDate = false;
-
-            if (CheckInputs())
-            {
-                if (cbTravelType.SelectedIndex == 0)
-                {
-                    numOfTravelers = ParseNumOfTravelers();
-                
-                    if (numOfTravelers > 0)
-                    {
-                        country = cbCountries.SelectedItem as string;
-                        destination = tbxDestination.Text;
-
-                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-
-                        if ((bool)cbxAllInclusive.IsChecked)
-                        {
-                            isAllInclusive = true;
-                        }
-
-                        if (endDate < startDate)
-                        {
-                            isEndDateEarlierThanStartDate = true;
-                        }
-
-                        if (!isEndDateEarlierThanStartDate)
-                        {
-                            Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, startDate, endDate);
-                            newVacation.PackingList = this.packingList;
-                            user.travels.Add(newVacation);
-                            travelManager.AddTravel(newVacation);
-
-                            TravelsWindow travelsWindow = new(userManager, travelManager);
-                            travelsWindow.Show();
-                            Close();
-                        }
-
-                        else
-                        {
-                            MessageBox.Show("You can't select an end date that occurs before the start date...", "Warning!", MessageBoxButton.OK);
-                        }
-                    }
-                }
-
-                else if (cbTravelType.SelectedIndex == 1)
-                {
-                    numOfTravelers = ParseNumOfTravelers();
-
-                    if (numOfTravelers > 0)
-                    {
-                        country = cbCountries.SelectedItem as string;
-                        destination = tbxDestination.Text;
-                        tripType = cbTripType.SelectedItem as string;
-
-                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
-                        TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
-
-                        if (endDate < startDate)
-                        {
-                            isEndDateEarlierThanStartDate = true;
-                        }
-
-                        if (!isEndDateEarlierThanStartDate)
-                        {
-                            Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, startDate, endDate);
-                            newTrip.PackingList = this.packingList;
-                            user.travels.Add(newTrip);
-                            travelManager.AddTravel(newTrip);
-
-                            TravelsWindow travelsWindow = new(userManager, travelManager);
-                            travelsWindow.Show();
-                            Close();
-                        }
-
-                        else
-                        {
-                            MessageBox.Show("End date occurs before the start date, please select a new end date...", "Warning!", MessageBoxButton.OK);
-                        }
-                    }
-                }
-            }
-
-            else
-            {
-                MessageBox.Show("In order to add a travel you need to give us the required info...", "Warning!", MessageBoxButton.OK);
             }
         }
 
@@ -273,74 +169,6 @@ namespace TravelPal
             }
 
             return true;
-        }
-
-        //Adds a new packinglist-item to the user and to the listview
-        private void btnAdditem_Click(object sender, RoutedEventArgs e)
-        {
-            int itemQuantity;
-            bool isRequiredItem = false;
-            string itemName = tbxAddItem.Text;
-            string quantity = tbxQuantity.Text;
-
-            if (tbxQuantity.Text.Trim().Length > 0 && !(bool)chbxDocument.IsChecked && tbxAddItem.Text.Trim().Length > 0)
-            {
-                itemQuantity = GetParsedQuantity(quantity);
-                
-                if (itemQuantity > 0 && tbxAddItem.Text.Trim().Length > 0)
-                {
-                    OtherItem newOtherItem = new(itemName, itemQuantity);
-                    packingList.Add(newOtherItem);
-
-                    ListViewItem item = new();
-                    item.Content = newOtherItem.ToString();
-                    item.Tag = newOtherItem;
-
-                    lvPackingList.Items.Add(item);
-                    tbxAddItem.Clear();
-                    tbxQuantity.Clear();
-                }
-            }
-
-            else if ((bool)chbxDocument.IsChecked)
-            {
-                if ((bool)chbxRequired.IsChecked)
-                {
-                    isRequiredItem = true;
-                }
-
-                if (tbxAddItem.Text.Trim().Length > 0)
-                {
-                    TravelDocument newTravelDocument = new(itemName, isRequiredItem);
-                    packingList.Add(newTravelDocument);
-
-                    ListViewItem item = new();
-                    item.Content = newTravelDocument.ToString();
-                    item.Tag = newTravelDocument;
-
-                    lvPackingList.Items.Add(item);
-                    tbxAddItem.Clear();
-                    chbxDocument.IsChecked = false;
-                    chbxRequired.IsChecked = false;
-                    lblRequired.Visibility = Visibility.Collapsed;
-                    chbxRequired.Visibility = Visibility.Collapsed;
-                }
-
-                else
-                {
-                    MessageBox.Show("Please enter what kind of item you would like to add...", "Warning!", MessageBoxButton.OK);
-                }
-            }
-
-            else if (tbxQuantity.Text.Trim().Length > 0 && tbxAddItem.Text.Trim().Length == 0)
-            {
-                MessageBox.Show("Please enter what kind of item you would like to add...", "Warning!", MessageBoxButton.OK);
-            }
-
-            else
-            {
-                MessageBox.Show("Please enter a quantity of your item or check the Document checkbox to add a new item...\n", "Warning!", MessageBoxButton.OK);
-            }
         }
 
         //Checks if the user input is a valid quantity number
@@ -535,6 +363,178 @@ namespace TravelPal
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        //Adds a travel if all input is correct and will show warnings if input is missing or incorrect
+        private void btnAddTravel_Click_1(object sender, RoutedEventArgs e)
+        {
+            int numOfTravelers = 0;
+            string country = "";
+            string destination = "";
+            string tripType = "";
+            bool isAllInclusive = false;
+            bool isEndDateEarlierThanStartDate = false;
+
+            if (CheckInputs())
+            {
+                if (cbTravelType.SelectedIndex == 0)
+                {
+                    numOfTravelers = ParseNumOfTravelers();
+
+                    if (numOfTravelers > 0)
+                    {
+                        country = cbCountries.SelectedItem as string;
+                        destination = tbxDestination.Text;
+
+                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+
+                        if ((bool)cbxAllInclusive.IsChecked)
+                        {
+                            isAllInclusive = true;
+                        }
+
+                        if (endDate < startDate)
+                        {
+                            isEndDateEarlierThanStartDate = true;
+                        }
+
+                        if (!isEndDateEarlierThanStartDate)
+                        {
+                            Vacation newVacation = new(isAllInclusive, destination, numOfTravelers, countryEnum, startDate, endDate);
+                            newVacation.PackingList = this.packingList;
+                            user.travels.Add(newVacation);
+                            travelManager.AddTravel(newVacation);
+
+                            TravelsWindow travelsWindow = new(userManager, travelManager);
+                            travelsWindow.Show();
+                            Close();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("You can't select an end date that occurs before the start date...", "Warning!", MessageBoxButton.OK);
+                        }
+                    }
+                }
+
+                else if (cbTravelType.SelectedIndex == 1)
+                {
+                    numOfTravelers = ParseNumOfTravelers();
+
+                    if (numOfTravelers > 0)
+                    {
+                        country = cbCountries.SelectedItem as string;
+                        destination = tbxDestination.Text;
+                        tripType = cbTripType.SelectedItem as string;
+
+                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                        TripTypes tripEnum = (TripTypes)Enum.Parse(typeof(TripTypes), tripType);
+
+                        if (endDate < startDate)
+                        {
+                            isEndDateEarlierThanStartDate = true;
+                        }
+
+                        if (!isEndDateEarlierThanStartDate)
+                        {
+                            Trip newTrip = new(tripEnum, destination, numOfTravelers, countryEnum, startDate, endDate);
+                            newTrip.PackingList = this.packingList;
+                            user.travels.Add(newTrip);
+                            travelManager.AddTravel(newTrip);
+
+                            TravelsWindow travelsWindow = new(userManager, travelManager);
+                            travelsWindow.Show();
+                            Close();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("End date occurs before the start date, please select a new end date...", "Warning!", MessageBoxButton.OK);
+                        }
+                    }
+                }
+            }
+
+            else
+            {
+                MessageBox.Show("In order to add a travel you need to give us the required info...", "Warning!", MessageBoxButton.OK);
+            }
+        }
+
+        //Adds a new packinglist-item to the user and to the listview
+        private void btnAddItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            int itemQuantity;
+            bool isRequiredItem = false;
+            string itemName = tbxAddItem.Text;
+            string quantity = tbxQuantity.Text;
+
+            if (tbxQuantity.Text.Trim().Length > 0 && !(bool)chbxDocument.IsChecked && tbxAddItem.Text.Trim().Length > 0)
+            {
+                itemQuantity = GetParsedQuantity(quantity);
+
+                if (itemQuantity > 0 && tbxAddItem.Text.Trim().Length > 0)
+                {
+                    OtherItem newOtherItem = new(itemName, itemQuantity);
+                    packingList.Add(newOtherItem);
+
+                    ListViewItem item = new();
+                    item.Content = newOtherItem.ToString();
+                    item.Tag = newOtherItem;
+
+                    lvPackingList.Items.Add(item);
+                    tbxAddItem.Clear();
+                    tbxQuantity.Clear();
+                }
+            }
+
+            else if ((bool)chbxDocument.IsChecked)
+            {
+                if ((bool)chbxRequired.IsChecked)
+                {
+                    isRequiredItem = true;
+                }
+
+                if (tbxAddItem.Text.Trim().Length > 0)
+                {
+                    TravelDocument newTravelDocument = new(itemName, isRequiredItem);
+                    packingList.Add(newTravelDocument);
+
+                    ListViewItem item = new();
+                    item.Content = newTravelDocument.ToString();
+                    item.Tag = newTravelDocument;
+
+                    lvPackingList.Items.Add(item);
+                    tbxAddItem.Clear();
+                    chbxDocument.IsChecked = false;
+                    chbxRequired.IsChecked = false;
+                    lblRequired.Visibility = Visibility.Collapsed;
+                    chbxRequired.Visibility = Visibility.Collapsed;
+                }
+
+                else
+                {
+                    MessageBox.Show("Please enter what kind of item you would like to add...", "Warning!", MessageBoxButton.OK);
+                }
+            }
+
+            else if (tbxQuantity.Text.Trim().Length > 0 && tbxAddItem.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Please enter what kind of item you would like to add...", "Warning!", MessageBoxButton.OK);
+            }
+
+            else
+            {
+                MessageBox.Show("Please enter a quantity of your item or check the Document checkbox to add a new item...\n", "Warning!", MessageBoxButton.OK);
+            }
+        }
+
+        //Sends the user back to the TravelsWindow and closes the AddTravelWindow when clicking the Return-button
+        private void btnReturn_Click_1(object sender, RoutedEventArgs e)
+        {
+            TravelsWindow travelsWindow = new(userManager, travelManager);
+            travelsWindow.Show();
+            Close();
         }
     }
 }

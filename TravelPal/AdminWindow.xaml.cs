@@ -113,49 +113,6 @@ namespace TravelPal
             }
         }
 
-        //Sends the user back to the MainWindow and closes the AdminWindow when clicking the Return-button
-        private void btnReturn_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new(userManager, travelManager);
-            mainWindow.Show();
-            Close();    
-        }
-
-        //Removes the selected travel in the listview from the TravelManager's travels-list and from the user's travels-list
-        private void btnRemove_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewItem selectedItem = lvUserTravels.SelectedItem as ListViewItem;
-            Travel selectedTravel = selectedItem.Tag as Travel;
-
-            travelManager.RemoveTravel(selectedTravel);
-
-            foreach (User user in userUsers)
-            {
-                foreach (Travel travel in user.travels)
-                {
-                    if (selectedTravel == travel)
-                    {
-                        userToGetTravelRemoved = user;
-                        travelToRemove = travel;
-                    }
-                }
-            }
-
-            userToGetTravelRemoved.travels.Remove(travelToRemove);
-
-            if (cbUsers.SelectedIndex == 0)
-            {
-                PopulateTravelsListView();
-            }
-
-            else
-            {
-                PopulateSelectedUserTravelsListView();
-            }
-
-            btnRemove.IsEnabled = false;
-        }
-
         //Displays travels in listview depending on what item is selected in the combobox
         private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -211,6 +168,50 @@ namespace TravelPal
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+
+        //Removes the selected travel in the listview from the TravelManager's travels-list and from the user's travels-list
+        private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem selectedItem = lvUserTravels.SelectedItem as ListViewItem;
+            Travel selectedTravel = selectedItem.Tag as Travel;
+
+            travelManager.RemoveTravel(selectedTravel);
+
+            foreach (User user in userUsers)
+            {
+                foreach (Travel travel in user.travels)
+                {
+                    if (selectedTravel == travel)
+                    {
+                        userToGetTravelRemoved = user;
+                        travelToRemove = travel;
+                    }
+                }
+            }
+
+            userToGetTravelRemoved.travels.Remove(travelToRemove);
+
+            if (cbUsers.SelectedIndex == 0)
+            {
+                PopulateTravelsListView();
+            }
+
+            else
+            {
+                PopulateSelectedUserTravelsListView();
+            }
+
+            btnRemove.IsEnabled = false;
+        }
+
+        //Sends the user back to the MainWindow and closes the AdminWindow when clicking the Return-button
+        private void btnReturn_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new(userManager, travelManager);
+            mainWindow.Show();
+            Close();
         }
     }
 }

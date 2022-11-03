@@ -64,16 +64,68 @@ namespace TravelPal
             pabxPasswordBox2.Visibility = Visibility.Visible;
         }
 
-        //Sends the user back to the MainWindow and closes the RegisterWindow when clicking the Return-button
-        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        //Checks that the user has entered input in all fields and returns a bool
+        private bool CheckInputs()
         {
-            MainWindow mainWindow = new(userManager, travelManager);
-            mainWindow.Show();
-            Close();
+            string username = tbxUsername.Text;
+            string country = cbCountries.SelectedItem as string;
+            string password = "";
+
+            if (!(bool)chbxShowPassword.IsChecked)
+            {
+                password = pabxPasswordBox.Password;
+            }
+
+            else if ((bool)(chbxShowPassword.IsChecked))
+            {
+                password = tbxPasswordBox.Text;
+            }
+
+            string[] fields = new[] { username, country, password };
+
+            foreach (string field in fields)
+            {
+                if (string.IsNullOrEmpty(field))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        //Clears all password-boxes
+        private void ClearPasswordBoxes()
+        {
+            tbxPasswordBox.Clear();
+            tbxPasswordBox2.Clear();
+            pabxPasswordBox.Clear();
+            pabxPasswordBox2.Clear();
+        }
+
+        //Enables click and drag for the window's position
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        //Minimizes the window when clicking "-"
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        //Closes the program when clicking "X"
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         //Registers a new user if all inputs are OK and displays warnings if input is missing or incorrect
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private void btnRegister_Click_1(object sender, RoutedEventArgs e)
         {
             string username = "";
 
@@ -137,64 +189,13 @@ namespace TravelPal
 
         }
 
-        //Checks that the user has entered input in all fields and returns a bool
-        private bool CheckInputs()
+
+        //Sends the user back to the MainWindow and closes the RegisterWindow when clicking the Return-button
+        private void btnReturn_Click_1(object sender, RoutedEventArgs e)
         {
-            string username = tbxUsername.Text;
-            string country = cbCountries.SelectedItem as string;
-            string password = "";
-
-            if (!(bool)chbxShowPassword.IsChecked)
-            {
-                password = pabxPasswordBox.Password;
-            }
-
-            else if ((bool)(chbxShowPassword.IsChecked))
-            {
-                password = tbxPasswordBox.Text;
-            }
-
-            string[] fields = new[] { username, country, password };
-
-            foreach (string field in fields)
-            {
-                if (string.IsNullOrEmpty(field))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        //Clears all password-boxes
-        private void ClearPasswordBoxes()
-        {
-            tbxPasswordBox.Clear();
-            tbxPasswordBox2.Clear();
-            pabxPasswordBox.Clear();
-            pabxPasswordBox2.Clear();
-        }
-
-        //Enables click and drag for the window's position
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
-
-        //Minimizes the window when clicking "-"
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        //Closes the program when clicking "X"
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
+            MainWindow mainWindow = new(userManager, travelManager);
+            mainWindow.Show();
+            Close();
         }
     }
 }

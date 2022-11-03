@@ -117,14 +117,6 @@ namespace TravelPal
             tbxDays.IsEnabled = false;
         }
 
-        //Sends the user back to the TravelsWindow and closes TravelDetailsWindow when clicking the Return-button
-        private void btnReturn_Click(object sender, RoutedEventArgs e)
-        {
-            TravelsWindow travelsWindow = new(userManager, travelManager);
-            travelsWindow.Show();
-            Close();
-        }
-
         //Enables click and drag for the window's position
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -144,6 +136,14 @@ namespace TravelPal
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        //Sends the user back to the TravelsWindow and closes TravelDetailsWindow when clicking the Return-button
+        private void btnReturn_Click_1(object sender, RoutedEventArgs e)
+        {
+            TravelsWindow travelsWindow = new(userManager, travelManager);
+            travelsWindow.Show();
+            Close();
         }
     }
 }

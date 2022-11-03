@@ -66,8 +66,39 @@ namespace TravelPal
             pabxPasswordBox.Visibility = Visibility.Visible;
         }
 
+        //Clears all inputboxes
+        private void ClearTextBoxes()
+        {
+            chbxShowPassword.IsChecked = false;
+            tbxUsername.Clear();
+            tbxPasswordBox.Clear();
+            pabxPasswordBox.Clear();
+        }
+
+        //Enables click and drag for the window's position
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        //Minimizes the window when clicking "-"
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        //Closes the program when clicking "X"
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+
+        }
+
         //Checks if the user is registered and signs in. Shows a warning if the username or password is incorrect
-        private void btnSignIn_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string username = tbxUsername.Text;
             string password = "";
@@ -107,37 +138,6 @@ namespace TravelPal
                 MessageBox.Show("Username or password is incorrect... Please register if you are not a member yet!", "Warning!", MessageBoxButton.OK);
                 ClearTextBoxes();
             }
-        }
-
-        //Clears all inputboxes
-        private void ClearTextBoxes()
-        {
-            chbxShowPassword.IsChecked = false;
-            tbxUsername.Clear();
-            tbxPasswordBox.Clear();
-            pabxPasswordBox.Clear();
-        }
-
-        //Enables click and drag for the window's position
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
-        }
-
-        //Minimizes the window when clicking "-"
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        //Closes the program when clicking "X"
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-
         }
     }
 }

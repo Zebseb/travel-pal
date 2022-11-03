@@ -64,137 +64,28 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             />
-        <Label
+                <Label
             Content="User:"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Grid.Row="0"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
-            Margin="40, 0, 5, 0"
+            Margin="10, 0, 5, 0"
             FontSize="12"
             />
-        <Label
+                <Label
             x:Name="lblUsername"
-            Content=""
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Content="*USERNAME*"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
             Grid.Row="0"
             VerticalAlignment="Center"
             HorizontalAlignment="Left"
-            HorizontalContentAlignment="Left"
+            Margin="40, 0, 0, 0"
             FontSize="12"
             />
-        <Button
-            x:Name="btnSignOut"
-            Content="Sign Out"
-            Grid.Row="9"
-            Grid.Column="9"
-            Height="25"
-            Width="70"
-            VerticalAlignment="Bottom"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Center"
-            BorderThickness="2"
-            Click="btnReturn_Click"
-            />
-        <Button
-            x:Name="btnAddTravel"
-            Content="Add Travel"
-            Grid.Row="4"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Height="30"
-            Width="110"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="0, 0, 40, 0"
-            BorderThickness="2"
-            Click="btnAddTravel_Click"
-            />
-        <Button
-            x:Name="btnDetails"
-            Content="Travel Details"
-            Grid.Row="5"
-            Grid.RowSpan="3"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Height="30"
-            Width="110"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="0, 0, 40, 0"
-            BorderThickness="2"
-            Click="btnDetails_Click"
-            />
-        <Button
-            x:Name="btnRemove"
-            Content="Remove Travel"
-            Grid.Row="7"
-            Grid.RowSpan="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Height="30"
-            Width="110"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Margin="0, 0, 40, 0"
-            BorderThickness="2"
-            Click="btnRemove_Click"
-            />
-        <Button
-            x:Name="btnEditAccount"
-            Content="Edit Account"
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Height="20"
-            Width="80"
-            VerticalAlignment="Top"
-            VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Left"
-            Margin="35, 0, 5, 5"
-            BorderThickness="2"
-            FontSize="12"
-            Click="btnEditAccount_Click"
-            />
-        <Button
-            x:Name="btnHelp"
-            Content="Help"
-            Grid.Row="9"
-            Grid.Column="8"
-            Grid.ColumnSpan="1"
-            Height="20"
-            Width="40"
-            VerticalAlignment="Bottom"
-            VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Left"
-            Margin="10, 5, 5, 0"
-            BorderThickness="2"
-            FontSize="12"
-            Click="btnHelp_Click"
-            />
-        <Button
-            x:Name="btnAboutUs"
-            Content="About Us"
-            Grid.Row="9"
-            Grid.Column="7"
-            Grid.ColumnSpan="1"
-            Height="20"
-            Width="55"
-            VerticalAlignment="Bottom"
-            VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Center"
-            HorizontalAlignment="Left"
-            Margin="10, 5, 5, 0"
-            BorderThickness="2"
-            FontSize="12"
-            Click="btnAboutUs_Click"
-            />
-        <ListView
+                <ListView
             x:Name="lvTravels"
             Grid.Column="1"
             Grid.ColumnSpan="8"
@@ -234,6 +125,242 @@
             Click="btnClose_Click"
             >
         </Button>
+                <Button
+                    x:Name="btnEditAccount"
+                    Content="Edit Account"
+                    Cursor="Hand"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="1"
+                    Click="btnEditAccount_Click_1"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="100"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnAddTravel"
+                    Content="Add Travel"
+                    Cursor="Hand"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="4"
+                    Grid.RowSpan="2"
+                    Click="btnAddTravel_Click_1"
+                    IsDefault="True"
+                    VerticalAlignment="Center"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnDetails"
+                    Content="Travel Details"
+                    Cursor="Hand"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="6"
+                    Click="btnDetails_Click_1"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnRemove"
+                    Content="Remove Travel"
+                    Cursor="Hand"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="7"
+                    Grid.RowSpan="2"
+                    Click="btnRemove_Click_1"
+                    VerticalAlignment="Center"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="120"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnAboutUs"
+                    Content="About Us"
+                    Cursor="Hand"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="9"
+                    Click="btnAboutUs_Click_1"
+                    FontSize="12"
+                    VerticalAlignment="Bottom"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="60"
+                                    Height="20"
+                                    CornerRadius="10"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnHelp"
+                    Content="Help"
+                    Cursor="Hand"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="9"
+                    Click="btnHelp_Click_1"
+                    FontSize="12"
+                    VerticalAlignment="Bottom"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="60"
+                                    Height="20"
+                                    CornerRadius="10"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button
+                    x:Name="btnSignOut"
+                    Content="Sign Out"
+                    Cursor="Hand"
+                    Grid.Column="9"
+                    Grid.ColumnSpan="1"
+                    Grid.Row="9"
+                    Click="btnSignOut_Click"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MintCream"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="MediumSlateBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="60"
+                                    Height="30"
+                                    CornerRadius="15"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
         </Border>
     </Border>

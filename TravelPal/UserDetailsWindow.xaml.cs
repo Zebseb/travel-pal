@@ -127,11 +127,12 @@ namespace TravelPal
                 {
                     username = tbxUsername.Text;
                     bool isAvailableUsename = userManager.UpdateUsername(user, username);
+                    string country = cbCountries.SelectedItem as string;
+                    Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
 
                     if (isAvailableUsename)
                     {
-                        string country = cbCountries.SelectedItem as string;
-                        Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
+                        user.Username = username;
                         user.Location = countryEnum;
 
                         if (pabxPasswordBox.Password.Trim().Length > 0 && pabxPasswordBox2.Password.Trim().Length > 0)
@@ -141,7 +142,7 @@ namespace TravelPal
                                 user.Password = pabxPasswordBox.Password;
                                 user.Username = username;
 
-                                MessageBox.Show("Username and password was updated!", "Info", MessageBoxButton.OK);
+                                MessageBox.Show("User details was updated!", "Successful update", MessageBoxButton.OK);
 
                                 TravelsWindow travelsWindow = new(userManager, travelManager);
                                 travelsWindow.Show();
@@ -166,7 +167,7 @@ namespace TravelPal
                                 user.Password = tbxPasswordBox.Text;
                                 user.Username = username;
 
-                                MessageBox.Show("Username and password was updated!", "Info", MessageBoxButton.OK);
+                                MessageBox.Show("Account details was updated!", "Successful update", MessageBoxButton.OK);
 
                                 TravelsWindow travelsWindow = new(userManager, travelManager);
                                 travelsWindow.Show();
@@ -183,14 +184,26 @@ namespace TravelPal
                                 MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
                             }
                         }
+
+                        else
+                        {
+                            MessageBox.Show("Your username was updated!", "Successful update", MessageBoxButton.OK);
+                        }
+
                     }
 
-                    else if (!isAvailableUsename)
+                    else if (!isAvailableUsename && user.Location.ToString() == cbCountries.SelectedItem as string)
                     {
                         {
                             MessageBox.Show("That username is already taken! Please choose another one...", "Warning!", MessageBoxButton.OK);
                             cbCountries.SelectedItem = user.Location.ToString();
                         }
+                    }
+
+                    else if (!isAvailableUsename && user.Location.ToString() != cbCountries.SelectedItem as string)
+                    {
+                        user.Location = countryEnum;
+                        MessageBox.Show("Location was updated!", "Successful update!", MessageBoxButton.OK);
                     }
                 }
 

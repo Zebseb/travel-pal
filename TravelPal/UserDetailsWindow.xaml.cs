@@ -130,8 +130,6 @@ namespace TravelPal
 
                     if (isAvailableUsename)
                     {
-                        user.Username = username;
-
                         string country = cbCountries.SelectedItem as string;
                         Countries countryEnum = (Countries)Enum.Parse(typeof(Countries), country);
                         user.Location = countryEnum;
@@ -141,6 +139,7 @@ namespace TravelPal
                             if (pabxPasswordBox.Password.Trim().Length >= 5 && pabxPasswordBox.Password == pabxPasswordBox2.Password)
                             {
                                 user.Password = pabxPasswordBox.Password;
+                                user.Username = username;
 
                                 MessageBox.Show("Username and password was updated!", "Info", MessageBoxButton.OK);
 
@@ -151,12 +150,12 @@ namespace TravelPal
 
                             else if (pabxPasswordBox.Password.Trim().Length < 5)
                             {
-                                MessageBox.Show("Username was updated, but you have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                                MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
                             }
 
                             else if (pabxPasswordBox.Password != pabxPasswordBox2.Password)
                             {
-                                MessageBox.Show("Username was updated, but your passwords have to match in order to update your current one...", "Warning!", MessageBoxButton.OK);
+                                MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
                             }
                         }
 
@@ -165,6 +164,7 @@ namespace TravelPal
                             if (tbxPasswordBox.Text.Trim().Length >= 5 && tbxPasswordBox.Text == tbxPasswordBox2.Text)
                             {
                                 user.Password = tbxPasswordBox.Text;
+                                user.Username = username;
 
                                 MessageBox.Show("Username and password was updated!", "Info", MessageBoxButton.OK);
 
@@ -175,21 +175,13 @@ namespace TravelPal
 
                             else if (tbxPasswordBox.Text.Trim().Length < 5)
                             {
-                                MessageBox.Show("Username was updated, but you have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
+                                MessageBox.Show("You have to choose a password with at least 5 characters...", "Warning!", MessageBoxButton.OK);
                             }
 
                             else if (tbxPasswordBox.Text != tbxPasswordBox2.Text)
                             {
-                                MessageBox.Show("Username was updated, but your passwords have to match in order to update your current one...", "Warning!", MessageBoxButton.OK);
+                                MessageBox.Show("Your passwords have to match...", "Warning!", MessageBoxButton.OK);
                             }
-                        }
-
-                        if (isAvailableUsename)
-                        {
-                            MessageBox.Show("Your username was updated!", "Warning!", MessageBoxButton.OK);
-                            TravelsWindow travelsWindow = new(userManager, travelManager);
-                            travelsWindow.Show();
-                            Close();
                         }
                     }
 

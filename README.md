@@ -1,2 +1,2 @@
 # travel-pal
- WPF Project for a travelling agency
+ WPF project for a travelling agency.
